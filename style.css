@@ -212,7 +212,7 @@ PAGE GENERATEUR DE LABYRINTHE
 /************ SECTION FILTRE : BOUTON RETOUR ************/
 
 .generateur-retour {
-    height: 40px;
+    height: 50px;
     color: var(--text-retour-color);
     font-family: "Mulish-Black", Verdana, sans-serif;
     font-size: 1.1rem;
@@ -389,6 +389,14 @@ PAGE GENERATEUR DE LABYRINTHE
 #labyrinthe>div {
     display: flex;
     flex-direction: row;
+    position: relative;
+}
+
+#labyrinthe>div>div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .labyrinthe-room {
@@ -404,11 +412,14 @@ PAGE GENERATEUR DE LABYRINTHE
 }
 
 .labyrinth-solution {
-    background-color: #4c7a3a;
-    /* background-image: url("./images/round.png");
-    background-size: 50% 50%;
+    /* background-color: #4c7a3a; */
+    background-image: url("./images/round.png");
+    background-size: 0;
     background-position: center;
-    background-repeat: no-repeat; */
+    background-repeat: no-repeat;
+    overflow: visible;
+    position: absolute;
+    
 }
 
 .labyrinthe-border {

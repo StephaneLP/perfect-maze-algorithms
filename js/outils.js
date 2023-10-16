@@ -44,4 +44,16 @@ function buttonActive(id, blnActive) {
     }
 }
 
-export { getRandomIntInclusive, shuffleArray2Dim, createArray2Dim, buttonActive }
+function notEqual(room1, room2) {
+    return (room1[0] !== room2[0])||(room1[1] !== room2[1])
+}
+
+function convertCellToRoom(cell) {
+    return [(cell[0] - 1) / 2, (cell[1] - 1) / 2]
+}
+
+function convertRoomToCell(room) {
+    return [2 * room[0] + 1, 2 * room[1] + 1]
+}
+
+export { getRandomIntInclusive, shuffleArray2Dim, createArray2Dim, buttonActive, notEqual, convertCellToRoom, convertRoomToCell }
