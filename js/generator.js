@@ -1,6 +1,6 @@
 import { algoProfondeur } from "./algoBacktracking.js"
 import { displayMaze } from "./displayMaze.js"
-import { buttonActive } from "./outils.js"
+import { getRandomIntInclusive, shuffleArray2Dim, createArray2Dim, buttonActive } from "./outils.js"
 
 /****************************************************************************************
 LOAD : INITIALISATION DES NOMBRES DE LIGNES ET COLONNES
@@ -51,7 +51,7 @@ document.querySelector("#btn-message").addEventListener("click", () => displayMe
 FONCTION GENERER UN LABYRINTHE
 ****************************************************************************************/
 
-let backUpMaze = {stackCells: [], nbGridLines: 0, nbGridColumns: 0}
+let backUpMaze = {stackOpenCells: [], nbGridLines: 0, nbGridColumns: 0}
 
 const generateMaze = (event) => {
     event.preventDefault()
@@ -108,19 +108,19 @@ const generateMaze = (event) => {
     }
   
     // Création du labyrinthe
-    let stackMazeCells = []
+    let stackOpenCells = []
 
     switch(algorithme) {
         case "profondeur":
-            algoProfondeur(stackMazeCells, nbGridLines, nbGridColumns)
+            algoProfondeur(stackOpenCells, nbGridLines, nbGridColumns)
             break
     }
 
     // Affichage du labyrinthe
-    displayMaze(stackMazeCells, nbGridLines, nbGridColumns, minCellLength, maxCellLength, speed)
+    displayMaze(stackOpenCells, nbGridLines, nbGridColumns, minCellLength, maxCellLength, speed)
 
     // BackUp du labyrinthe pour afficher la solution
-    backUpMaze = {stackCells: stackMazeCells, nbGridLines: nbGridLines, nbGridColumns: nbGridColumns}
+    backUpMaze = {stackOpenCells: stackOpenCells, nbGridLines: nbGridLines, nbGridColumns: nbGridColumns}
 }
 
 document.querySelector("#generateur-filtre").addEventListener("submit", generateMaze)
@@ -129,8 +129,92 @@ document.querySelector("#generateur-filtre").addEventListener("submit", generate
 FONCTION AFFICHER LA SOLUTION DU LABYRINTHE
 ****************************************************************************************/
 
-const displaySolution = () => {
-    console.log(backUpMaze.stackCells)
+const generateSolution = () => {
+    const nbLines = 2*backUpMaze.nbGridLines+1
+    const nbColumns = 2*backUpMaze.nbGridColumns+1
+    const stackOpenCells = backUpMaze.stackOpenCells
+
+    // Initialisation du tableau contenant le labyrinthe
+    let gridMaze = createArray2Dim(nbLines, nbColumns, false)
+
+    for(let i=0; i<stackOpenCells.length; i++) {
+        for(let j=0; j<stackOpenCells[i].length; j++) {
+            gridMaze[stackOpenCells[i][j][0]][stackOpenCells[i][j][1]] = true
+        }
+    }
+
+    // Calcul des coordonnées des pièces "Entrée" et "Sortie"
+    let accessCells = [], RoomEntry = [], RoomExit = []
+
+    accessCells = stackOpenCells.slice(-1)[0]
+    RoomEntry = [(accessCells[0][0]-1)/2, (accessCells[0][1])/2]
+    RoomExit = [(accessCells[1][0]-1)/2, (accessCells[1][1]-2)/2]
+    
+    // Pile recherche du chemin solution
+    let stackSolutionCells = []
+
+    algoSolutionBacktracking(stackSolutionCells, gridMaze, RoomEntry, RoomExit)
 }
 
-document.querySelector("#btn-solution").addEventListener("click", displaySolution)
+// Retourne aléatoirement une pièce adjacente accessible non visitée
+const setAdjacentRoom = (room, gridRooms, gridMaze) => {
+    let n = room[0]
+    let m = room[1]
+    let array = []
+    
+    if(n>0 && gridMaze[2*n][2*m+1] && !gridRooms[n-1][m]) array.push([n-1, m]) // Pièce nord
+    if(n<gridRooms.length-1 && gridMaze[2*n+2][2*m+1] && !gridRooms[n+1][m]) array.push([n+1, m]) // Pièce sud
+    if(m>0 && gridMaze[2*n+1][2*m] && !gridRooms[n][m-1]) array.push([n, m-1]) // Pièce ouest
+    if(m<gridRooms[0].length-1 && gridMaze[2*n+1][2*m+2] && !gridRooms[n][m+1]) array.push([n, m+1]) // Pièce est
+
+    if(array.length>0) return shuffleArray2Dim(array)[0]
+
+    return null 
+}
+
+function algoSolutionBacktracking(stackSolutionCells, gridMaze, RoomEntry, RoomExit) {
+    let currentRoom = [], adjacentRoom = [], stackSolutionRooms = []
+    let gridRooms = createArray2Dim(backUpMaze.nbGridLines, backUpMaze.nbGridColumns, false)
+
+    // Pièce de départ : Entrée du labyrinthe
+    currentRoom = RoomEntry
+    gridRooms[currentRoom[0]][currentRoom[1]] = true
+    stackSolutionRooms.push(currentRoom)
+    stackSolutionCells.push({room: currentRoom, solution: true})
+
+    // Algorithme de recherche du chemin solution
+    while((currentRoom[0] !== RoomExit[0])||(currentRoom[1] !== RoomExit[1])) {
+        adjacentRoom = setAdjacentRoom(currentRoom, gridRooms, gridMaze)
+        if(adjacentRoom) {
+            currentRoom = [adjacentRoom[0],adjacentRoom[1]]
+            gridRooms[currentRoom[0]][currentRoom[1]] = true
+            stackSolutionRooms.push(currentRoom)
+            stackSolutionCells.push({room: currentRoom, solution: true})
+        }
+        else {
+            stackSolutionCells.push({room: currentRoom, solution: false})
+            stackSolutionRooms.pop()
+            currentRoom = stackSolutionRooms[stackSolutionRooms.length-1]
+        }
+    }
+
+
+    console.log(stackSolutionRooms)
+    let id
+    for(let i=0; i<stackSolutionRooms.length; i++) {
+        id = (2*stackSolutionRooms[i][0]+1).toString() + "-" + (2*stackSolutionRooms[i][1]+1).toString()
+        document.getElementById(id).className = "labyrinth-solution"
+    }
+
+
+
+    // for(let i=0; i<stackSolutionCells.length; i++) {
+    //     if
+    // }
+    // 
+}
+
+
+
+
+document.querySelector("#btn-solution").addEventListener("click", generateSolution)

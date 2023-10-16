@@ -16,35 +16,28 @@ const setAdjacentRoom = (room, gridRooms) => {
     return null 
 }
 
-const addAdjacentMazeCells = (stackCells, currentRoom, adjacentRoom) => {
+const addOpenCells = (stackOpenCells, currentRoom, adjacentRoom) => {
     let cellsToAdd = []
 
-    if(adjacentRoom[0] < currentRoom[0]) {
-        cellsToAdd.push([2*currentRoom[0], 2*currentRoom[1]+1]) // Mur nord
-    }
-    else if(adjacentRoom[0] > currentRoom[0]) {
-        cellsToAdd.push([2*currentRoom[0]+2, 2*currentRoom[1]+1]) // Mur sud
-    }
-    else if(adjacentRoom[1] < currentRoom[1]) {
-        cellsToAdd.push([2*currentRoom[0]+1, 2*currentRoom[1]]) // Mur ouest
-    }
-    else {
-        cellsToAdd.push([2*currentRoom[0]+1, 2*currentRoom[1]+2]) // Mur est
-    }
+    if(adjacentRoom[0]<currentRoom[0]) cellsToAdd.push([2*currentRoom[0], 2*currentRoom[1]+1]) // Mur nord
+    else if(adjacentRoom[0] > currentRoom[0]) cellsToAdd.push([2*currentRoom[0]+2, 2*currentRoom[1]+1]) // Mur sud
+    else if(adjacentRoom[1] < currentRoom[1]) cellsToAdd.push([2*currentRoom[0]+1, 2*currentRoom[1]]) // Mur ouest
+    else cellsToAdd.push([2*currentRoom[0]+1, 2*currentRoom[1]+2]) // Mur est
+
     cellsToAdd.push([2*adjacentRoom[0]+1, 2*adjacentRoom[1]+1])
 
-    stackCells.push(cellsToAdd)
+    stackOpenCells.push(cellsToAdd)
 }
 
-const algoProfondeur = (stackMazeCells, nbGridLines, nbGridColumns) => {
+const algoProfondeur = (stackOpenCells, nbGridLines, nbGridColumns) => {
     let gridRooms = createArray2Dim(nbGridLines, nbGridColumns, false)
     let stackRooms = [], currentRoom = [], adjacentRoom = []
 
-    // Cellule de départ déterminée aléatoirement
+    // Pièce de départ déterminée aléatoirement
     currentRoom = [getRandomIntInclusive(0, nbGridLines-1),getRandomIntInclusive(0, nbGridColumns-1)]
     gridRooms[currentRoom[0]][currentRoom[1]] = true
     stackRooms.push(currentRoom)
-    stackMazeCells.push([[2*currentRoom[0]+1, 2*currentRoom[1]+1]])
+    stackOpenCells.push([[2*currentRoom[0]+1, 2*currentRoom[1]+1]])
 
     // Algorithme de création du labyrinthe
     while(stackRooms.length > 0) {
@@ -54,14 +47,22 @@ const algoProfondeur = (stackMazeCells, nbGridLines, nbGridColumns) => {
         if(adjacentRoom) {
             gridRooms[adjacentRoom[0]][adjacentRoom[1]] = true
             stackRooms.push(adjacentRoom)
-            addAdjacentMazeCells(stackMazeCells, currentRoom, adjacentRoom)
+            addOpenCells(stackOpenCells, currentRoom, adjacentRoom)
         }
         else {
             stackRooms.pop()
         }
     }
 
-    return stackMazeCells
+    // Ajout de l'entrée et de la sortie (dernier tableau de la pile)
+    let indexEntry, indexExit
+
+    indexEntry = 2*getRandomIntInclusive(0, nbGridLines-1)+1
+    indexExit = 2*getRandomIntInclusive(0, nbGridLines-1)+1
+
+    stackOpenCells.push([[indexEntry,0],[indexExit,2*nbGridColumns]])
+
+    return stackOpenCells
 }
 
 export { algoProfondeur }

@@ -2,7 +2,7 @@ import { getRandomIntInclusive, buttonActive } from "./outils.js"
 
 let gblTimeOuts = []
 
-function displayMaze(stackMazeCells, nbGridLines, nbGridColumns, minLength, maxLength, speed) {
+function displayMaze(stackOpenCells, nbGridLines, nbGridColumns, minLength, maxLength, speed) {
     let nbLines = 2*nbGridLines+1
     let nbColumns = 2*nbGridColumns+1
 
@@ -57,7 +57,7 @@ function displayMaze(stackMazeCells, nbGridLines, nbGridColumns, minLength, maxL
     }
 
     // Affichage du labyrinthe
-    const stackLength = stackMazeCells.length
+    const stackLength = stackOpenCells.length
 
     if(speed !== 0) {
         document.querySelector("#btn-stop").style.visibility = "visible"
@@ -65,41 +65,33 @@ function displayMaze(stackMazeCells, nbGridLines, nbGridColumns, minLength, maxL
 
         gblTimeOuts = []
         for(let i=0; i<stackLength; i++) {
-            gblTimeOuts.push(setTimeout(displayCells, i*speed, stackMazeCells[i]))
+            gblTimeOuts.push(setTimeout(openCells, i*speed, stackOpenCells[i]))
         }
-        gblTimeOuts.push(setTimeout(displayMazeAccess, stackLength*speed, nbGridLines, nbGridColumns))
+        gblTimeOuts.push(setTimeout(displayArrowAccess, stackLength*speed, stackOpenCells.slice(-1)))
     }
     else {
         for(let i=0; i<stackLength; i++) {
-            displayCells(stackMazeCells[i])
+            openCells(stackOpenCells[i])
         }
-        displayMazeAccess(nbGridLines, nbGridColumns)
+        displayArrowAccess(stackOpenCells.slice(-1))
     }
 }
 
-function displayCells(arrCells) {
+function openCells(arrCells) {
     for(let i=0; i<arrCells.length; i++) {
         const id = arrCells[i][0]+"-"+arrCells[i][1]
-        document.getElementById(id).style.backgroundColor = "transparent"
+        document.getElementById(id).className = "labyrinth-open"
     }
 }
 
-function displayMazeAccess(nbLines, nbColumns) {
-    let index, id
+function displayArrowAccess(arrAccess) {
+    let id
 
-    // Entrée
-    index = 2*getRandomIntInclusive(0, nbLines-1)+1
-    id = "left-wall-"+index
-    document.getElementById(id).classList.add("labyrinthe-access");
-    id = index+"-0"
-    document.getElementById(id).style.backgroundColor = "transparent"
+    id = "left-wall-" + arrAccess[0][0][0]
+    document.getElementById(id).classList.add("labyrinthe-access") 
 
-    // Sortie
-    index = 2*getRandomIntInclusive(0, nbLines-1)+1
-    id = "right-wall-"+index
-    document.getElementById(id).classList.add("labyrinthe-access");
-    id = index+"-"+(2*nbColumns)
-    document.getElementById(id).style.backgroundColor = "transparent"
+    id = "right-wall-" + arrAccess[0][1][0]
+    document.getElementById(id).classList.add("labyrinthe-access") 
 
     endDisplayMaze()
 }

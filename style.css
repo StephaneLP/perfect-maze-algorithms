@@ -54,7 +54,7 @@ STYLE COMMUN A TOUTES LES PAGES
     --bg-button-stop-hover-color: #ac1f1f;
     --bg-maze1-color: #181c2e;
     --bg-maze2-color: #1f253d;
-    --bg-maze3-color: #9b813d;
+    --bg-maze3-color: #aa8e47;
 }
 
 /************ BOUTONS ************/
@@ -397,6 +397,18 @@ PAGE GENERATEUR DE LABYRINTHE
 
 .labyrinthe-wall {
     background-color: var(--bg-maze1-color);
+}
+
+.labyrinth-open {
+    background-color: transparent;
+}
+
+.labyrinth-solution {
+    background-color: #4c7a3a;
+    /* background-image: url("./images/round.png");
+    background-size: 50% 50%;
+    background-position: center;
+    background-repeat: no-repeat; */
 }
 
 .labyrinthe-border {
