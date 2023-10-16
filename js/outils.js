@@ -17,6 +17,15 @@ const shuffleArray2Dim = (arr) => {
     return array
 }
 
+const inverseArray1Dim = (arr) => {
+    let arrCopy = [...arr]
+
+    for (let i = arr.length -1 ; i === 0; i--) {
+        arrCopy.push(arr[i])
+    }
+    return arrCopy
+}
+
 const createArray2Dim = (nbLines, nbColumns, defaultValue) => {
     let array = new Array(nbLines)
 
@@ -56,4 +65,4 @@ function convertRoomToCell(room) {
     return [2 * room[0] + 1, 2 * room[1] + 1]
 }
 
-export { getRandomIntInclusive, shuffleArray2Dim, createArray2Dim, buttonActive, notEqual, convertCellToRoom, convertRoomToCell }
+export { getRandomIntInclusive, shuffleArray2Dim, inverseArray1Dim, createArray2Dim, buttonActive, notEqual, convertCellToRoom, convertRoomToCell }

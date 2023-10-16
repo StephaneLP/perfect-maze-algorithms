@@ -1,4 +1,4 @@
-import { shuffleArray2Dim, createArray2Dim, notEqual } from "./outils.js"
+import { getRandomIntInclusive, createArray2Dim, notEqual } from "./outils.js"
 import { backUpMaze } from "./generator.js"
 
 const solutionAlgoBacktracking = (stackSolutionRooms, stackSearchSolutionRooms, gridMaze, RoomEntry, RoomExit) => {
@@ -8,24 +8,25 @@ const solutionAlgoBacktracking = (stackSolutionRooms, stackSearchSolutionRooms, 
     // Pièce de départ : Entrée du labyrinthe
     currentRoom = [...RoomEntry]
     gridRooms[currentRoom[0]][currentRoom[1]] = true
-    stackSolutionRooms.push(currentRoom)
-    stackSearchSolutionRooms.push({room: currentRoom, display: true})
+    stackSolutionRooms.push({room: currentRoom, direction: null})
+    stackSearchSolutionRooms.push({room: currentRoom, direction: null, display: true})
 
     // Algorithme de recherche du chemin solution
     while(notEqual(currentRoom, RoomExit)) {
         adjacentRoom = setAdjacentRoom(currentRoom, gridRooms, gridMaze)
         if(adjacentRoom) {
-            currentRoom = [adjacentRoom[0],adjacentRoom[1]]
+            currentRoom = [...adjacentRoom.room]
             gridRooms[currentRoom[0]][currentRoom[1]] = true
-            stackSolutionRooms.push(currentRoom)
-            stackSearchSolutionRooms.push({room: currentRoom, display: true})
+            stackSolutionRooms.push({room: currentRoom, direction: adjacentRoom.direction})
+            stackSearchSolutionRooms.push({room: currentRoom, direction: adjacentRoom.direction, display: true})
         }
         else {
-            stackSearchSolutionRooms.push({room: currentRoom, display: false})
+            stackSearchSolutionRooms.push({room: currentRoom, direction: stackSolutionRooms[stackSolutionRooms.length - 1].direction, display: false})
             stackSolutionRooms.pop()
-            currentRoom = stackSolutionRooms[stackSolutionRooms.length - 1]
+            currentRoom = [...stackSolutionRooms[stackSolutionRooms.length - 1].room]
         }
-    } 
+    }
+    console.log(stackSearchSolutionRooms)
 }
 
 // Retourne aléatoirement une pièce adjacente accessible non visitée
@@ -37,14 +38,15 @@ const setAdjacentRoom = (room, gridRooms, gridMaze) => {
     const isWestAccessible = ((m > 0) && (gridMaze[2 * n + 1][2 * m]) && (!gridRooms[n][m-1]))
     const isEstAccessible = ((m < gridRooms[0].length - 1) && (gridMaze[2 * n + 1][2 * m + 2]) && (!gridRooms[n][m + 1]))
 
-    if(isNorthAccessible) array.push([n - 1, m]) // Pièce nord
-    if(isSouthAccessible) array.push([n + 1, m]) // Pièce sud
-    if(isWestAccessible) array.push([n, m - 1]) // Pièce ouest
-    if(isEstAccessible) array.push([n, m + 1]) // Pièce est
+    if(isNorthAccessible) array.push({room: [n - 1, m], direction: "N"}) // Pièce nord
+    if(isSouthAccessible) array.push({room: [n + 1, m], direction: "S"}) // Pièce sud
+    if(isWestAccessible) array.push({room: [n, m - 1], direction: "W"}) // Pièce ouest
+    if(isEstAccessible) array.push({room: [n, m + 1], direction: "E"}) // Pièce est
 
-    if(array.length > 0) return shuffleArray2Dim(array)[0]
+    if(array.length === 0) return null
 
-    return null 
+    const indice = getRandomIntInclusive(0, array.length - 1)
+    return array[indice]
 }
 
 export { solutionAlgoBacktracking }
