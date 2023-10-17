@@ -1,4 +1,4 @@
-import { getRandomIntInclusive, shuffleArray2Dim, createArray2Dim } from "./outils.js"
+import { getRandomIntInclusive, shuffleArray2Dim, createArray2Dim } from "../utils/outils.js"
 
 // Retourne aléatoirement une pièce adjacente non visitée
 const setAdjacentRoom = (room, gridRooms) => {

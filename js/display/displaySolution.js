@@ -1,4 +1,4 @@
-import { inverseArray1Dim } from "./outils.js"
+import { inverseArray1Dim } from "../utils/outils.js"
 
 const displaySolution = (stackRooms, diameter, speed) => {
     let room, pathCells

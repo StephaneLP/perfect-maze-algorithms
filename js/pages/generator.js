@@ -1,8 +1,8 @@
-import { algoProfondeur } from "./algoBacktracking.js"
-import { displayMaze } from "./displayMaze.js"
-import { solutionAlgoBacktracking } from "./solutionAlgoBacktracking.js"
-import { displaySolution, displaySearchSolution } from "./displaySolution.js"
-import { createArray2Dim, buttonActive } from "./outils.js"
+import { algoProfondeur } from "../algorithms/algoBacktracking.js"
+import { displayMaze } from "../display/displayMaze.js"
+import { solutionAlgoBacktracking } from "../algorithms/solutionAlgoBacktracking.js"
+import { displaySolution, displaySearchSolution } from "../display/displaySolution.js"
+import { createArray2Dim, buttonActive } from "../utils/outils.js"
 
 /****************************************************************************************
 LOAD : INITIALISATION DES NOMBRES DE LIGNES ET COLONNES
@@ -76,14 +76,14 @@ const generateMaze = (event) => {
     // Calcul des nombres de lignes et colonnes en fonction de la fenêtre
     const hauteurFenetre = window.innerHeight - 40
     const largeurFenetre = window.innerWidth - 380
-    const thicknessFactor = 10-Number(thickness)
+    const thicknessFactor = Number(thickness) / 10
     let nbGridLines, nbGridColumns, minCellLength, maxCellLength
 
     if(!document.querySelector("#dimension-perso").checked) {
         nbGridLines = Number(dimension)
-        minCellLength = hauteurFenetre/(nbGridLines*(thicknessFactor+1)+1)
-        maxCellLength = minCellLength*thicknessFactor
-        nbGridColumns = Math.floor((largeurFenetre-minCellLength)/(minCellLength + maxCellLength))
+        maxCellLength = hauteurFenetre / (nbGridLines + thicknessFactor * (nbGridLines + 1))
+        minCellLength = maxCellLength * thicknessFactor
+        nbGridColumns = Math.floor((largeurFenetre-minCellLength) / (minCellLength + maxCellLength))
     } else {
         if(lines==="" || columns==="") {
             displayMessage(true)
@@ -93,12 +93,16 @@ const generateMaze = (event) => {
         nbGridColumns = Number(columns)
 
         if((hauteurFenetre/largeurFenetre)>(nbGridLines/nbGridColumns)) {
-            minCellLength = largeurFenetre/(nbGridColumns*(thicknessFactor+1)+1)
+            maxCellLength =  largeurFenetre / (nbGridColumns + thicknessFactor * (nbGridColumns + 1))
+            // minCellLength = largeurFenetre/(nbGridColumns*(thicknessFactor+1)+1)
         }
         else {
-            minCellLength = hauteurFenetre/(nbGridLines*(thicknessFactor+1)+1)
+            maxCellLength =  hauteurFenetre / (nbGridLines + thicknessFactor * (nbGridLines + 1))
+            // minCellLength = hauteurFenetre/(nbGridLines*(thicknessFactor+1)+1)
         }
-        maxCellLength = minCellLength*thicknessFactor 
+
+        minCellLength = maxCellLength * thicknessFactor
+        // maxCellLength = minCellLength*thicknessFactor 
     }
   
     // Création du labyrinthe
@@ -117,7 +121,7 @@ const generateMaze = (event) => {
     backUpMaze = {stackOpenCells: stackOpenCells, nbGridLines: nbGridLines, nbGridColumns: nbGridColumns, maxCellLength: maxCellLength}
 }
 
-document.querySelector("#generateur-filtre").addEventListener("submit", generateMaze)
+document.querySelector("#generator-labyrinth").addEventListener("submit", generateMaze)
 
 /****************************************************************************************
 FONCTION AFFICHER LA SOLUTION DU LABYRINTHE

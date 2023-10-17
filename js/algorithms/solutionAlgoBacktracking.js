@@ -1,5 +1,5 @@
-import { getRandomIntInclusive, createArray2Dim, notEqual } from "./outils.js"
-import { backUpMaze } from "./generator.js"
+import { getRandomIntInclusive, createArray2Dim, notEqual } from "../utils/outils.js"
+import { backUpMaze } from "../pages/generator.js"
 
 const solutionAlgoBacktracking = (stackSolutionRooms, stackSearchSolutionRooms, gridMaze, RoomEntry, RoomExit) => {
     let currentRoom = [], adjacentRoom = []

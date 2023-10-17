@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./images/favicon.png" />
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/generator.css">
+    <title>Labyrinthes Parfaits</title>
+</head>
+<body>
+    <!-----------------------------------------------------------------------------------
+    PAGE GENERATEUR DE LABYRINTHE
+    ------------------------------------------------------------------------------------>
+    <main class="generator">
+        <section class="generator-filter">
+            <!-- BOUTON RETOUR VERS LA PAGE D'ACCUEIL -->
+            <a class="generator-back" href="/">
+                <img src="./images/back.png" alt="Retour vers la page d'accueil" />
+                Page d'accueil
+            </a>
+            <!-- FORMULAIRE LABYRINTHE -->
+            <form class="generator-form" id="generator-labyrinth">
+                <h2>Labyrinthe</h2>
+                <div class="select">
+                    <h3>Algorithme</h3>
+                    <select id="algorithme" name="algorithme">
+                        <option value="profondeur">Parcours en profondeur</option>
+                        <option value="fusion">Fusion aléatoire</option>
+                        <option value="sidewinder">Sidewinder</option>
+                    </select>  
+                </div>
+                <div class="range">
+                    <h3>Vitesse d'animation</h3>
+                    <div class="graduation">
+                        <div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div>
+                    </div>
+                    <input type="range" id="animation" name="animation" min="1" max="9" step="1" />
+                    <div class="checkbox">
+                        <input type="checkbox" id="animation-sans" name="animation-sans" />
+                        <label for="animation-sans">Sans animation</label>                              
+                    </div>
+                </div>
+                <div class="range">
+                    <h3>Taille du labyrinthe</h3>
+                    <div class="graduation">
+                        <div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div>
+                    </div>
+                    <input type="range" id="dimension" name="dimensions" min="6" max="22" step="2" />
+                    <div class="checkbox">
+                        <input type="checkbox" id="dimension-perso" name="dimension-perso" />
+                        <label for="dimension-perso">Taille personnalisée</label>
+                        <div id="select-perso">
+                            <div>
+                                <label for="lignes">Nombre de lignes</label>
+                                <select id="lignes" name="lignes"></select>                            
+                            </div>
+                            <div>
+                                <label for="colonnes">Nombre de colonnes</label>
+                                <select id="colonnes" name="colonnes"></select>                            
+                            </div>
+                        </div>                               
+                    </div>
+                </div>
+                <div class="range">
+                    <h3>Epaisseur des murs</h3>
+                    <div class="graduation">
+                        <div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div>
+                    </div>
+                    <input type="range" id="epaisseur" name="epaisseur" min="1" max="9" step="1" />                
+                </div>
+                <input type="submit" value="Générer le labyrinthe" class="btn" id="btn-generate" />
+            </form>
+            <!-- FORMULAIRE SOLUTION -->
+            <form class="generator-form" id="generator-solution">
+                <h2>Solution</h2>
+                <div class="radio">
+                    <div>
+                        <input type="radio" id="complete" name="type-solution" value="recherche" checked />
+                        <label for="complete">Avec recherche du chemin</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="simple" name="type-solution" value="sans" />
+                        <label for="simple">Sans</label>
+                    </div>
+                </div>
+                <div class="range">
+                    <h3>Vitesse d'animation</h3>
+                    <div class="graduation">
+                        <div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div>
+                    </div>
+                    <input type="range" id="animation-solution" name="animation-solution" min="1" max="9" step="1" />
+                    <div class="checkbox">
+                        <input type="checkbox" id="animation-solution-sans" name="animation-solution-sans" />
+                        <label for="animation-solution-sans">Sans animation</label>                              
+                    </div>
+                </div>
+                <button class="btn btn-disabled" id="btn-solution" disabled>Générer la solution</button>
+            </form>
+            <div class="stop-animation">
+                <button class="btn" id="btn-stop">Fin<br>Animation</button>
+            </div>
+        </section>
+        <!-- SECTION AFFICHAGE DU LABYRINTHE -->
+        <section class="labyrinthe">
+            <div id="labyrinthe"></div>
+        </section>
+        <!-- FENETRE MODALE MESSAGE -->
+        <section class="message">
+            <div id="message">
+                <div id="libelle-message">
+                     Veuillez renseigner les nombres de lignes et de colonnes S.V.P.
+                </div>
+                <button class="btn" id="btn-message">Fermer</button>
+            </div>
+        </section>
+    </main>
+</body>
+<script type="module" src="./js/pages/generator.js"></script>
+</html>
