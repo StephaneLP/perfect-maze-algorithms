@@ -1,4 +1,4 @@
-import { getRandomIntInclusive, buttonActive } from "../utils/outils.js"
+import { buttonActive } from "../utils/outils.js"
 
 let gblTimeOuts = []
 let stackCells = []
@@ -12,6 +12,7 @@ function displayMaze(stackOpenCells, nbGridLines, nbGridColumns, minLength, maxL
     let section = document.querySelector("#labyrinthe")
 
     section.replaceChildren()
+    gblTimeOuts = []
     stackCells = stackOpenCells
 
     for(let n=0; n<nbLines; n++) {
@@ -62,10 +63,9 @@ function displayMaze(stackOpenCells, nbGridLines, nbGridColumns, minLength, maxL
     const stackLength = stackOpenCells.length
 
     if(speed !== 0) {
-        document.querySelector(".stop-animation").style.visibility = "visible"
+        document.querySelector("#stop-maze-animation").style.visibility = "visible"
         speed = speed*10
 
-        gblTimeOuts = []
         for(let i=0; i<stackLength; i++) {
             gblTimeOuts.push(setTimeout(openCells, i*speed, stackOpenCells[i]))
         }
@@ -101,14 +101,14 @@ function displayArrowAccess(arrAccess) {
 function endDisplayMaze() {
     buttonActive("#btn-generate", true)
     buttonActive("#btn-solution", true)
-    document.querySelector(".stop-animation").style.visibility = "hidden"
+    document.querySelector("#stop-maze-animation").style.visibility = "hidden"
 }
 
 /****************************************************************************************
 ARRET DE L'ANIMATION
 ****************************************************************************************/
 
-const stopAnimation = () => {
+const stopMazeAnimation = () => {
     for(var i=0; i<gblTimeOuts.length; i++) {
         clearTimeout(gblTimeOuts[i]);
     }
@@ -119,6 +119,6 @@ const stopAnimation = () => {
     displayArrowAccess(stackCells.slice(-1))
 }
 
-document.querySelector("#btn-stop").addEventListener("click", stopAnimation)
+document.querySelector("#btn-maze-stop").addEventListener("click", stopMazeAnimation)
 
 export { displayMaze }

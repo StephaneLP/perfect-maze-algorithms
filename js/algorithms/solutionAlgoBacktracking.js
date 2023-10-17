@@ -8,7 +8,7 @@ const solutionAlgoBacktracking = (stackSolutionRooms, stackSearchSolutionRooms, 
     // Pièce de départ : Entrée du labyrinthe
     currentRoom = [...RoomEntry]
     gridRooms[currentRoom[0]][currentRoom[1]] = true
-    stackSolutionRooms.push({room: currentRoom, direction: null})
+    stackSolutionRooms.push({room: currentRoom, direction: null, display: true})
     stackSearchSolutionRooms.push({room: currentRoom, direction: null, display: true})
 
     // Algorithme de recherche du chemin solution
@@ -17,7 +17,7 @@ const solutionAlgoBacktracking = (stackSolutionRooms, stackSearchSolutionRooms, 
         if(adjacentRoom) {
             currentRoom = [...adjacentRoom.room]
             gridRooms[currentRoom[0]][currentRoom[1]] = true
-            stackSolutionRooms.push({room: currentRoom, direction: adjacentRoom.direction})
+            stackSolutionRooms.push({room: currentRoom, direction: adjacentRoom.direction, display: true})
             stackSearchSolutionRooms.push({room: currentRoom, direction: adjacentRoom.direction, display: true})
         }
         else {
@@ -26,7 +26,6 @@ const solutionAlgoBacktracking = (stackSolutionRooms, stackSearchSolutionRooms, 
             currentRoom = [...stackSolutionRooms[stackSolutionRooms.length - 1].room]
         }
     }
-    console.log(stackSearchSolutionRooms)
 }
 
 // Retourne aléatoirement une pièce adjacente accessible non visitée

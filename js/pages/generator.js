@@ -1,7 +1,7 @@
 import { algoProfondeur } from "../algorithms/algoBacktracking.js"
 import { displayMaze } from "../display/displayMaze.js"
 import { solutionAlgoBacktracking } from "../algorithms/solutionAlgoBacktracking.js"
-import { displaySolution, displaySearchSolution } from "../display/displaySolution.js"
+import { displaySolution } from "../display/displaySolution.js"
 import { createArray2Dim, buttonActive } from "../utils/outils.js"
 
 /****************************************************************************************
@@ -94,15 +94,12 @@ const generateMaze = (event) => {
 
         if((hauteurFenetre/largeurFenetre)>(nbGridLines/nbGridColumns)) {
             maxCellLength =  largeurFenetre / (nbGridColumns + thicknessFactor * (nbGridColumns + 1))
-            // minCellLength = largeurFenetre/(nbGridColumns*(thicknessFactor+1)+1)
         }
         else {
             maxCellLength =  hauteurFenetre / (nbGridLines + thicknessFactor * (nbGridLines + 1))
-            // minCellLength = hauteurFenetre/(nbGridLines*(thicknessFactor+1)+1)
         }
 
         minCellLength = maxCellLength * thicknessFactor
-        // maxCellLength = minCellLength*thicknessFactor 
     }
   
     // Création du labyrinthe
@@ -127,35 +124,37 @@ document.querySelector("#generator-labyrinth").addEventListener("submit", genera
 FONCTION AFFICHER LA SOLUTION DU LABYRINTHE
 ****************************************************************************************/
 
-const generateSolution = () => {
+const generateSolution = (event) => {
+    event.preventDefault()
+
+    const search = event.target.search.value
+    const animationSpeed = event.target.animation.value
+
     const nbLines = 2 * backUpMaze.nbGridLines + 1
     const nbColumns = 2 * backUpMaze.nbGridColumns + 1
     const stackOpenCells = backUpMaze.stackOpenCells
     const imgSolutionDiameter = Math.floor(backUpMaze.maxCellLength * 0.5).toString() + "px"
-    const animationSpeed = "1"
 
-    let speed = (document.querySelector("#animation-sans").checked ? 0 : 10 - Number(animationSpeed))
+    let speed = (document.querySelector("#animation-solution-sans").checked ? 0 : 10 - Number(animationSpeed))
 
     // Initialisation du tableau contenant le labyrinthe
     let gridMaze = createArray2Dim(nbLines, nbColumns, false)
-
     stackOpenCells.map(array => array.map(element => gridMaze[element[0]][element[1]] = true))
 
     // Calcul des coordonnées des pièces "Entrée" et "Sortie"
     let accessCells = [], RoomEntry = [], RoomExit = []
-
     accessCells = stackOpenCells.slice(-1)[0]
     RoomEntry = [(accessCells[0][0] - 1) / 2, (accessCells[0][1]) / 2]
     RoomExit = [(accessCells[1][0]- 1 ) / 2, (accessCells[1][1] - 2 ) / 2]
     
     // Piles de recherche du chemin solution
     let stackSolutionRooms = [], stackSearchSolutionRooms = []
-
     solutionAlgoBacktracking(stackSolutionRooms, stackSearchSolutionRooms, gridMaze, RoomEntry, RoomExit)
-    // displaySolution(stackSolutionRooms, imgSolutionDiameter, speed)
-    displaySearchSolution(stackSearchSolutionRooms, imgSolutionDiameter, speed)
+
+    const stackRooms = (search === "ok" ? stackSearchSolutionRooms : stackSolutionRooms)
+    displaySolution(stackRooms, imgSolutionDiameter, speed)
 }
 
-document.querySelector("#btn-solution").addEventListener("click", generateSolution)
+document.querySelector("#generator-solution").addEventListener("submit", generateSolution)
 
 export { backUpMaze }
