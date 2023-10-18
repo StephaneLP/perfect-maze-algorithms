@@ -1,4 +1,5 @@
 import { algoProfondeur } from "../algorithms/algoBacktracking.js"
+import { algoFusion }  from "../algorithms/algoFusion.js"
 import { displayMaze } from "../display/displayMaze.js"
 import { solutionAlgoBacktracking } from "../algorithms/solutionAlgoBacktracking.js"
 import { displaySolution } from "../display/displaySolution.js"
@@ -109,6 +110,9 @@ const generateMaze = (event) => {
         case "profondeur":
             algoProfondeur(stackOpenCells, nbGridLines, nbGridColumns)
             break
+        case "fusion":
+            algoFusion(stackOpenCells, nbGridLines, nbGridColumns)
+            break
     }
 
     // Affichage du labyrinthe
@@ -144,11 +148,11 @@ const generateSolution = (event) => {
     const accessCells = stackOpenCells.slice(-1)[0]
     
     // Piles de recherche du chemin solution
-    let stackSolutionCells = [], stackSearchSolutionRooms = []
-    solutionAlgoBacktracking(stackSolutionCells, gridMaze, accessCells)
+    let stackSolutionCells = [], stackSearchSolutionCells = []
+    solutionAlgoBacktracking(stackSolutionCells, stackSearchSolutionCells, gridMaze, accessCells)
 
-    const stackRooms = (search === "ok" ? stackSearchSolutionRooms : stackSolutionRooms)
-    displaySolution(stackSolutionCells, imgSolutionDiameter, speed)
+    const stackCells = (search === "ok" ? stackSearchSolutionCells : stackSolutionCells)
+    displaySolution(stackCells, imgSolutionDiameter, speed)
 }
 
 document.querySelector("#generator-solution").addEventListener("submit", generateSolution)

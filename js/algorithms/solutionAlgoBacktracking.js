@@ -1,60 +1,53 @@
 import { getRandomIntInclusive, createArray2Dim, convertCellToRoom, convertRoomToCell } from "../utils/outils.js"
 
-const solutionAlgoBacktracking = (stackSolutionCells, gridMaze, accessCells) => {
-    let currentRoom = [], adjacentRoom = [], stackCells = []
+const solutionAlgoBacktracking = (stackSolutionCells, stackSearchSolutionCells, gridMaze, accessCells) => {
+    let currentRoom = [], adjacentRoom = []
     let gridRooms = createArray2Dim(gridMaze.length, gridMaze[0].length, false)
     const entryCell = [...accessCells[0]]
     const exitCell = [...accessCells[1]]
     const entryRoom = [(entryCell[0] - 1) / 2, (entryCell[1]) / 2]
     const exitRoom = [(exitCell[0]- 1 ) / 2, (exitCell[1] - 2 ) / 2]
 
-    stackSolutionCells.push({cell: entryCell, display: true})
+    stackSearchSolutionCells.push({cell: entryCell, display: true})
     currentRoom = [...entryRoom]
     gridRooms[currentRoom[0]][currentRoom[1]] = true
-    stackSolutionCells.push({cell: convertRoomToCell(currentRoom), display: true})
-let c = 0
+    stackSearchSolutionCells.push({cell: convertRoomToCell(currentRoom), display: true})
+    addCells(stackSolutionCells, stackSearchSolutionCells.slice(-2))
+
     while(notCurrentRoomExit(currentRoom, exitRoom)) {
-c += 1
-if(c==1000) {console.log(stackCells); return}
         adjacentRoom = setAdjacentRoom(currentRoom, gridRooms, gridMaze)
         if(adjacentRoom) {
             gridRooms[adjacentRoom[0]][adjacentRoom[1]] = true
-            addSolutionCells(stackSolutionCells, currentRoom, adjacentRoom)
-            addCells(stackCells, stackSolutionCells.slice(-2))
-
+            addSolutionCells(stackSearchSolutionCells, currentRoom, adjacentRoom)
+            addCells(stackSolutionCells, stackSearchSolutionCells.slice(-2))
             currentRoom = [...adjacentRoom]
         }
         else {
-            if(stackCells.length !== 0) {
-            updateSolutionCells(stackSolutionCells, stackCells)
-            currentRoom = [...stackCells.slice(-1)]                
-            }
-
+            updateSolutionCells(stackSearchSolutionCells, stackSolutionCells)
+            currentRoom = convertCellToRoom(stackSolutionCells[stackSolutionCells.length - 1].cell)
         }
     }
-    
+    stackSearchSolutionCells.push({cell: exitCell, display: true})
+    stackSolutionCells.push({cell: exitCell, display: true})
 }
 
-const addCells = (stackCells, arrCells) => {
-    arrCells.map(arr => stackCells.push([...arr.cell]))
+const addCells = (stackSolutionCells, arrCells) => {
+    arrCells.map(obj => stackSolutionCells.push({cell: [...obj.cell],display: obj.display}))
 }
 
-const addSolutionCells = (stackSolutionCells, currentRoom, adjacentRoom) => {
-    stackSolutionCells.push({cell: [currentRoom[0] + adjacentRoom[0] + 1, currentRoom[1] + adjacentRoom[1] + 1], display: true})
-    stackSolutionCells.push({cell: [2*adjacentRoom[0]+1, 2*adjacentRoom[1]+1], display: true})
+const addSolutionCells = (stackSearchSolutionCells, currentRoom, adjacentRoom) => {
+    stackSearchSolutionCells.push({cell: [currentRoom[0] + adjacentRoom[0] + 1, currentRoom[1] + adjacentRoom[1] + 1], display: true})
+    stackSearchSolutionCells.push({cell: [2*adjacentRoom[0]+1, 2*adjacentRoom[1]+1], display: true})
 }
 
-const updateSolutionCells = (stackSolutionCells, stackCells) => {
-    let cell
+const updateSolutionCells = (stackSearchSolutionCells, stackSolutionCells) => {
+    let obj
 
-    cell = [...stackCells[stackCells.length - 1]]
-    stackSolutionCells.push({cell: cell, display: false})
-    stackCells.pop()
-
-    cell = [...stackCells[stackCells.length - 1]]
-    stackSolutionCells.push({cell: cell, display: false})
-    stackCells.pop()
-
+    for(let i = 0; i < 2; i++) {
+        obj = stackSolutionCells[stackSolutionCells.length - 1]
+        stackSearchSolutionCells.push({cell: [...obj.cell], display: false})
+        stackSolutionCells.pop()        
+    }
 }
 
 // Retourne aléatoirement une pièce adjacente accessible non visitée

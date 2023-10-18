@@ -4,8 +4,6 @@ let gblTimeOuts = []
 let backupStackCells = [], backupDiameter
 
 const displaySolution = (stackSolutionCells, diameter, speed) => {
-    let room, pathCells
-console.log(stackSolutionCells)
     clearImgTags()
     gblTimeOuts = []
     backupStackCells = stackSolutionCells
@@ -14,7 +12,7 @@ console.log(stackSolutionCells)
     stackSolutionCells.map((solutionCell, index) => {
         if(speed !== 0) {
             document.querySelector("#stop-solution-animation").style.visibility = "visible"
-            gblTimeOuts.push(setTimeout(displayCell, speed * index, solutionCell.cell, diameter, solutionCell.cell.display))
+            gblTimeOuts.push(setTimeout(displayCell, speed * index, solutionCell.cell, diameter, solutionCell.display))
         } else {
             displayCell(solutionCell.cell, diameter, solutionCell.display)
         }
