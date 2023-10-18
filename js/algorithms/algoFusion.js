@@ -25,7 +25,7 @@ const algoFusion = (stackOpenCells, nbGridLines, nbGridColumns) => {
 
         isCelluleParcours = arrBranches[getRandomIntInclusive(0, nbGridLines*nbGridColumns-1)]
         arrCellulesAdjacentes = setArrCellulesAdjacentes(isCelluleParcours, arrBranches, nbGridLines, nbGridColumns)
-
+    }
 
 
 

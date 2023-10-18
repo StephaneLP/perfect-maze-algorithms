@@ -112,6 +112,10 @@ SECTION FILTRE
     margin: 5px 0 0;
 }
 
+.generator-form #algorithme {
+    color: var(--text-color3);
+}
+
 /************ SECTION FILTRE : INPUT RADIO ************/
 
 .generator-form .radio>div {
