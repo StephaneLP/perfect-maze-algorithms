@@ -8,8 +8,8 @@ const solutionAlgoBacktracking = (stackSolutionRooms, stackSearchSolutionRooms, 
     // Pièce de départ : Entrée du labyrinthe
     currentRoom = [...RoomEntry]
     gridRooms[currentRoom[0]][currentRoom[1]] = true
-    stackSolutionRooms.push({room: currentRoom, direction: null, display: true})
-    stackSearchSolutionRooms.push({room: currentRoom, direction: null, display: true})
+    stackSolutionRooms.push({room: currentRoom, direction: "E", display: true})
+    stackSearchSolutionRooms.push({room: currentRoom, direction: "E", display: true})
 
     // Algorithme de recherche du chemin solution
     while(notEqual(currentRoom, RoomExit)) {

@@ -211,6 +211,7 @@ SECTION LABYRINTHE
 
 #labyrinthe {
     background-color: var(--bg-maze3-color);
+    overflow: hidden;
 }
 
 #labyrinthe>div {
@@ -239,7 +240,6 @@ SECTION LABYRINTHE
 }
 
 .labyrinth-solution {
-    /* background-color: #4c7a3a; */
     background-image: url("../images/round.png");
     background-size: 0;
     background-position: center;
@@ -252,6 +252,7 @@ SECTION LABYRINTHE
 .labyrinthe-border {
     background-color: var(--bg-maze2-color);
     width: 20px;
+    z-index: 1;
 }
 
 .labyrinthe-access {
