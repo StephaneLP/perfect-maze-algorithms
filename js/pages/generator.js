@@ -71,7 +71,7 @@ const generateMaze = (event) => {
     const thickness = event.target.epaisseur.value
 
     // Calcul de la vitesse d'animation
-    let speed = (document.querySelector("#animation-sans").checked ? 0 : 10 - Number(animationSpeed))
+    let speed = (document.querySelector("#animation-sans").checked ? 0 : (2 * (10 - Number(animationSpeed)) - 1) * 10)
 
     // Calcul des nombres de lignes et colonnes en fonction de la fenêtre
     const hauteurFenetre = window.innerHeight - 40
@@ -127,34 +127,28 @@ FONCTION AFFICHER LA SOLUTION DU LABYRINTHE
 const generateSolution = (event) => {
     event.preventDefault()
 
-    const search = event.target.search.value
-    const animationSpeed = event.target.animation.value
-
-    const nbLines = 2 * backUpMaze.nbGridLines + 1
-    const nbColumns = 2 * backUpMaze.nbGridColumns + 1
+    const nbMazeLines = 2 * backUpMaze.nbGridLines + 1
+    const nbMazeColumns = 2 * backUpMaze.nbGridColumns + 1
     const stackOpenCells = backUpMaze.stackOpenCells
-    const imgSolutionDiameter = Math.floor(backUpMaze.maxCellLength * 0.5).toString() + "px"
+    const imgSolutionDiameter = Math.floor(backUpMaze.maxCellLength * 0.5)
 
-    let speed = (document.querySelector("#animation-solution-sans").checked ? 0 : 10 - Number(animationSpeed))
+    const search = event.target.search.value
+    const animation = event.target.animation.checked
+    const speed = (animation ? 0 :  (2 * (10 - Number(event.target.speed.value)) - 1) * 10)
 
     // Initialisation du tableau contenant le labyrinthe
-    let gridMaze = createArray2Dim(nbLines, nbColumns, false)
+    let gridMaze = createArray2Dim(nbMazeLines, nbMazeColumns, false)
     stackOpenCells.map(array => array.map(element => gridMaze[element[0]][element[1]] = true))
 
-    // Calcul des coordonnées des pièces "Entrée" et "Sortie"
-    let accessCells = [], RoomEntry = [], RoomExit = []
-    accessCells = stackOpenCells.slice(-1)[0]
-    RoomEntry = [(accessCells[0][0] - 1) / 2, (accessCells[0][1]) / 2]
-    RoomExit = [(accessCells[1][0]- 1 ) / 2, (accessCells[1][1] - 2 ) / 2]
+    // Cellules Entrée et Sortie
+    const accessCells = stackOpenCells.slice(-1)[0]
     
     // Piles de recherche du chemin solution
-    let stackSolutionRooms = [], stackSearchSolutionRooms = []
-    solutionAlgoBacktracking(stackSolutionRooms, stackSearchSolutionRooms, gridMaze, RoomEntry, RoomExit)
+    let stackSolutionCells = [], stackSearchSolutionRooms = []
+    solutionAlgoBacktracking(stackSolutionCells, gridMaze, accessCells)
 
     const stackRooms = (search === "ok" ? stackSearchSolutionRooms : stackSolutionRooms)
-    displaySolution(stackRooms, imgSolutionDiameter, speed)
+    displaySolution(stackSolutionCells, imgSolutionDiameter, speed)
 }
 
 document.querySelector("#generator-solution").addEventListener("submit", generateSolution)
-
-export { backUpMaze }

@@ -64,7 +64,6 @@ function displayMaze(stackOpenCells, nbGridLines, nbGridColumns, minLength, maxL
 
     if(speed !== 0) {
         document.querySelector("#stop-maze-animation").style.visibility = "visible"
-        speed = speed*10
 
         for(let i=0; i<stackLength; i++) {
             gblTimeOuts.push(setTimeout(openCells, i*speed, stackOpenCells[i]))
