@@ -1,5 +1,3 @@
-import { inverseArray1Dim } from "../utils/outils.js"
-
 let gblTimeOuts = []
 let backupStackCells = [], backupDiameter
 

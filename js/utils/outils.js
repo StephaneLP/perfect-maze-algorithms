@@ -4,6 +4,19 @@ const getRandomIntInclusive = (min, max) => {
     return Math.floor(Math.random() * (max - min +1)) + min
 }
 
+const shuffleArrayDim = (arr) => {
+    let arrCopy = arr.map(arr => arr.map(cell => cell))
+    let array = []
+    let index
+
+    while(arrCopy.length > 0) {
+        index = getRandomIntInclusive(0, arrCopy.length-1)
+        array.push([...arrCopy[index]])
+        arrCopy.splice(index, 1)
+    }
+    return array
+}
+
 const shuffleArray2Dim = (arr) => {
     let arrCopy = arr.map(arr => arr.map(cell => cell))
     let array = []
@@ -17,28 +30,10 @@ const shuffleArray2Dim = (arr) => {
     return array
 }
 
-const inverseArray1Dim = (arr) => {
-    let arrCopy = [...arr]
-
-    for (let i = arr.length -1 ; i === 0; i--) {
-        arrCopy.push(arr[i])
-    }
-    return arrCopy
-}
-
 const createArray2Dim = (nbLines, nbColumns, defaultValue) => {
-    let array = new Array(nbLines)
+    let value = (defaultValue !== undefined ? defaultValue : null)
+    let array = new Array(nbLines).fill(null).map(() => new Array(nbColumns).fill(value))
 
-    for(let n=0; n<nbLines; n++) {
-        array[n] = new Array(nbColumns)
-    }
-    if(defaultValue !== undefined) {
-        for(let n=0; n<nbLines; n++) {
-            for(let m=0; m<nbColumns; m++) {
-                array[n][m] = defaultValue
-            }
-        }        
-    }
     return array
 }
 
@@ -61,4 +56,4 @@ function convertRoomToCell(room) {
     return [2 * room[0] + 1, 2 * room[1] + 1]
 }
 
-export { getRandomIntInclusive, shuffleArray2Dim, inverseArray1Dim, createArray2Dim, buttonActive, convertCellToRoom, convertRoomToCell }
+export { getRandomIntInclusive, shuffleArrayDim, shuffleArray2Dim, createArray2Dim, buttonActive, convertCellToRoom, convertRoomToCell }

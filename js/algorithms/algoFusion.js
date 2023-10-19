@@ -1,30 +1,22 @@
-import { getRandomIntInclusive, shuffleArray2Dim, createArray2Dim } from "../utils/outils.js"
+import { getRandomIntInclusive, shuffleArrayDim, createArray2Dim } from "../utils/outils.js"
 
 const algoFusion = (stackOpenCells, nbGridLines, nbGridColumns) => {
-    // Initialisation du tableau contenant les branches (pièces) du labyrinthe
-    // Chaque élément contient les coordonnées n et m et un numéro de branche
-    let arrBranches = []
-    let numBranche = 0
+    let gridRooms = initGridRooms(nbGridLines, nbGridColumns)
+    let stackWalls = initStackWalls(nbGridLines, nbGridColumns)
+    let wall = [], cell0 = [], cell1 = []
 
-    for(let n=0; n<nbGridLines; n++) {
-        for(let m=0; m<nbGridColumns; m++) {
-            arrBranches.push({
-                n: n,
-                m: m,
-                branche: numBranche
-            })
-            numBranche += 1
+    stackWalls = shuffleArrayDim(stackWalls)
+
+    while(stackWalls.length > 0) {
+        wall = stackWalls[stackWalls.length - 1]
+
+        cell0 = getCoordinates(wall[0], nbGridColumns)
+        cell1 = getCoordinates(wall[1], nbGridColumns)
+
+        if (gridRooms[cell0[0]][cell0[1]] !== gridRooms[cell1[0]][cell1[1]]) {
+            console.log("ok")
         }
-    }
-
-    let nbBranches = nbGridLines*nbGridColumns
-    let isCelluleParcours = []
-    let arrCellulesAdjacentes = []
-
-    while(nbBranches>1) {
-
-        isCelluleParcours = arrBranches[getRandomIntInclusive(0, nbGridLines*nbGridColumns-1)]
-        arrCellulesAdjacentes = setArrCellulesAdjacentes(isCelluleParcours, arrBranches, nbGridLines, nbGridColumns)
+        stackWalls.pop()
     }
 
 
@@ -33,78 +25,41 @@ const algoFusion = (stackOpenCells, nbGridLines, nbGridColumns) => {
 
 
 
-    let gridRooms = createArray2Dim(nbGridLines, nbGridColumns, false)
-    let stackRooms = [], currentRoom = [], adjacentRoom = []
 
-    // Pièce de départ déterminée aléatoirement
-    currentRoom = [getRandomIntInclusive(0, nbGridLines-1),getRandomIntInclusive(0, nbGridColumns-1)]
-    gridRooms[currentRoom[0]][currentRoom[1]] = true
-    stackRooms.push(currentRoom)
-    stackOpenCells.push([[2*currentRoom[0]+1, 2*currentRoom[1]+1]])
 
-    // Algorithme de création du labyrinthe
-    while(stackRooms.length > 0) {
-        currentRoom = stackRooms[stackRooms.length-1]
-        adjacentRoom = setAdjacentRoom(currentRoom, gridRooms)
 
-        if(adjacentRoom) {
-            gridRooms[adjacentRoom[0]][adjacentRoom[1]] = true
-            stackRooms.push(adjacentRoom)
-            addOpenCells(stackOpenCells, currentRoom, adjacentRoom)
-        }
-        else {
-            stackRooms.pop()
-        }
-    }
 
-    // Ajout des cellules (murs) Entrée et Sortie (dernier tableau de la pile)
-    let indexEntry, indexExit
 
-    indexEntry = 2*getRandomIntInclusive(0, nbGridLines-1)+1
-    indexExit = 2*getRandomIntInclusive(0, nbGridLines-1)+1
-
-    stackOpenCells.push([[indexEntry, 0],[indexExit, 2 * nbGridColumns]])
 
     return stackOpenCells
 }
 
-// Retourne un tableau contenant les cellules adjacentes
-function setArrCellulesAdjacentes(cellule, arrBranches, nbColonnes, nbLignes) {
-    let x = cellule.x
-    let y = cellule.y
-    let tab = []
-
-    if(x>0) tab.push({
-        x: x-1,
-        y: y,
-        branche: getNumBranche(arrBranches, x-1, y)
-    })
-
-    if(x<nbColonnes-1) tab.push({
-        x: x+1,
-        y: y,
-        branche: getNumBranche(arrBranches, x+1, y)
-    })
-
-    if(y>0) tab.push({
-        x: x,
-        y: y-1,
-        branche: getNumBranche(arrBranches, x, y-1)
-    })
-
-    if(y<nbLignes-1) tab.push({
-        x: x,
-        y: y+1,
-        branche: getNumBranche(arrBranches, x, y+1)
-    })
-
-    tab = randomArray(tab)
-    return tab 
+const initGridRooms = (nbLin, nbCol) => {
+    let arr = createArray2Dim(nbLin, nbCol)
+    arr = arr.map((arr, n) => arr.map((el, m) => el = m + n * nbCol))
+console.log(arr)
+    return arr
 }
 
+const initStackWalls = (nbLin, nbCol) => {
+    let arr = []
 
+    for (let n = 0; n < nbLin; n++) {
+        for (let m = 0; m < nbCol; m++) {
+            if (m < nbCol - 1) arr.push([setRoomNumber(n, m, nbCol), setRoomNumber(n, m + 1, nbCol)])
+            if (n < nbLin - 1) arr.push([setRoomNumber(n, m, nbCol), setRoomNumber(n + 1, m, nbCol)])
+        }
+    }
+    return arr
+}
 
+const setRoomNumber = (n, m, nbCol) => {
+    return (m + n * nbCol)
+}
 
+const getCoordinates = (nbRoom, nbCol) => {
+    return [Math.floor(nbRoom / nbCol), nbRoom % nbCol]
+}
 
 
 

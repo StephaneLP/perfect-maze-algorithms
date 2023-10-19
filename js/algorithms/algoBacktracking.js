@@ -41,7 +41,7 @@ const setAdjacentRoom = (room, gridRooms) => {
     let n = room[0]
     let m = room[1]
     let array = []
-    
+
     if(n>0 && !gridRooms[n-1][m]) array.push([n-1, m]) // Pièce nord
     if(n<gridRooms.length-1 && !gridRooms[n+1][m]) array.push([n+1, m]) // Pièce sud
     if(m>0 && !gridRooms[n][m-1]) array.push([n, m-1]) // Pièce ouest
