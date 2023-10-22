@@ -3,41 +3,39 @@ import { getRandomIntInclusive, shuffleArrayDim, createArray2Dim } from "../util
 const algoFusion = (stackOpenCells, nbGridLines, nbGridColumns) => {
     let gridRooms = initGridRooms(nbGridLines, nbGridColumns)
     let stackWalls = initStackWalls(nbGridLines, nbGridColumns)
-    let wall = [], cell0 = [], cell1 = []
+    let wall = [], room0 = [], room1 = [], numBranch0 = 0, numBranch1 = 0
 
     stackWalls = shuffleArrayDim(stackWalls)
 
     while(stackWalls.length > 0) {
         wall = stackWalls[stackWalls.length - 1]
+        room0 = getCoordinates(wall[0], nbGridColumns)
+        room1 = getCoordinates(wall[1], nbGridColumns)
+        numBranch0 = gridRooms[room0[0]][room0[1]].numBranch
+        numBranch1 = gridRooms[room1[0]][room1[1]].numBranch
 
-        cell0 = getCoordinates(wall[0], nbGridColumns)
-        cell1 = getCoordinates(wall[1], nbGridColumns)
-
-        if (gridRooms[cell0[0]][cell0[1]] !== gridRooms[cell1[0]][cell1[1]]) {
-            console.log("ok")
+        if (numBranch0 !== numBranch1) {
+            updateNumBranches(gridRooms, numBranch0, numBranch1)
+            addOpenCells(stackOpenCells, gridRooms, room0, room1)
         }
         stackWalls.pop()
     }
 
+    // Ajout des cellules (murs) Entrée et Sortie (dernier tableau de la pile)
+    let indexEntry, indexExit
 
+    indexEntry = 2*getRandomIntInclusive(0, nbGridLines-1)+1
+    indexExit = 2*getRandomIntInclusive(0, nbGridLines-1)+1
 
-
-
-
-
-
-
-
-
-
+    stackOpenCells.push([[indexEntry, 0],[indexExit, 2 * nbGridColumns]])
 
     return stackOpenCells
 }
 
 const initGridRooms = (nbLin, nbCol) => {
     let arr = createArray2Dim(nbLin, nbCol)
-    arr = arr.map((arr, n) => arr.map((el, m) => el = m + n * nbCol))
-console.log(arr)
+    arr = arr.map((arr, n) => arr.map((el, m) => el = {numBranch: m + n * nbCol, visited: false}))
+
     return arr
 }
 
@@ -46,8 +44,8 @@ const initStackWalls = (nbLin, nbCol) => {
 
     for (let n = 0; n < nbLin; n++) {
         for (let m = 0; m < nbCol; m++) {
-            if (m < nbCol - 1) arr.push([setRoomNumber(n, m, nbCol), setRoomNumber(n, m + 1, nbCol)])
-            if (n < nbLin - 1) arr.push([setRoomNumber(n, m, nbCol), setRoomNumber(n + 1, m, nbCol)])
+            if(m < nbCol - 1) arr.push([setRoomNumber(n, m, nbCol), setRoomNumber(n, m + 1, nbCol)])
+            if(n < nbLin - 1) arr.push([setRoomNumber(n, m, nbCol), setRoomNumber(n + 1, m, nbCol)])
         }
     }
     return arr
@@ -61,34 +59,25 @@ const getCoordinates = (nbRoom, nbCol) => {
     return [Math.floor(nbRoom / nbCol), nbRoom % nbCol]
 }
 
-
-
-
-
-
-// Retourne aléatoirement une pièce adjacente non visitée
-const setAdjacentRoom = (room, gridRooms) => {
-    let n = room[0]
-    let m = room[1]
-    let array = []
-    
-    if(n>0 && !gridRooms[n-1][m]) array.push([n-1, m]) // Pièce nord
-    if(n<gridRooms.length-1 && !gridRooms[n+1][m]) array.push([n+1, m]) // Pièce sud
-    if(m>0 && !gridRooms[n][m-1]) array.push([n, m-1]) // Pièce ouest
-    if(m<gridRooms[0].length-1 && !gridRooms[n][m+1]) array.push([n, m+1]) // Pièce est
-
-    if(array.length == 0) return null 
-
-    return shuffleArray2Dim(array)[0]
+const updateNumBranches = (gridRooms, numBranch0, numBranch1) => {
+    gridRooms.map((arr, n) => arr.map((room, m) => {
+        if (room.numBranch == numBranch1) gridRooms[n][m].numBranch = numBranch0
+    }))
 }
+    
+const addOpenCells = (stackOpenCells, gridRooms, room0, room1) => {
+    let cellRooms = []
 
-const addOpenCells = (stackOpenCells, currentRoom, adjacentRoom) => {
-    let cellsToAdd = []
-
-    cellsToAdd.push([currentRoom[0] + adjacentRoom[0] + 1, currentRoom[1] + adjacentRoom[1] + 1])
-    cellsToAdd.push([2*adjacentRoom[0]+1, 2*adjacentRoom[1]+1])
-
-    stackOpenCells.push(cellsToAdd)
+    cellRooms.push([room0[0] + room1[0] + 1, room0[1] + room1[1] + 1])
+    if (!gridRooms[room0[0]][room0[1]].visited) {
+        cellRooms.push([2 * room0[0] + 1, 2 * room0[1] + 1])
+        gridRooms[room0[0]][room0[1]].visited = true
+    }
+    if(!gridRooms[room1[0]][room1[1]].visited) {
+        cellRooms.push([2 * room1[0] + 1, 2 * room1[1] + 1])
+        gridRooms[room1[0]][room1[1]].visited = true
+    }
+    stackOpenCells.push(cellRooms)
 }
 
 export { algoFusion }

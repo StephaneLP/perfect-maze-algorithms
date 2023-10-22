@@ -21,88 +21,129 @@
                 Page d'accueil
             </a>
             <!-- FORMULAIRE LABYRINTHE -->
-            <form class="generator-form" id="generator-labyrinth">
-                <h2>Labyrinthe</h2>
-                <div class="select">
-                    <h3>Algorithme</h3>
-                    <select id="algorithme" name="algorithme">
-                        <option value="profondeur">Parcours en profondeur</option>
-                        <option value="fusion">Fusion aléatoire</option>
-                        <option value="sidewinder">Sidewinder</option>
-                    </select>  
+            <form id="generator-labyrinth">
+                <div class="generator-form">
+                    <h2>Algorithme</h2>
+                    <div class="select">
+                        <div>
+                            <input type="radio" id="" name="" value="" checked>
+                            <label for="">Parcours en profondeur</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="" name="" value="">
+                            <label for="">Fusion aléatoire</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="" name="" value="">
+                            <label for="">Prim</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="" name="" value="">
+                            <label for="">Sidewinder</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="" name="" value="">
+                            <label for="">Arbre binaire</label>
+                        </div>
+
+
+
+                        <select id="algorithme" name="algorithme">
+                            <option value=""></option>
+                            <option value="profondeur">Parcours en profondeur</option>
+                            <option value="fusion">Fusion aléatoire</option>
+                            <option value="prim">Prim</option>
+                            <option value="sidewinder">Sidewinder</option>
+                            <option value="binarytree">Arbre binaire</option>
+                        </select>  
+                    </div>
                 </div>
-                <div class="range">
-                    <h3>Vitesse d'animation</h3>
-                    <div class="graduation">
-                        <div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div>
+                <div class="generator-form" >
+                    <h2>Dimensions</h2>
+                    <div class="range">
+                        <span>Taille</span>
+                        <div>
+                            <div class="graduation">
+                                <div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div>
+                            </div>
+                            <input type="range" name="taille" min="10" max="30" step="5" />                            
+                        </div>
                     </div>
-                    <input type="range" id="animation" name="animation" min="1" max="9" step="1" />
-                    <div class="checkbox">
-                        <input type="checkbox" id="animation-sans" name="animation-sans" />
-                        <label for="animation-sans">Sans animation</label>                              
+                    <div class="range">
+                        <span>Epaisseur</span>
+                        <div>
+                            <div class="graduation">
+                                <div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div>
+                            </div>
+                            <input type="range" name="thickness" min="10" max="70" step="15" />                               
+                        </div>
                     </div>
-                </div>
-                <div class="range">
-                    <h3>Taille du labyrinthe</h3>
-                    <div class="graduation">
-                        <div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div>
-                    </div>
-                    <input type="range" id="dimension" name="dimensions" min="6" max="22" step="2" />
-                    <div class="checkbox">
-                        <input type="checkbox" id="dimension-perso" name="dimension-perso" />
-                        <label for="dimension-perso">Taille personnalisée</label>
-                        <div id="select-perso">
+                    <div class="taille-perso">
+                        <input type="checkbox" id="taille-perso" name="taille-perso" />
+                        <label for="taille-perso">Taille personnalisée</label>
+                        <div id="select-taille-perso">
                             <div>
-                                <label for="lignes">Nombre de lignes</label>
-                                <select id="lignes" name="lignes"></select>                            
+                                <label for="lines">Nombre de lignes</label>
+                                <select id="lines" name="lines"></select>                            
                             </div>
                             <div>
-                                <label for="colonnes">Nombre de colonnes</label>
-                                <select id="colonnes" name="colonnes"></select>                            
+                                <label for="columns">Nombre de colonnes</label>
+                                <select id="columns" name="columns"></select>                            
                             </div>
                         </div>                               
                     </div>
                 </div>
-                <div class="range">
-                    <h3>Epaisseur des murs</h3>
-                    <div class="graduation">
-                        <div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div>
+                <div class="generator-form">
+                    <h2>Génération</h2>
+                    <div class="animation">
+                        <input type="checkbox" id="animation-checkbox" name="animationchecked" checked />
+                        <label for="animation-checkbox">Activer l'animation</label>
                     </div>
-                    <input type="range" id="epaisseur" name="epaisseur" min="1" max="9" step="1" />                
+                    <div class="range" id="animation-div">
+                        <span>Vitesse</span>
+                        <div>
+                            <div class="graduation">
+                                <div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div>
+                            </div>
+                            <input type="range" name="animation" min="1" max="9" step="2" />                            
+                        </div>
+                    </div>
+                    <input type="submit" value="Générer le labyrinthe" class="btn" id="btn-generate" />
+                    <button class="btn btn-disabled" id="btn-solution" disabled>Générer la solution</button>
                 </div>
-                <input type="submit" value="Générer le labyrinthe" class="btn" id="btn-generate" />
             </form>
             <!-- FORMULAIRE SOLUTION -->
-            <form class="generator-form" id="generator-solution">
-                <h2>Solution</h2>
-                <div class="radio">
-                    <div>
+            <!-- <form id="generator-solution">
+                <div class="generator-form">
+                    <h2>Solution</h2>
+                    <div class="animation">
+                        <input type="checkbox" id="animation-solution-checkbox" name="animationchecked" checked />
+                        <label for="animation-solution-checkbox">Activer l'animation</label>
+                    </div>
+                    <div class="radio animation-solution-div">
+                        <span>Avec recherche</span>
                         <input type="radio" id="search-ok" name="search" value="ok" checked />
-                        <label for="search-ok">Avec recherche du chemin</label>
-                    </div>
-                    <div>
+                        <label for="search-ok">Oui</label>
                         <input type="radio" id="search-no" name="search" value="no" />
-                        <label for="search-no">Sans</label>
+                        <label for="search-no">Non</label>
                     </div>
+                    <div class="range animation-solution-div">
+                        <span>Vitesse</span>
+                        <div>
+                            <div class="graduation">
+                                <div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div>
+                            </div>
+                            <input type="range" name="animation" min="1" max="9" step="2" />                            
+                        </div>
+                    </div>
+                    <button class="btn btn-disabled" id="btn-solution" disabled>Générer la solution</button>
                 </div>
-                <div class="range">
-                    <h3>Vitesse d'animation</h3>
-                    <div class="graduation">
-                        <div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div>
-                    </div>
-                    <input type="range" id="speed-solution" name="speed" min="1" max="9" step="1" />
-                    <div class="checkbox">
-                        <input type="checkbox" id="animation-solution" name="animation" />
-                        <label for="animation-solution">Sans animation</label>                              
-                    </div>
-                </div>
-                <button class="btn btn-disabled" id="btn-solution" disabled>Générer la solution</button>
-            </form>
+            </form> -->
             <div class="stop-animation" id="stop-maze-animation">
-                <button class="btn" id="btn-maze-stop">Afficher<br>Labyrinthe</button>
+                <button class="btn" id="btn-maze-stop">Terminer</button>
             </div>
             <div class="stop-animation" id="stop-solution-animation">
-                <button class="btn" id="btn-solution-stop">Afficher<br>Solution</button>
+                <button class="btn" id="btn-solution-stop">Terminer</button>
             </div>
         </section>
         <!-- SECTION AFFICHAGE DU LABYRINTHE -->
@@ -112,9 +153,7 @@
         <!-- FENETRE MODALE MESSAGE -->
         <section class="message">
             <div id="message">
-                <div id="libelle-message">
-                     Veuillez renseigner les nombres de lignes et de colonnes S.V.P.
-                </div>
+                <div id="libelle-message"></div>
                 <button class="btn" id="btn-message">Fermer</button>
             </div>
         </section>

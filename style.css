@@ -157,4 +157,5 @@ FENETRE MODALE MESSAGE
 
 .message #btn-message {
     width: 100%;
+    transition: all 0s ease-out;
 }

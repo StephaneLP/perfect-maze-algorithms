@@ -11,7 +11,7 @@ PAGE GENERATEUR DE LABYRINTHE
 }
 
 /*****************************************************
-SECTION FILTRE
+SECTION FILTRE : GLOBAL
 *****************************************************/
 
 .generator-filter {
@@ -38,7 +38,9 @@ SECTION FILTRE
     border-radius: 5px;
 }
 
-/************ SECTION FILTRE : BOUTON RETOUR ************/
+/*****************************************************
+SECTION FILTRE : BOUTON RETOUR
+*****************************************************/
 
 .generator-back {
     height: 50px;
@@ -65,11 +67,13 @@ SECTION FILTRE
     width: 18px;
 }
 
-/************ SECTION FILTRE : GENERATION & SOLUTION ************/
+/*****************************************************
+SECTION FILTRE : FORMULAIRES
+*****************************************************/
 
 .generator-form {
-    margin: 30px 20px 0;
-    padding: 30px 15px 15px;
+    margin: 40px 20px 0;
+    padding: 20px 15px 15px;
     background-color: var(--bg-color2);
     border-radius: 5px;
     position: relative;
@@ -78,7 +82,7 @@ SECTION FILTRE
 .generator-form h2 {
     font-family: "Mulish-Italic", Verdana, sans-serif;
     font-weight: 500;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: var(--text-titre-color);
     text-align: center;
     text-wrap: nowrap;
@@ -88,50 +92,38 @@ SECTION FILTRE
     transform: translate(-50%,-60%);
 }
 
-.generator-form h3 {
-    margin: 0 0 5px;
-    font-family: "Mulish-Regular", Verdana, sans-serif;
-    font-weight: 400;
-    font-size: 1.2rem;
-    color: var(--text-titre-color2);
+.generator-form>div {
+    margin: 10px 0 0;
 }
 
-.generator-form>div {
-    margin: 20px 0 0;
+/************ FORMULAIRES : SELECT ************/
+
+.generator-form select {
+    width: 100%;
+    font-size: 1rem;
+}
+
+.generator-form select option{
+    /* color: var(--text-color2); */
+    background-color: var(--bg-color4);
+}
+
+/************ FORMULAIRES : CLASSE RANGE ************/
+
+.generator-form .range {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.generator-form .range>div {
+    width: 60%;
     display: flex;
     flex-direction: column;
 }
 
-.generator-form>div:nth-child(2) {
-    margin: 0;
-}
-
-/************ SECTION FILTRE : SELECT ************/
-
-.generator-form .select select {
-    margin: 5px 0 0;
-}
-
-.generator-form #algorithme {
-    color: var(--text-color3);
-}
-
-/************ SECTION FILTRE : INPUT RADIO ************/
-
-.generator-form .radio>div {
-    margin: 5px 0 0;
-    display: flex;
-    flex-direction: row;
-}
-
-.generator-form .radio>div label {
-    margin-left: 10px;
-    font-size: 0.9rem;
-}
-
-/************ SECTION FILTRE : INPUT RANGE ************/
-
-.generator-form .range .graduation {
+.generator-form .range>div .graduation {
     margin: 0;
     padding: 0 6px;
     display: flex;
@@ -139,29 +131,30 @@ SECTION FILTRE
     justify-content: space-between;
 }
 
-.generator-form .range .graduation>div {
+.generator-form .range>div .graduation>div {
     color: var(--text-color2);
     font-size: 0.6rem;
 }
 
-/************ SECTION FILTRE : CHECKBOX & SELECT ************/
+/************ FORMULAIRES : CLASSE & ID CHOIX TAILLE ************/
 
-.generator-form .checkbox {
-    margin: 10px 0 0;
+.generator-form .taille-perso {
+    margin: 20px 0 0;
     font-family: "Mulish-Italic", Verdana, sans-serif;
     font-size: 0.9rem;
 }
 
-.generator-form #select-perso {
+.generator-form .taille-perso label {
+    margin: 0 0 0 5px;
+}
+
+.generator-form #select-taille-perso {
+    margin: 15px 0 0;
     font-size: 0.9rem;
     display: none;
 }
 
-.generator-form #select-perso select {
-    font-size: 0.9rem;
-}
-
-.generator-form #select-perso>div {
+.generator-form #select-taille-perso>div {
     margin: 5px 0 0;
     display: flex;
     flex-direction: row;
@@ -169,7 +162,76 @@ SECTION FILTRE
     align-items: center;
 }
 
-/************ SECTION FILTRE : BOUTON STOP ************/
+.generator-form #select-taille-perso select {
+    width: 25%;
+    font-size: 0.9rem;
+}
+
+/************ FORMULAIRES : CLASSE ANIMATION ************/
+
+.generator-form .animation label {
+    margin: 0 0 0 5px;
+}
+
+/************ FORMULAIRES : SOLUTION CLASSE RADIO ************/
+
+.generator-form .radio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.generator-form .radio input {
+    margin: 0 0 0 10px;
+}
+
+.generator-form .radio label {
+    margin: 0 0 0 5px;
+    font-size: 0.9rem;
+}
+
+/*****************************************************
+SECTION FILTRE : FENETRE MODALE CHOIX ALGORITHME
+*****************************************************/
+
+.choix-algorithme {
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left:0;
+    -webkit-backdrop-filter: blur(15px); /* assure la compatibilité avec safari */
+    backdrop-filter: blur(10px);
+    opacity: 1;
+    z-index: 1;
+}
+
+.choix-algorithme #choix-algorithme {
+    width: 400px;
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color1);
+    border-radius: 20px;
+    padding: 60px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.choix-algorithme #libelle-choix-algorithme {
+    text-align: center;
+    margin: 0 0 40px;
+}
+
+.choix-algorithme #btn-choix-algorithme {
+    width: 100%;
+}
+
+/*****************************************************
+SECTION FILTRE : FENETRE MODALE STOP ANIMATION
+*****************************************************/
 
 .stop-animation {
     width: 300px;

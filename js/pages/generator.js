@@ -1,5 +1,9 @@
 import { algoProfondeur } from "../algorithms/algoBacktracking.js"
 import { algoFusion }  from "../algorithms/algoFusion.js"
+import { algoSidewinder }  from "../algorithms/algoSidewinder.js"
+import { algoBinarytree }  from "../algorithms/algoBinarytree.js"
+import { algoPrim }  from "../algorithms/algoPrim.js"
+
 import { displayMaze } from "../display/displayMaze.js"
 import { solutionAlgoBacktracking } from "../algorithms/solutionAlgoBacktracking.js"
 import { displaySolution } from "../display/displaySolution.js"
@@ -25,30 +29,55 @@ const initSelect = (element, pas, max) => {
     }
 }
 
-window.addEventListener('load', initSelect("#lignes", 5, 80), initSelect("#colonnes", 5, 80))
+window.addEventListener('load', initSelect("#lines", 5, 80), initSelect("#columns", 5, 80))
 
 /****************************************************************************************
 LOAD : INITIALISATION DU FILTRE DIMENSION
 ****************************************************************************************/
 
-const handleCheckboxDimensionClick = () => {
-    const dimensionPerso = document.querySelector("#dimension-perso")
+const handleDimensionClick = () => {
+    const dimensionPerso = document.querySelector("#taille-perso")
 
-    document.querySelector("#select-perso").style.display = (dimensionPerso.checked ? "block" : "none")
+    document.querySelector("#select-taille-perso").style.display = (dimensionPerso.checked ? "block" : "none")
 }
 
-document.querySelector("#dimension-perso").addEventListener("click", handleCheckboxDimensionClick)
+document.querySelector("#taille-perso").addEventListener("click", handleDimensionClick)
+
+/****************************************************************************************
+LOAD : INITIALISATION DU FILTRE ANIMATION DE LA GENERATION
+****************************************************************************************/
+
+const handleAnimationClick = () => {
+    const animation = document.querySelector("#animation-checkbox")
+
+    document.querySelector("#animation-div").style.display = (animation.checked ? "flex" : "none")
+}
+
+document.querySelector("#animation-checkbox").addEventListener("click", handleAnimationClick)
+
+/****************************************************************************************
+LOAD : INITIALISATION DU FILTRE ANIMATION DE LA SOLUTION
+****************************************************************************************/
+
+// const handleAnimationSolutionClick = () => {
+//     const animationSolution = document.querySelector("#animation-solution-checkbox")
+
+//     document.querySelectorAll(".animation-solution-div").forEach(div => div.style.display = (animationSolution.checked ? "flex" : "none"))
+// }
+
+// document.querySelector("#animation-solution-checkbox").addEventListener("click", handleAnimationSolutionClick)
 
 /****************************************************************************************
 FONCTION FENETRE MODALE MESSAGE
 ****************************************************************************************/
 
-const displayMessage = (blnDisplay) => {
+const displayMessage = (blnDisplay, msg) => {
     document.querySelector(".message").style.visibility = (blnDisplay ? "visible" : "hidden")
+    document.querySelector("#libelle-message").textContent = msg
     buttonActive("#btn-generate", true)
 }
 
-document.querySelector("#btn-message").addEventListener("click", () => displayMessage(false))
+document.querySelector("#btn-message").addEventListener("click", () => displayMessage(false, ""))
 
 /****************************************************************************************
 FONCTION GENERER UN LABYRINTHE
@@ -65,29 +94,30 @@ const generateMaze = (event) => {
 
     // Parametres
     const algorithme = event.target.algorithme.value
-    const animationSpeed = event.target.animation.value
-    const dimension = event.target.dimension.value
-    const lines = event.target.lignes.value
-    const columns = event.target.colonnes.value
-    const thickness = event.target.epaisseur.value
+    const taille = event.target.taille.value
+    const thickness = event.target.thickness.value
+    const animationchecked = event.target.animationchecked.checked
+    const animation = event.target.animation.value
+    const lines = event.target.lines.value
+    const columns = event.target.columns.value
 
     // Calcul de la vitesse d'animation
-    let speed = (document.querySelector("#animation-sans").checked ? 0 : (2 * (10 - Number(animationSpeed)) - 1) * 10)
+    const speed = (animationchecked ? (2 * (10 - Number(animation)) - 1) * 10 : 0)
 
     // Calcul des nombres de lignes et colonnes en fonction de la fenêtre
     const hauteurFenetre = window.innerHeight - 40
     const largeurFenetre = window.innerWidth - 380
-    const thicknessFactor = Number(thickness) / 10
+    const thicknessFactor = Number(thickness) / 100
     let nbGridLines, nbGridColumns, minCellLength, maxCellLength
 
-    if(!document.querySelector("#dimension-perso").checked) {
-        nbGridLines = Number(dimension)
+    if(!document.querySelector("#taille-perso").checked) {
+        nbGridLines = Number(taille)
         maxCellLength = hauteurFenetre / (nbGridLines + thicknessFactor * (nbGridLines + 1))
         minCellLength = maxCellLength * thicknessFactor
         nbGridColumns = Math.floor((largeurFenetre-minCellLength) / (minCellLength + maxCellLength))
     } else {
         if(lines==="" || columns==="") {
-            displayMessage(true)
+            displayMessage(true, "Veuillez renseigner les nombres de lignes et de colonnes S.V.P.")
             return
         }
         nbGridLines = Number(lines)
@@ -113,6 +143,15 @@ const generateMaze = (event) => {
         case "fusion":
             algoFusion(stackOpenCells, nbGridLines, nbGridColumns)
             break
+        case "prim":
+            algoPrim(stackOpenCells, nbGridLines, nbGridColumns)
+            break
+        case "sidewinder":
+            algoSidewinder(stackOpenCells, nbGridLines, nbGridColumns)
+            break
+        case "binarytree":
+            algoBinarytree(stackOpenCells, nbGridLines, nbGridColumns)
+            break
     }
 
     // Affichage du labyrinthe
@@ -136,9 +175,15 @@ const generateSolution = (event) => {
     const stackOpenCells = backUpMaze.stackOpenCells
     const imgSolutionDiameter = Math.floor(backUpMaze.maxCellLength * 0.5)
 
+    const animationchecked = document.querySelector("#animation-generation-checkbox").checked
+
+
     const search = event.target.search.value
-    const animation = event.target.animation.checked
-    const speed = (animation ? 0 :  (2 * (10 - Number(event.target.speed.value)) - 1) * 10)
+
+    const animation = event.target.animation.value
+
+    // Calcul de la vitesse d'animation
+    const speed = (animationchecked ? (2 * (10 - Number(animation)) - 1) * 10 : 0)
 
     // Initialisation du tableau contenant le labyrinthe
     let gridMaze = createArray2Dim(nbMazeLines, nbMazeColumns, false)
@@ -155,4 +200,4 @@ const generateSolution = (event) => {
     displaySolution(stackCells, imgSolutionDiameter, speed)
 }
 
-document.querySelector("#generator-solution").addEventListener("submit", generateSolution)
+document.querySelector("#btn-solution").addEventListener("click", generateSolution)
