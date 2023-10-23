@@ -55,6 +55,4 @@ const stopSolutionAnimation = () => {
     document.querySelector("#stop-solution-animation").style.visibility = "hidden"
 }
 
-document.querySelector("#btn-solution-stop").addEventListener("click", stopSolutionAnimation)
-
-export { displaySolution }
+export { displaySolution, stopSolutionAnimation }

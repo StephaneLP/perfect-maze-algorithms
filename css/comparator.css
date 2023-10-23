@@ -10,9 +10,9 @@ body {
 }
 
 .generator {
-    height: 100vh;
+    /* width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column; */
 }
 
 /*****************************************************
@@ -20,19 +20,19 @@ SECTION FILTRE : GLOBAL
 *****************************************************/
 
 .generator-filter {
-    width: 300px;
+    height: 80px;
     background-color: var(--bg-color1);
-    box-shadow: 5px 0 15px var(--shadow-color);
-    position: relative;
-    overflow:auto;
+    box-shadow: 0px 5px 15px var(--shadow-color);
+    display: flex;
+    flex-direction: row;
 }
 
-.generator-filter .btn {
+/* .generator-filter .btn {
     margin: 30px 0 0;
     width: 100%;
-}
+} */
 
-.generator-filter select {
+/* .generator-filter select {
     padding: 2px 5px;
     font-family: "Mulish-Regular", Verdana, sans-serif;
     font-weight: 400;
@@ -41,20 +41,27 @@ SECTION FILTRE : GLOBAL
     background-color: var(--bg-color3);
     border: 1px solid var(--bg-color4);
     border-radius: 5px;
-}
+} */
+
+
+
+
+
+
+
 
 /*****************************************************
 SECTION FILTRE : BOUTON RETOUR
 *****************************************************/
 
 .generator-back {
-    height: 60px;
+    padding: 0 30px;
     color: var(--text-retour-color);
     font-family: "Mulish-Black", Verdana, sans-serif;
     font-size: 1.1rem;
     text-decoration: none;
     background-color: var(--bg-color1);
-    border-bottom: 1px solid var(--bg-color4);
+    border-right: 1px solid var(--bg-color4);
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -226,17 +233,29 @@ SECTION FILTRE : FENETRE MODALE STOP ANIMATION
     background-color: var(--bg-button-stop-hover-color);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 /*****************************************************
 SECTION LABYRINTHE
 *****************************************************/
 
 .labyrinthe {
-    width: calc(100% - 300px);
+    height: calc(100vh - 80px);
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    
+    /* background-color: var(--bg-maze2-color); */
 }
 
 #labyrinthe {

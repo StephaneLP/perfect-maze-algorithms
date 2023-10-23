@@ -1,4 +1,4 @@
-import { getRandomIntInclusive, createArray2Dim, convertCellToRoom, convertRoomToCell } from "../utils/outils.js"
+import { getRandomIntInclusive, createArray2Dim, convertCellToRoom, convertRoomToCell } from "../utils/tools.js"
 
 const solutionAlgoBacktracking = (stackSolutionCells, stackSearchSolutionCells, gridMaze, accessCells) => {
     let currentRoom = [], adjacentRoom = []

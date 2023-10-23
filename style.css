@@ -66,6 +66,7 @@ VARIABLES
     --bg-maze2-color: #1f253d;
     /* --bg-maze3-color: #0755ad; */
     --bg-maze3-color: #4c7a3a;
+    --bg-maze4-color: #86ae76;
 }
 
 /*****************************************************
@@ -80,14 +81,9 @@ BODY
 
 body {
     margin: 0 auto;
-    height: 100vh;
     font-family: "Mulish-Regular", Verdana, sans-serif;
     font-size: 1rem;
     color: var(--text-color);
-    background: linear-gradient(to bottom, var(--bg-body-color), var(--bg-body-color)), url("../images/Labyrinthe.jpg");
-    background-position: center; 
-    background-repeat: repeat;
-    animation: fadein 1s;
 }
 
 /*****************************************************

@@ -1,5 +1,4 @@
-import { getRandomIntInclusive, shuffleArrayDim, createArray2Dim } from "../utils/outils.js"
-import { addAccessCells } from "./tools.js"
+import { getRandomIntInclusive, shuffleArrayDim, createArray2Dim } from "../utils/tools.js"
 
 const algoPrim = (stackOpenCells, nbLines, nbColumns) => {
     let gridRooms = createArray2Dim(nbLines, nbColumns, false)
@@ -21,8 +20,6 @@ const algoPrim = (stackOpenCells, nbLines, nbColumns) => {
         }
         stackWalls.splice(index, 1)
     }
-
-    addAccessCells(stackOpenCells, nbLines, nbColumns)
 
     return stackOpenCells
 }
