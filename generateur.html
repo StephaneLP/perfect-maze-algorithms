@@ -24,42 +24,31 @@
             <form id="generator-labyrinth">
                 <div class="generator-form">
                     <h2>Algorithme</h2>
-                    <div class="select">
+                    <div class="radio">
                         <div>
-                            <input type="radio" id="" name="" value="" checked>
-                            <label for="">Parcours en profondeur</label>
+                            <input type="radio" id="profondeur" name="algorithme" value="profondeur" checked>
+                            <label for="profondeur">Parcours en profondeur</label>
                         </div>
                         <div>
-                            <input type="radio" id="" name="" value="">
-                            <label for="">Fusion aléatoire</label>
+                            <input type="radio" id="fusion" name="algorithme" value="fusion">
+                            <label for="fusion">Fusion aléatoire</label>
                         </div>
                         <div>
-                            <input type="radio" id="" name="" value="">
-                            <label for="">Prim</label>
+                            <input type="radio" id="prim" name="algorithme" value="prim">
+                            <label for="prim">Prim</label>
                         </div>
                         <div>
-                            <input type="radio" id="" name="" value="">
-                            <label for="">Sidewinder</label>
+                            <input type="radio" id="sidewinder" name="algorithme" value="sidewinder">
+                            <label for="sidewinder">Sidewinder</label>
                         </div>
                         <div>
-                            <input type="radio" id="" name="" value="">
-                            <label for="">Arbre binaire</label>
+                            <input type="radio" id="binarytree" name="algorithme" value="binarytree">
+                            <label for="binarytree">Arbre binaire</label>
                         </div>
-
-
-
-                        <select id="algorithme" name="algorithme">
-                            <option value=""></option>
-                            <option value="profondeur">Parcours en profondeur</option>
-                            <option value="fusion">Fusion aléatoire</option>
-                            <option value="prim">Prim</option>
-                            <option value="sidewinder">Sidewinder</option>
-                            <option value="binarytree">Arbre binaire</option>
-                        </select>  
                     </div>
                 </div>
                 <div class="generator-form" >
-                    <h2>Dimensions</h2>
+                    <h2>Paramètres</h2>
                     <div class="range">
                         <span>Taille</span>
                         <div>
@@ -94,7 +83,7 @@
                     </div>
                 </div>
                 <div class="generator-form">
-                    <h2>Génération</h2>
+                    <h2>Générateur</h2>
                     <div class="animation">
                         <input type="checkbox" id="animation-checkbox" name="animationchecked" checked />
                         <label for="animation-checkbox">Activer l'animation</label>

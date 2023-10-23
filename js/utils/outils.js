@@ -38,13 +38,14 @@ const createArray2Dim = (nbLines, nbColumns, defaultValue) => {
 }
 
 function buttonActive(id, blnActive) {
-    if(!blnActive) {
-        document.querySelector(id).disabled = true
-        document.querySelector(id).classList.add("btn-disabled");
-    }
-    else {
-        document.querySelector(id).disabled = false
-        document.querySelector(id).classList.remove("btn-disabled");
+    const element = document.querySelector(id)
+    
+    if(blnActive) {
+        element.disabled = false
+        element.classList.remove("btn-disabled");
+    } else {
+        element.disabled = true
+        element.classList.add("btn-disabled");
     }
 }
 
