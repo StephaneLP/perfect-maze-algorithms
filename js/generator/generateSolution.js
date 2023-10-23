@@ -19,7 +19,9 @@ const generateSolution = (event) => {
     const animationSpeed = document.querySelector("#animation-speed").value
     const solutionSearch = document.querySelector("#solution-search").checked
 
-    const speed = (animationChecked ? (2 * (10 - Number(animationSpeed)) - 1) * 10 : 0)
+    // Calcul de la vitesse d'animation
+    const factor = Math.sqrt(600 / (backUpMaze.nbGridLines * backUpMaze.nbGridColumns))
+    const speed = (animationChecked ? (Math.pow(10 - Number(animationSpeed), 2) + 5) * factor : 0)
 
     // Initialisation du tableau contenant le labyrinthe
     let gridMaze = createArray2Dim(nbMazeLines, nbMazeColumns, false)
