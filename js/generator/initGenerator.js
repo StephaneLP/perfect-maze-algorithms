@@ -12,7 +12,7 @@ const initSelect = (element, pas, max) => {
     let select = document.querySelector(element)
     let option = document.createElement("option")
 
-    option.text = "--"
+    option.text = "---"
     option.value = ""
     select.appendChild(option)
 

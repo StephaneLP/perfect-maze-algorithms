@@ -24,39 +24,36 @@
                 <div class="comparator-algorithmes">
                     <div>Veuillez choisir jusqu'à 3 algorithmes</div>
                     <div>
-                        <select>
-                            <option></option>
-                            <option>Parcours en profondeur</option>
-                            <option>Fusion aléatoire</option>
-                            <option>Prim</option>
-                            <option>Sidewinder</option>
-                            <option>Arbre binaire</option>
+                        <select id="algorithm1" name="algorithm1">
+                            <option value=""></option>
+                            <option value="profondeur">Parcours en profondeur</option>
+                            <option value="fusion">Fusion aléatoire</option>
+                            <option value="prim">Prim</option>
+                            <option value="sidewinder">Sidewinder</option>
+                            <option value="binarytree">Arbre binaire</option>
                         </select>
                     </div>
                     <div>
-                        <select>
-                            <option></option>
-                            <option>Parcours en profondeur</option>
-                            <option>Fusion aléatoire</option>
-                            <option>Prim</option>
-                            <option>Sidewinder</option>
-                            <option>Arbre binaire</option>
+                        <select id="algorithm2" name="algorithm2">
+                            <option value=""></option>
+                            <option value="profondeur">Parcours en profondeur</option>
+                            <option value="fusion">Fusion aléatoire</option>
+                            <option value="prim">Prim</option>
+                            <option value="sidewinder">Sidewinder</option>
+                            <option value="binarytree">Arbre binaire</option>
                         </select>
                     </div>
                     <div>
-                        <select>
-                            <option></option>
-                            <option>Parcours en profondeur</option>
-                            <option>Fusion aléatoire</option>
-                            <option>Prim</option>
-                            <option>Sidewinder</option>
-                            <option>Arbre binaire</option>
+                        <select id="algorithm3" name="algorithm3">
+                            <option value=""></option>
+                            <option value="profondeur">Parcours en profondeur</option>
+                            <option value="fusion">Fusion aléatoire</option>
+                            <option value="prim">Prim</option>
+                            <option value="sidewinder">Sidewinder</option>
+                            <option value="binarytree">Arbre binaire</option>
                         </select>
                     </div>
                 </div>
-
-
-
                 <div class="comparator-generate">
                     <div class="comparator-speed">
                         <span>Vitesse d'animation</span>
@@ -65,30 +62,34 @@
                         </div>
                         <input type="range" name="animationSpeed" id="animation-speed" min="1" max="9" step="2" />                           
                     </div>
-                    <input type="submit" value="Générer les labyrinthes" class="btn" id="btn-generate" />
+                    <input type="submit" value="Générer les labyrinthes" class="btn" />
                     <!-- <button class="btn btn-disabled" id="btn-solution" disabled>Statistiques</button> -->
                 </div>
             </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="stop-animation" id="stop-maze-animation">
                 <button class="btn" id="btn-maze-stop">Terminer</button>
             </div>
         </section>
-        <!-- SECTION AFFICHAGE DU LABYRINTHE -->
-        <section class="labyrinthe">
-            <div id="labyrinthe"></div>
+        <!-- SECTION AFFICHAGE DES LABYRINTHES -->
+        <section class="maze">
+            <div class="maze-structure" id="structure1">
+                <h2 id="title1"></h2>
+                <div class="maze-structure-labyrinth">aa
+                    <div class="labyrinthe" id="labyrinth1"></div>
+                </div>
+            </div>
+            <div class="maze-structure" id="structure2">
+                <h2 id="title2"></h2>
+                <div class="maze-structure-labyrinth">
+                    <div class="labyrinthe" id="labyrinth2"></div>
+                </div>
+            </div>
+            <div class="maze-structure" id="structure3">
+                <h2 id="title3"></h2>
+                <div class="maze-structure-labyrinth">
+                    <div class="labyrinthe" id="labyrinth3"></div>
+                </div>
+            </div>
         </section>
         <!-- FENETRE MODALE MESSAGE -->
         <section class="message">
@@ -99,5 +100,5 @@
         </section>
     </main>
 </body>
-<!-- <script type="module" src="./js/comparator/initcomparator.js"></script> -->
+<script type="module" src="./js/comparator/initComparator.js"></script>
 </html>
