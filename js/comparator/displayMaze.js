@@ -1,6 +1,10 @@
 let gblTimeOuts = []
 let gblMaze = []
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const displayMaze = (maze, params, speed) => {
     const nbLines = 2 * params.nbLines + 1
     const nbColumns = 2 * params.nbColumns + 1
@@ -42,6 +46,10 @@ const displayMaze = (maze, params, speed) => {
     gblTimeOuts.push(setTimeout(endDisplayMaze, interval, stackOpenCells.slice(-1)))
 }
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const addMazeCell = (line, id, width, height, className) => {
     let cell = document.createElement("div")
 
@@ -52,6 +60,10 @@ const addMazeCell = (line, id, width, height, className) => {
     line.appendChild(cell)
 }
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const openCells = (idMaze, arrCells, className) => {
     let id = ""
 
@@ -61,6 +73,10 @@ const openCells = (idMaze, arrCells, className) => {
     }
 }
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const openCellsTemp = (idMaze, arrCells, interval, speed) => {
     let intervalTemp = interval
 
@@ -69,6 +85,10 @@ const openCellsTemp = (idMaze, arrCells, interval, speed) => {
         intervalTemp += speed
     }
 }
+
+/****************************************************************************************
+
+****************************************************************************************/
 
 const endDisplayMaze = () => {
     document.querySelector("#stop-maze-animation").style.visibility = "hidden"
@@ -86,5 +106,3 @@ const stopMazeAnimation = () => {
 }
 
 export { displayMaze, stopMazeAnimation }
-
-document.querySelector("#btn-maze-stop").addEventListener("click", stopMazeAnimation)

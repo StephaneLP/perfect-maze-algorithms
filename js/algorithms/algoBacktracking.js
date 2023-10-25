@@ -1,5 +1,9 @@
 import { getRandomIntInclusive, shuffleArray2Dim, createArray2Dim } from "../utils/tools.js"
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const algoProfondeur = (stackOpenCells, nbGridLines, nbGridColumns) => {
     let gridRooms = createArray2Dim(nbGridLines, nbGridColumns, false)
     let stackRooms = [], currentRoom = [], adjacentRoom = []
@@ -28,6 +32,10 @@ const algoProfondeur = (stackOpenCells, nbGridLines, nbGridColumns) => {
     return stackOpenCells
 }
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 // Retourne aléatoirement une pièce adjacente non visitée
 const setAdjacentRoom = (room, gridRooms) => {
     let n = room[0]
@@ -43,6 +51,10 @@ const setAdjacentRoom = (room, gridRooms) => {
 
     return shuffleArray2Dim(array)[0]
 }
+
+/****************************************************************************************
+
+****************************************************************************************/
 
 const addOpenCells = (stackOpenCells, currentRoom, adjacentRoom) => {
     let cellsToAdd = []

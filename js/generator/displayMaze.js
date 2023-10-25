@@ -3,6 +3,10 @@ import { activateBtn } from "../utils/tools.js"
 let gblTimeOuts = []
 let stackCells = []
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const displayMaze = (stackOpenCells, nbGridLines, nbGridColumns, minLength, maxLength, speed) => {
     let nbLines = 2 * nbGridLines + 1
     let nbColumns = 2 * nbGridColumns + 1
@@ -53,6 +57,10 @@ const displayMaze = (stackOpenCells, nbGridLines, nbGridColumns, minLength, maxL
     }
 }
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const addBorderCell = (line, id, className) => {
     let cell = document.createElement("div")
 
@@ -60,6 +68,10 @@ const addBorderCell = (line, id, className) => {
     cell.className = className
     line.appendChild(cell)
 }
+
+/****************************************************************************************
+
+****************************************************************************************/
 
 const addMazeCell = (line, id, width, height, className) => {
     let cell = document.createElement("div")
@@ -71,6 +83,10 @@ const addMazeCell = (line, id, width, height, className) => {
     line.appendChild(cell)
 }
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const openCells = (arrCells, className) => {
     let id = ""
 
@@ -80,6 +96,10 @@ const openCells = (arrCells, className) => {
     }
 }
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const openCellsTemp = (arrCells, interval, speed) => {
     let intervalTemp = interval
 
@@ -88,6 +108,10 @@ const openCellsTemp = (arrCells, interval, speed) => {
         intervalTemp += speed
     }
 }
+
+/****************************************************************************************
+
+****************************************************************************************/
 
 const displayArrowAccess = (arrAccess) => {
     let id
@@ -99,6 +123,10 @@ const displayArrowAccess = (arrAccess) => {
 
     endDisplayMaze()
 }
+
+/****************************************************************************************
+
+****************************************************************************************/
 
 const endDisplayMaze = () => {
     activateBtn("#btn-generate", true)

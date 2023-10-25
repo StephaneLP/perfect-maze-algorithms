@@ -1,5 +1,9 @@
 import { getRandomIntInclusive } from "../utils/tools.js"
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const algoBinarytree = (stackOpenCells, nbGridLines, nbGridColumns) => {
     for (let n = 0; n < nbGridLines; n++) {
         for (let m = 0; m < nbGridColumns; m++) {
@@ -10,9 +14,17 @@ const algoBinarytree = (stackOpenCells, nbGridLines, nbGridColumns) => {
     return stackOpenCells
 }
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const randomWallOpen = () => {
     return (getRandomIntInclusive(0,1) == 0)
 }
+
+/****************************************************************************************
+
+****************************************************************************************/
 
 const addOpenCells = (stackOpenCells, n, m, nbGridColumns) => {
     let cellRooms = [], isRightWallOpen = null

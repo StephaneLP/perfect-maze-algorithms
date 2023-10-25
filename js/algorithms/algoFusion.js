@@ -1,5 +1,9 @@
 import { getRandomIntInclusive, shuffleArrayDim, createArray2Dim } from "../utils/tools.js"
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const algoFusion = (stackOpenCells, nbGridLines, nbGridColumns) => {
     let gridRooms = initGridRooms(nbGridLines, nbGridColumns)
     let stackWalls = initStackWalls(nbGridLines, nbGridColumns)
@@ -24,12 +28,20 @@ const algoFusion = (stackOpenCells, nbGridLines, nbGridColumns) => {
     return stackOpenCells
 }
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const initGridRooms = (nbLin, nbCol) => {
     let arr = createArray2Dim(nbLin, nbCol)
     arr = arr.map((arr, n) => arr.map((el, m) => el = {numBranch: m + n * nbCol, visited: false}))
 
     return arr
 }
+
+/****************************************************************************************
+
+****************************************************************************************/
 
 const initStackWalls = (nbLin, nbCol) => {
     let arr = []
@@ -43,13 +55,25 @@ const initStackWalls = (nbLin, nbCol) => {
     return arr
 }
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const setRoomNumber = (n, m, nbCol) => {
     return (m + n * nbCol)
 }
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const getCoordinates = (nbRoom, nbCol) => {
     return [Math.floor(nbRoom / nbCol), nbRoom % nbCol]
 }
+
+/****************************************************************************************
+
+****************************************************************************************/
 
 const updateNumBranches = (gridRooms, numBranch0, numBranch1) => {
     gridRooms.map((arr, n) => arr.map((room, m) => {
@@ -57,6 +81,10 @@ const updateNumBranches = (gridRooms, numBranch0, numBranch1) => {
     }))
 }
     
+/****************************************************************************************
+
+****************************************************************************************/
+
 const addOpenCells = (stackOpenCells, gridRooms, room0, room1) => {
     let cellRooms = []
 

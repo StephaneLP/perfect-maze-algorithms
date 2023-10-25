@@ -1,5 +1,9 @@
 import { getRandomIntInclusive, shuffleArrayDim, createArray2Dim } from "../utils/tools.js"
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const algoSidewinder = (stackOpenCells, nbGridLines, nbGridColumns) => {
     let currentRoom = [], stackRooms = []
 
@@ -17,9 +21,17 @@ const algoSidewinder = (stackOpenCells, nbGridLines, nbGridColumns) => {
     return stackOpenCells
 }
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const rightWallClose = () => {
     return (getRandomIntInclusive(0,1) == 0)
 }
+
+/****************************************************************************************
+
+****************************************************************************************/
 
 const addOpenCells = (stackOpenCells, stackRooms) => {
     let cellRooms = [], crossingRoom = []

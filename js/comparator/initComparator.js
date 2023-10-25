@@ -1,4 +1,4 @@
-import { prepareGeneratingMazes } from "./generateMazes.js"
+import { generateMaze } from "./generateMaze.js"
 import { stopMazeAnimation } from "./displayMaze.js"
 
 /****************************************************************************************
@@ -43,6 +43,27 @@ const displayMessage = (blnDisplay, msg) => {
 }
 
 /****************************************************************************************
+
+****************************************************************************************/
+
+const prepareGeneratingMazes = (event) => {
+    event.preventDefault()
+
+    const algo1 = event.target.algorithm1.value
+    const algo2 = event.target.algorithm2.value
+    const algo3 = event.target.algorithm3.value
+    const animationSpeed = event.target.animationSpeed.value
+
+    if(algo1 == "" && algo2 == "" && algo3 == "") {
+        displayMessage(true, "Veuillez sélectionner au moins un algorithme S.V.P.")
+        return
+    }
+    if(algo1 !== "") generateMaze(algo1, "structure1", "labyrinth1", animationSpeed)
+    if(algo2 !== "") generateMaze(algo2, "structure2", "labyrinth2", animationSpeed)
+    if(algo3 !== "") generateMaze(algo3, "structure3", "labyrinth3", animationSpeed)
+}
+
+/****************************************************************************************
 INITIALISATION DES EVENNEMENTS
 ****************************************************************************************/
 
@@ -51,6 +72,6 @@ document.querySelector("#algorithm2").addEventListener("change", initMazesStruct
 document.querySelector("#algorithm3").addEventListener("change", initMazesStructure)
 document.querySelector("#btn-message").addEventListener("click", () => displayMessage(false, ""))
 document.querySelector("#comparator-labyrinth").addEventListener("submit", prepareGeneratingMazes)
-// document.querySelector("#btn-maze-stop").addEventListener("click", stopMazeAnimation)
+document.querySelector("#btn-maze-stop").addEventListener("click", stopMazeAnimation)
 
 export { displayMessage }

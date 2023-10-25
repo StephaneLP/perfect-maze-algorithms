@@ -1,5 +1,9 @@
 import { getRandomIntInclusive, shuffleArrayDim, createArray2Dim } from "../utils/tools.js"
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const algoPrim = (stackOpenCells, nbLines, nbColumns) => {
     let gridRooms = createArray2Dim(nbLines, nbColumns, false)
     let stackWalls = [], currentWall = [], startRoom = [], notVisitedRoom = [], index = 0
@@ -24,6 +28,10 @@ const algoPrim = (stackOpenCells, nbLines, nbColumns) => {
     return stackOpenCells
 }
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const addWalls = (stackWalls, room, nbLines, nbColumns) => {
     let n = room[0]
     let m = room[1]
@@ -36,6 +44,10 @@ const addWalls = (stackWalls, room, nbLines, nbColumns) => {
     
     array.map(arr => stackWalls.push(arr))
 }
+
+/****************************************************************************************
+
+****************************************************************************************/
 
 const setNotVisitedRoom = (wall, gridRooms) => {
     let room0 = [], room1 = [], res = null

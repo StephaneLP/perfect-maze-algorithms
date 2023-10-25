@@ -1,5 +1,9 @@
 import { getRandomIntInclusive, createArray2Dim, convertCellToRoom, convertRoomToCell } from "../utils/tools.js"
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const solutionAlgoBacktracking = (stackSolutionCells, stackSearchSolutionCells, gridMaze, accessCells) => {
     let currentRoom = [], adjacentRoom = []
     let gridRooms = createArray2Dim(gridMaze.length, gridMaze[0].length, false)
@@ -31,14 +35,26 @@ const solutionAlgoBacktracking = (stackSolutionCells, stackSearchSolutionCells, 
     stackSolutionCells.push({cell: exitCell, display: true})
 }
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const addCells = (stackSolutionCells, arrCells) => {
     arrCells.map(obj => stackSolutionCells.push({cell: [...obj.cell],display: obj.display}))
 }
+
+/****************************************************************************************
+
+****************************************************************************************/
 
 const addSolutionCells = (stackSearchSolutionCells, currentRoom, adjacentRoom) => {
     stackSearchSolutionCells.push({cell: [currentRoom[0] + adjacentRoom[0] + 1, currentRoom[1] + adjacentRoom[1] + 1], display: true})
     stackSearchSolutionCells.push({cell: [2*adjacentRoom[0]+1, 2*adjacentRoom[1]+1], display: true})
 }
+
+/****************************************************************************************
+
+****************************************************************************************/
 
 const updateSolutionCells = (stackSearchSolutionCells, stackSolutionCells) => {
     let obj
@@ -49,6 +65,10 @@ const updateSolutionCells = (stackSearchSolutionCells, stackSolutionCells) => {
         stackSolutionCells.pop()        
     }
 }
+
+/****************************************************************************************
+
+****************************************************************************************/
 
 // Retourne aléatoirement une pièce adjacente accessible non visitée
 const setAdjacentRoom = (room, gridRooms, gridMaze) => {
@@ -70,6 +90,10 @@ const setAdjacentRoom = (room, gridRooms, gridMaze) => {
     return array[indice]
 }
 
+
+/****************************************************************************************
+
+****************************************************************************************/
 
 function notCurrentRoomExit(room1, room2) {
     return (room1[0] !== room2[0])||(room1[1] !== room2[1])

@@ -1,6 +1,10 @@
 let gblTimeOuts = []
 let backupStackCells = [], backupDiameter
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const displaySolution = (stackSolutionCells, diameter, speed) => {
     clearImgTags()
     gblTimeOuts = []
@@ -21,6 +25,10 @@ const displaySolution = (stackSolutionCells, diameter, speed) => {
     }
 }
 
+/****************************************************************************************
+
+****************************************************************************************/
+
 const displayCell = (cell, diameter, blnDisplay) => {
     let imgElement
     const id = cell[0] + "-" + cell[1]
@@ -37,6 +45,10 @@ const displayCell = (cell, diameter, blnDisplay) => {
         document.getElementById("img-" + id).remove()
     }        
 }
+
+/****************************************************************************************
+
+****************************************************************************************/
 
 const clearImgTags = () => {
     document.querySelectorAll("img").forEach(element => {

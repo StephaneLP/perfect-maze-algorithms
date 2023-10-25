@@ -5,25 +5,10 @@ import { algoBinarytree }  from "../algorithms/algoBinarytree.js"
 import { algoPrim }  from "../algorithms/algoPrim.js"
 
 import { displayMaze } from "./displayMaze.js"
-import { displayMessage } from "./initComparator.js"
 
+/****************************************************************************************
 
-const prepareGeneratingMazes = (event) => {
-    event.preventDefault()
-
-    const algo1 = event.target.algorithm1.value
-    const algo2 = event.target.algorithm2.value
-    const algo3 = event.target.algorithm3.value
-    const animationSpeed = event.target.animationSpeed.value
-
-    if(algo1 == "" && algo2 == "" && algo3 == "") {
-        displayMessage(true, "Veuillez sélectionner au moins un algorithme S.V.P.")
-        return
-    }
-    if(algo1 !== "") generateMaze(algo1, "structure1", "labyrinth1", animationSpeed)
-    if(algo2 !== "") generateMaze(algo2, "structure2", "labyrinth2", animationSpeed)
-    if(algo3 !== "") generateMaze(algo3, "structure3", "labyrinth3", animationSpeed)
-}
+****************************************************************************************/
 
 const generateMaze = (algo, structure, labyrinth, animationSpeed) => {
     const hauteurStructure = document.getElementById(structure).clientHeight - 56
@@ -70,4 +55,4 @@ const generateMaze = (algo, structure, labyrinth, animationSpeed) => {
     displayMaze(maze, params, speed)
 }
 
-export { prepareGeneratingMazes }
+export { generateMaze }
