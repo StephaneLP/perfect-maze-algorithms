@@ -5,7 +5,7 @@ import { algoBinarytree }  from "../algorithms/algoBinarytree.js"
 import { algoPrim }  from "../algorithms/algoPrim.js"
 
 import { addAccessCells } from "./tools.js"
-import { displayMaze } from "../display/displayMaze.js"
+import { displayMaze } from "./displayMaze.js"
 import { displayMessage } from "./initGenerator.js"
 import { activateBtn } from "../utils/tools.js"
 

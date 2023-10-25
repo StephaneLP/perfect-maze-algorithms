@@ -174,7 +174,6 @@ SECTION LABYRINTHES : STRUCTURE
 }
 
 .maze .maze-structure {
-    /* width: 33%; */
     height: 100%;
     display: none;
 }
@@ -194,7 +193,7 @@ SECTION LABYRINTHES : LABYRINTHE AFFICHE
 *****************************************************/
 
 .labyrinthe {
-    background-color: var(--bg-maze3-color);
+    background-color: var(--bg-maze6-color);
     border: 1px solid var(--border-maze-color);
 }
 

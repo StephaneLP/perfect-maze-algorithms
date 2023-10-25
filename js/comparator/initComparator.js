@@ -1,4 +1,5 @@
 import { prepareGeneratingMazes } from "./generateMazes.js"
+import { stopMazeAnimation } from "./displayMaze.js"
 
 /****************************************************************************************
 AFFICHER / MASQUER LES STRUCTURES DE LABYRINTHES CORRESPONDANT AUX ALGORITHMES SELECTIONNES
@@ -50,5 +51,6 @@ document.querySelector("#algorithm2").addEventListener("change", initMazesStruct
 document.querySelector("#algorithm3").addEventListener("change", initMazesStructure)
 document.querySelector("#btn-message").addEventListener("click", () => displayMessage(false, ""))
 document.querySelector("#comparator-labyrinth").addEventListener("submit", prepareGeneratingMazes)
+// document.querySelector("#btn-maze-stop").addEventListener("click", stopMazeAnimation)
 
 export { displayMessage }

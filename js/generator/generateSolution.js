@@ -1,5 +1,5 @@
 import { solutionAlgoBacktracking } from "../algorithms/solutionAlgoBacktracking.js"
-import { displaySolution } from "../display/displaySolution.js"
+import { displaySolution } from "./displaySolution.js"
 import { createArray2Dim } from "../utils/tools.js"
 import { backUpMaze } from "./generateMaze.js"
 

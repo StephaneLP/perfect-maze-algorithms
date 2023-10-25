@@ -111,12 +111,11 @@ ARRET DE L'ANIMATION
 ****************************************************************************************/
 
 const stopMazeAnimation = () => {
-    for(var i=0; i<gblTimeOuts.length; i++) {
+    for(var i = 0; i < gblTimeOuts.length; i++) {
         clearTimeout(gblTimeOuts[i]);
     }
-
-    for(let i=0; i<stackCells.length; i++) {
-        openCells(stackCells[i])
+    for(let i = 0; i < stackCells.length; i++) {
+        openCells(stackCells[i], "labyrinth-open")
     }
     displayArrowAccess(stackCells.slice(-1))
 }

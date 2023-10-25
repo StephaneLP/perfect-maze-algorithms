@@ -1,7 +1,7 @@
 import { generateMaze } from "./generateMaze.js"
 import { generateSolution } from "./generateSolution.js"
-import { stopMazeAnimation } from "../display/displayMaze.js"
-import { stopSolutionAnimation } from "../display/displaySolution.js"
+import { stopMazeAnimation } from "./displayMaze.js"
+import { stopSolutionAnimation } from "./displaySolution.js"
 import { activateBtn } from "../utils/tools.js"
 
 /****************************************************************************************

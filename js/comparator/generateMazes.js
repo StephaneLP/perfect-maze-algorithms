@@ -7,6 +7,7 @@ import { algoPrim }  from "../algorithms/algoPrim.js"
 import { displayMaze } from "./displayMaze.js"
 import { displayMessage } from "./initComparator.js"
 
+
 const prepareGeneratingMazes = (event) => {
     event.preventDefault()
 
@@ -27,7 +28,7 @@ const prepareGeneratingMazes = (event) => {
 const generateMaze = (algo, structure, labyrinth, animationSpeed) => {
     const hauteurStructure = document.getElementById(structure).clientHeight - 56
     const largeurStructure = document.getElementById(structure).clientWidth - 2
-    const thicknessFactor = 0.20
+    const thicknessFactor = 0.30
 
     let nbLines, nbColumns, minCellLength, maxCellLength
 
@@ -63,7 +64,10 @@ const generateMaze = (algo, structure, labyrinth, animationSpeed) => {
     }
 
     // Affichage du labyrinthe
-    displayMaze(labyrinth, stackOpenCells, nbLines, nbColumns, minCellLength, maxCellLength, speed)
+    const maze = {id: labyrinth, stackOpenCells: stackOpenCells}
+    const params = {nbLines: nbLines, nbColumns: nbColumns, minCellLength: minCellLength, maxCellLength: maxCellLength}
+
+    displayMaze(maze, params, speed)
 }
 
 export { prepareGeneratingMazes }
