@@ -4,8 +4,9 @@ import { getRandomIntInclusive, createArray2Dim, convertCellToRoom, convertRoomT
 
 ****************************************************************************************/
 
-const solutionAlgoBacktracking = (stackSolutionCells, stackSearchSolutionCells, gridMaze, accessCells) => {
-    let currentRoom = [], adjacentRoom = []
+const solutionAlgoBacktracking = (gridMaze, accessCells) => {
+    let currentRoom = [], adjacentRoom = [], stackSolutionCells = [], stackSearchSolutionCells = []
+
     let gridRooms = createArray2Dim(gridMaze.length, gridMaze[0].length, false)
     const entryCell = [...accessCells[0]]
     const exitCell = [...accessCells[1]]
@@ -33,6 +34,8 @@ const solutionAlgoBacktracking = (stackSolutionCells, stackSearchSolutionCells, 
     }
     stackSearchSolutionCells.push({cell: exitCell, display: true})
     stackSolutionCells.push({cell: exitCell, display: true})
+
+    return {stackSolutionCells: stackSolutionCells, stackSearchSolutionCells: stackSearchSolutionCells}
 }
 
 /****************************************************************************************
@@ -40,7 +43,7 @@ const solutionAlgoBacktracking = (stackSolutionCells, stackSearchSolutionCells, 
 ****************************************************************************************/
 
 const addCells = (stackSolutionCells, arrCells) => {
-    arrCells.map(obj => stackSolutionCells.push({cell: [...obj.cell],display: obj.display}))
+    arrCells.map(obj => stackSolutionCells.push({cell: [...obj.cell], display: obj.display}))
 }
 
 /****************************************************************************************
@@ -49,7 +52,7 @@ const addCells = (stackSolutionCells, arrCells) => {
 
 const addSolutionCells = (stackSearchSolutionCells, currentRoom, adjacentRoom) => {
     stackSearchSolutionCells.push({cell: [currentRoom[0] + adjacentRoom[0] + 1, currentRoom[1] + adjacentRoom[1] + 1], display: true})
-    stackSearchSolutionCells.push({cell: [2*adjacentRoom[0]+1, 2*adjacentRoom[1]+1], display: true})
+    stackSearchSolutionCells.push({cell: [2 * adjacentRoom[0] + 1, 2 * adjacentRoom[1] + 1], display: true})
 }
 
 /****************************************************************************************

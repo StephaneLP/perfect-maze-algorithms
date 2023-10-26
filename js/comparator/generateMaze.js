@@ -32,19 +32,19 @@ const generateMaze = (algo, structure, labyrinth, animationSpeed) => {
 
     switch(algo) {
         case "profondeur":
-            algoProfondeur(stackOpenCells, nbLines, nbColumns)
+            stackOpenCells = algoProfondeur(nbLines, nbColumns)
             break
         case "fusion":
-            algoFusion(stackOpenCells, nbLines, nbColumns)
+            stackOpenCells = algoFusion(nbLines, nbColumns)
             break
         case "prim":
-            algoPrim(stackOpenCells, nbLines, nbColumns)
+            stackOpenCells = algoPrim(nbLines, nbColumns)
             break
         case "sidewinder":
-            algoSidewinder(stackOpenCells, nbLines, nbColumns)
+            stackOpenCells = algoSidewinder(nbLines, nbColumns)
             break
         case "binarytree":
-            algoBinarytree(stackOpenCells, nbLines, nbColumns)
+            stackOpenCells = algoBinarytree(nbLines, nbColumns)
             break
     }
 

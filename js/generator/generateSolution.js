@@ -10,17 +10,17 @@ FONCTION AFFICHER LA SOLUTION DU LABYRINTHE
 const generateSolution = (event) => {
     event.preventDefault()
 
-    const nbMazeLines = 2 * backUpMaze.nbGridLines + 1
-    const nbMazeColumns = 2 * backUpMaze.nbGridColumns + 1
-    const stackOpenCells = backUpMaze.stackOpenCells
-    const imgSolutionDiameter = Math.floor(backUpMaze.maxCellLength * 0.5)
-
     const animationChecked = document.querySelector("#animation-checkbox").checked
     const animationSpeed = document.querySelector("#animation-speed").value
     const solutionSearch = document.querySelector("#solution-search").checked
 
-    // Calcul de la vitesse d'animation
-    const factor = Math.sqrt(600 / (backUpMaze.nbGridLines * backUpMaze.nbGridColumns))
+    const stackOpenCells = backUpMaze.stackOpenCells
+    const structure = backUpMaze.structure
+
+    const nbMazeLines = 2 * structure.nbLines + 1
+    const nbMazeColumns = 2 * structure.nbColumns + 1
+    const imgSolutionDiameter = Math.floor(structure.maxCellLength * 0.5)
+    const factor = Math.sqrt(600 / (structure.nbLines * structure.nbColumns))
     const speed = (animationChecked ? (Math.pow(10 - Number(animationSpeed), 2) + 5) * factor : 0)
 
     // Initialisation du tableau contenant le labyrinthe
@@ -31,10 +31,9 @@ const generateSolution = (event) => {
     const accessCells = stackOpenCells.slice(-1)[0]
     
     // Piles de recherche du chemin solution
-    let stackSolutionCells = [], stackSearchSolutionCells = []
-    solutionAlgoBacktracking(stackSolutionCells, stackSearchSolutionCells, gridMaze, accessCells)
+    let solution = solutionAlgoBacktracking(gridMaze, accessCells)
 
-    const stackCells = (solutionSearch ? stackSearchSolutionCells : stackSolutionCells)
+    const stackCells = (solutionSearch ? solution.stackSearchSolutionCells : solution.stackSolutionCells)
     displaySolution(stackCells, imgSolutionDiameter, speed)
 }
 

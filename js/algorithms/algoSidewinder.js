@@ -4,8 +4,8 @@ import { getRandomIntInclusive, shuffleArrayDim, createArray2Dim } from "../util
 
 ****************************************************************************************/
 
-const algoSidewinder = (stackOpenCells, nbGridLines, nbGridColumns) => {
-    let currentRoom = [], stackRooms = []
+const algoSidewinder = (nbGridLines, nbGridColumns) => {
+    let stackOpenCells = [], currentRoom = [], stackRooms = []
 
     for (let n = 0; n < nbGridLines; n++) {
         for (let m = 0; m < nbGridColumns; m++) {

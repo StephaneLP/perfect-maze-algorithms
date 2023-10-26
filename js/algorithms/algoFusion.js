@@ -4,10 +4,10 @@ import { getRandomIntInclusive, shuffleArrayDim, createArray2Dim } from "../util
 
 ****************************************************************************************/
 
-const algoFusion = (stackOpenCells, nbGridLines, nbGridColumns) => {
+const algoFusion = (nbGridLines, nbGridColumns) => {
     let gridRooms = initGridRooms(nbGridLines, nbGridColumns)
     let stackWalls = initStackWalls(nbGridLines, nbGridColumns)
-    let wall = [], room0 = [], room1 = [], numBranch0 = 0, numBranch1 = 0
+    let stackOpenCells = [], wall = [], room0 = [], room1 = [], numBranch0 = 0, numBranch1 = 0
 
     stackWalls = shuffleArrayDim(stackWalls)
 

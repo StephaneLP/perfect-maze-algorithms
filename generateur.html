@@ -21,28 +21,28 @@
                 Page d'accueil
             </a>
             <!-- FORMULAIRE LABYRINTHE -->
-            <form id="generator-labyrinth">
+            <form id="generator-form">
                 <div class="generator-form">
                     <h2>Algorithme</h2>
                     <div class="radio">
                         <div>
-                            <input type="radio" id="profondeur" name="algorithme" value="profondeur" checked>
+                            <input type="radio" id="profondeur" name="algorithm" value="profondeur" checked>
                             <label for="profondeur">Parcours en profondeur</label>
                         </div>
                         <div>
-                            <input type="radio" id="fusion" name="algorithme" value="fusion">
+                            <input type="radio" id="fusion" name="algorithm" value="fusion">
                             <label for="fusion">Fusion aléatoire</label>
                         </div>
                         <div>
-                            <input type="radio" id="prim" name="algorithme" value="prim">
+                            <input type="radio" id="prim" name="algorithm" value="prim">
                             <label for="prim">Prim</label>
                         </div>
                         <div>
-                            <input type="radio" id="sidewinder" name="algorithme" value="sidewinder">
+                            <input type="radio" id="sidewinder" name="algorithm" value="sidewinder">
                             <label for="sidewinder">Sidewinder</label>
                         </div>
                         <div>
-                            <input type="radio" id="binarytree" name="algorithme" value="binarytree">
+                            <input type="radio" id="binarytree" name="algorithm" value="binarytree">
                             <label for="binarytree">Arbre binaire</label>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                             <div class="graduation">
                                 <div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div>
                             </div>
-                            <input type="range" name="taille" min="6" max="30" step="6" />                            
+                            <input type="range" name="size" min="6" max="30" step="6" />                            
                         </div>
                     </div>
                     <div class="range">
@@ -67,17 +67,17 @@
                             <input type="range" name="thickness" min="10" max="50" step="10" />                               
                         </div>
                     </div>
-                    <div class="taille-perso">
-                        <input type="checkbox" id="taille-perso" name="taille-perso" />
-                        <label for="taille-perso">Taille personnalisée</label>
-                        <div id="select-taille-perso">
+                    <div class="custom-size">
+                        <input type="checkbox" id="custom-size" name="customSize" />
+                        <label for="custom-size">Taille personnalisée</label>
+                        <div id="select-custom-size">
                             <div>
-                                <label for="lines">Nombre de lignes</label>
-                                <select id="lines" name="lines"></select>                            
+                                <label for="custom-nb-lines">Nombre de lignes</label>
+                                <select id="custom-nb-lines" name="customNbLines"></select>                            
                             </div>
                             <div>
-                                <label for="columns">Nombre de colonnes</label>
-                                <select id="columns" name="columns"></select>                            
+                                <label for="custom-nb-columns">Nombre de colonnes</label>
+                                <select id="custom-nb-columns" name="customNbColumns"></select>                            
                             </div>
                         </div>                               
                     </div>
@@ -113,13 +113,13 @@
             </div>
         </section>
         <!-- SECTION AFFICHAGE DU LABYRINTHE -->
-        <section class="labyrinthe">
-            <div id="labyrinthe"></div>
+        <section class="generator-maze">
+            <div id="maze"></div>
         </section>
         <!-- FENETRE MODALE MESSAGE -->
-        <section class="message">
-            <div id="message">
-                <div id="libelle-message"></div>
+        <section class="message-container">
+            <div id="message-container">
+                <div id="message"></div>
                 <button class="btn" id="btn-message">Fermer</button>
             </div>
         </section>

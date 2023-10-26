@@ -4,7 +4,9 @@ import { getRandomIntInclusive } from "../utils/tools.js"
 
 ****************************************************************************************/
 
-const algoBinarytree = (stackOpenCells, nbGridLines, nbGridColumns) => {
+const algoBinarytree = (nbGridLines, nbGridColumns) => {
+    let stackOpenCells = []
+
     for (let n = 0; n < nbGridLines; n++) {
         for (let m = 0; m < nbGridColumns; m++) {
             addOpenCells(stackOpenCells, n, m, nbGridColumns)

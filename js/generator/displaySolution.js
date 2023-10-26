@@ -1,5 +1,5 @@
 let gblTimeOuts = []
-let backupStackCells = [], backupDiameter
+let gblStackCells = [], gblDiameter
 
 /****************************************************************************************
 
@@ -8,20 +8,17 @@ let backupStackCells = [], backupDiameter
 const displaySolution = (stackSolutionCells, diameter, speed) => {
     clearImgTags()
     gblTimeOuts = []
-    backupStackCells = stackSolutionCells
-    backupDiameter = diameter
+    gblStackCells = stackSolutionCells
+    gblDiameter = diameter
 
-    stackSolutionCells.map((solutionCell, index) => {
-        if(speed !== 0) {
-            document.querySelector("#stop-solution-animation").style.visibility = "visible"
+    if(speed > 0) {
+        document.querySelector("#stop-solution-animation").style.visibility = "visible"
+        stackSolutionCells.map((solutionCell, index) => {
             gblTimeOuts.push(setTimeout(displayCell, speed * index, solutionCell.cell, diameter, solutionCell.display))
-        } else {
-            displayCell(solutionCell.cell, diameter, solutionCell.display)
-        }
-    })
-
-    if(speed !== 0) {
-        gblTimeOuts.push(setTimeout(() => document.querySelector("#stop-solution-animation").style.visibility = "hidden", stackSolutionCells.length*speed))
+        })
+        gblTimeOuts.push(setTimeout(() => document.querySelector("#stop-solution-animation").style.visibility = "hidden", stackSolutionCells.length * speed))
+    } else {
+        stackSolutionCells.map(solutionCell => displayCell(solutionCell.cell, diameter, solutionCell.display))
     }
 }
 
@@ -52,7 +49,7 @@ const displayCell = (cell, diameter, blnDisplay) => {
 
 const clearImgTags = () => {
     document.querySelectorAll("img").forEach(element => {
-        if (element.id.substring(0,3) === "img") element.remove()
+        if(element.id.substring(0,3) === "img") element.remove()
     })
 }
 
@@ -63,7 +60,7 @@ ARRET DE L'ANIMATION
 const stopSolutionAnimation = () => {
     for(var i=0; i<gblTimeOuts.length; i++) clearTimeout(gblTimeOuts[i]);
     clearImgTags()
-    displaySolution(backupStackCells, backupDiameter, 0)
+    displaySolution(gblStackCells, gblDiameter, 0)
     document.querySelector("#stop-solution-animation").style.visibility = "hidden"
 }
 

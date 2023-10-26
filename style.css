@@ -122,7 +122,7 @@ BOUTONS
 FENETRE MODALE MESSAGE
 *****************************************************/
 
-.message {
+.message-container {
     width: 100%;
     height: 100%;
     visibility: hidden;
@@ -135,7 +135,7 @@ FENETRE MODALE MESSAGE
     z-index: 1;
 }
 
-.message #message {
+.message-container #message-container {
     width: 400px;
     font-family: "Poppins", Arial, Helvetica, sans-serif;
     color: var(--text-color);
@@ -148,12 +148,12 @@ FENETRE MODALE MESSAGE
     transform: translate(-50%, -50%);
 }
 
-.message #libelle-message {
+.message-container #message {
     text-align: center;
     margin: 0 0 40px;
 }
 
-.message #btn-message {
+.message-container #btn-message {
     width: 100%;
     transition: all 0s ease-out;
 }

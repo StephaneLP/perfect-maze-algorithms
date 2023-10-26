@@ -4,16 +4,16 @@ import { algoSidewinder }  from "../algorithms/algoSidewinder.js"
 import { algoBinarytree }  from "../algorithms/algoBinarytree.js"
 import { algoPrim }  from "../algorithms/algoPrim.js"
 
-import { addAccessCells } from "./tools.js"
+import { addAccessCells } from "../utils/tools.js"
 import { displayMaze } from "./displayMaze.js"
 import { displayMessage } from "./initGenerator.js"
 import { activateBtn } from "../utils/tools.js"
 
+let backUpMaze = {stackOpenCells: [], nbGridLines: 0, nbGridColumns: 0, maxCellLength: 0}
+
 /****************************************************************************************
 FONCTION GENERER UN LABYRINTHE
 ****************************************************************************************/
-
-let backUpMaze = {stackOpenCells: [], nbGridLines: 0, nbGridColumns: 0, maxCellLength: 0}
 
 const generateMaze = (event) => {
     event.preventDefault()
@@ -22,77 +22,87 @@ const generateMaze = (event) => {
     activateBtn("#btn-generate", false)
     activateBtn("#btn-solution", false)
 
-    // Parametres
-    const algorithme = event.target.algorithme.value
-    const taille = event.target.taille.value
+    // Parametres du formulaire
+    const algorithm = event.target.algorithm.value
+    const size = event.target.size.value
     const thickness = event.target.thickness.value
     const animationChecked = event.target.animationChecked.checked
     const animationSpeed = event.target.animationSpeed.value
-    const lines = event.target.lines.value
-    const columns = event.target.columns.value
+    const customSize = event.target.customSize.checked
+    const customNbLines = event.target.customNbLines.value
+    const customNbColumns = event.target.customNbColumns.value
 
-    // Calcul des nombres de lignes et colonnes en fonction de la fenêtre
-    const hauteurFenetre = window.innerHeight - 40
-    const largeurFenetre = window.innerWidth - 380
-    const thicknessFactor = Number(thickness) / 100
-    let nbGridLines, nbGridColumns, minCellLength, maxCellLength
-
-    if(!document.querySelector("#taille-perso").checked) {
-        nbGridLines = Number(taille)
-        maxCellLength = hauteurFenetre / (nbGridLines + thicknessFactor * (nbGridLines + 1))
-        minCellLength = maxCellLength * thicknessFactor
-        nbGridColumns = Math.floor((largeurFenetre-minCellLength) / (minCellLength + maxCellLength))
-    } else {
-        if(lines==="" || columns==="") {
-            displayMessage(true, "Veuillez renseigner les nombres de lignes et de colonnes S.V.P.")
-            return
-        }
-        nbGridLines = Number(lines)
-        nbGridColumns = Number(columns)
-
-        if((hauteurFenetre/largeurFenetre)>(nbGridLines/nbGridColumns)) {
-            maxCellLength =  largeurFenetre / (nbGridColumns + thicknessFactor * (nbGridColumns + 1))
-        }
-        else {
-            maxCellLength =  hauteurFenetre / (nbGridLines + thicknessFactor * (nbGridLines + 1))
-        }
-
-        minCellLength = maxCellLength * thicknessFactor
+    if(customSize && (customNbLines === "" || customNbColumns === "")) {
+        displayMessage(true, "Veuillez renseigner les nombres de lignes et de colonnes S.V.P.")
+        return
     }
-  
+
+    // Structure du labyrinthe : {nb lignes, nb colonnes, largeurs max cellules, largeurs min cellules}
+    const structure = defineStructure(thickness, size, customSize, customNbLines, customNbColumns)
+
     // Calcul de la vitesse d'animation
-    const factor = Math.sqrt(600 / (nbGridLines * nbGridColumns))
+    const factor = Math.sqrt(600 / (structure.nbLines * structure.nbColumns))
     const speed = (animationChecked ? (Math.pow(10 - Number(animationSpeed), 2) + 5) * factor : 0)
 
     // Création du labyrinthe
     let stackOpenCells = []
-
-    switch(algorithme) {
+    switch(algorithm) {
         case "profondeur":
-            algoProfondeur(stackOpenCells, nbGridLines, nbGridColumns)
+            stackOpenCells = algoProfondeur(structure.nbLines, structure.nbColumns)
             break
         case "fusion":
-            algoFusion(stackOpenCells, nbGridLines, nbGridColumns)
+            stackOpenCells = algoFusion(structure.nbLines, structure.nbColumns)
             break
         case "prim":
-            algoPrim(stackOpenCells, nbGridLines, nbGridColumns)
+            stackOpenCells = algoPrim(structure.nbLines, structure.nbColumns)
             break
         case "sidewinder":
-            algoSidewinder(stackOpenCells, nbGridLines, nbGridColumns)
+            stackOpenCells = algoSidewinder(structure.nbLines, structure.nbColumns)
             break
         case "binarytree":
-            algoBinarytree(stackOpenCells, nbGridLines, nbGridColumns)
+            stackOpenCells = algoBinarytree(structure.nbLines, structure.nbColumns)
             break
     }
-
-    // Ajout Entrée & Sortie
-    addAccessCells(stackOpenCells, nbGridLines, nbGridColumns)
+    stackOpenCells.push(addAccessCells(structure.nbLines, structure.nbColumns))
 
     // Affichage du labyrinthe
-    displayMaze(stackOpenCells, nbGridLines, nbGridColumns, minCellLength, maxCellLength, speed)
+    displayMaze(stackOpenCells, structure, speed)
 
     // BackUp du labyrinthe pour afficher la solution
-    backUpMaze = {stackOpenCells: stackOpenCells, nbGridLines: nbGridLines, nbGridColumns: nbGridColumns, maxCellLength: maxCellLength }
+    backUpMaze = {stackOpenCells: stackOpenCells, structure: structure }
+}
+
+/****************************************************************************************
+
+****************************************************************************************/
+
+const defineStructure = (thickness, size, customSize, customNbLines, customNbColumns) => {
+    const heightWindow = window.innerHeight - 40
+    const widthWindow = window.innerWidth - 380
+    const thicknessFactor = Number(thickness) / 100
+
+    let nbLines, nbColumns, maxCellLength, minCellLength
+
+    if(customSize) {
+        const formatWindow = (heightWindow / widthWindow)
+        const formatMaze = (nbLines / nbColumns)
+
+        nbLines = Number(customNbLines)
+        nbColumns = Number(customNbColumns)
+        if(formatWindow > formatMaze) {
+            maxCellLength =  widthWindow / (nbColumns + thicknessFactor * (nbColumns + 1))
+        } else {
+            maxCellLength =  heightWindow / (nbLines + thicknessFactor * (nbLines + 1))
+        }
+        minCellLength = maxCellLength * thicknessFactor
+    } else {
+        nbLines = Number(size)
+        maxCellLength = heightWindow / (nbLines + thicknessFactor * (nbLines + 1))
+        minCellLength = maxCellLength * thicknessFactor
+        nbColumns = Math.floor((widthWindow-minCellLength) / (minCellLength + maxCellLength))
+    }
+
+    return {nbLines: nbLines, nbColumns: nbColumns, maxCellLength: maxCellLength, minCellLength: minCellLength}
 }
 
 export { generateMaze, backUpMaze }

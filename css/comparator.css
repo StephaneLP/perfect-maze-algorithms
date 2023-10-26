@@ -165,7 +165,7 @@ SECTION FILTRE : FENETRE MODALE STOP ANIMATION
 SECTION LABYRINTHES : STRUCTURE
 *****************************************************/
 
-.maze {
+.comparator-maze {
     height: calc(100vh - 80px);
     background-color: var(--bg-maze2-color);
     display: flex;
@@ -173,12 +173,12 @@ SECTION LABYRINTHES : STRUCTURE
     justify-content: space-between;
 }
 
-.maze .maze-structure {
+.comparator-maze .maze-structure {
     height: 100%;
     display: none;
 }
 
-.maze .maze-structure .maze-structure-labyrinth {
+.comparator-maze .maze-structure .maze-structure-labyrinth {
     width: 100%;
     height: calc(100% - 50px);
     background-color: var(--bg-maze1-color);
@@ -192,29 +192,29 @@ SECTION LABYRINTHES : STRUCTURE
 SECTION LABYRINTHES : LABYRINTHE AFFICHE
 *****************************************************/
 
-.labyrinthe {
+.labyrinth {
     background-color: var(--bg-maze6-color);
     border: 1px solid var(--border-maze-color);
 }
 
-.labyrinthe>div {
+.labyrinth>div {
     display: flex;
     flex-direction: row;
     position: relative;
 }
 
-.labyrinthe>div>div {
+.labyrinth>div>div {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-.labyrinthe-room {
+.labyrinth-room {
     background-color: var(--bg-maze2-color);
 }
 
-.labyrinthe-wall {
+.labyrinth-wall {
     background-color: var(--bg-maze1-color);
 }
 
@@ -236,13 +236,13 @@ SECTION LABYRINTHES : LABYRINTHE AFFICHE
     
 }
 
-.labyrinthe-border {
+.labyrinth-border {
     background-color: var(--bg-maze2-color);
     width: 20px;
     z-index: 1;
 }
 
-.labyrinthe-access {
+.labyrinth-access {
     background-image: url("../images/arrow.png");
     background-size: 90% 90%;
     background-position: center;

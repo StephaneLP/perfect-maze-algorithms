@@ -89,4 +89,16 @@ function convertRoomToCell(room) {
     return [2 * room[0] + 1, 2 * room[1] + 1]
 }
 
-export { getRandomIntInclusive, shuffleArrayDim, shuffleArray2Dim, createArray2Dim, activateBtn, convertCellToRoom, convertRoomToCell }
+/****************************************************************************************
+
+****************************************************************************************/
+
+// Ajout des cellules (murs) Entrée et Sortie (dernier tableau de la pile)
+const addAccessCells = (nbGridLines, nbGridColumns) => {
+    const indexEntry = 2 * getRandomIntInclusive(0, nbGridLines -1 ) + 1
+    const indexExit = 2 * getRandomIntInclusive(0, nbGridLines - 1) + 1
+
+    return [[indexEntry, 0],[indexExit, 2 * nbGridColumns]]
+}
+
+export { getRandomIntInclusive, shuffleArrayDim, shuffleArray2Dim, createArray2Dim, activateBtn, convertCellToRoom, convertRoomToCell, addAccessCells }

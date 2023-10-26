@@ -4,9 +4,9 @@ import { getRandomIntInclusive, shuffleArrayDim, createArray2Dim } from "../util
 
 ****************************************************************************************/
 
-const algoPrim = (stackOpenCells, nbLines, nbColumns) => {
+const algoPrim = (nbLines, nbColumns) => {
     let gridRooms = createArray2Dim(nbLines, nbColumns, false)
-    let stackWalls = [], currentWall = [], startRoom = [], notVisitedRoom = [], index = 0
+    let stackOpenCells = [], stackWalls = [], currentWall = [], startRoom = [], notVisitedRoom = [], index = 0
 
     startRoom = [getRandomIntInclusive(0, nbLines - 1), getRandomIntInclusive(0, nbColumns - 1)]
     gridRooms[startRoom[0]][startRoom[1]] = true

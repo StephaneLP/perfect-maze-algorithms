@@ -4,9 +4,9 @@ import { getRandomIntInclusive, shuffleArray2Dim, createArray2Dim } from "../uti
 
 ****************************************************************************************/
 
-const algoProfondeur = (stackOpenCells, nbGridLines, nbGridColumns) => {
+const algoProfondeur = (nbGridLines, nbGridColumns) => {
     let gridRooms = createArray2Dim(nbGridLines, nbGridColumns, false)
-    let stackRooms = [], currentRoom = [], adjacentRoom = []
+    let stackOpenCells = [], stackRooms = [], currentRoom = [], adjacentRoom = []
 
     // Pièce de départ déterminée aléatoirement
     currentRoom = [getRandomIntInclusive(0, nbGridLines-1),getRandomIntInclusive(0, nbGridColumns-1)]
