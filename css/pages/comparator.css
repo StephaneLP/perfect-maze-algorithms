@@ -1,6 +1,6 @@
 /*****************************************************
 
-PAGE GENERATEUR DE LABYRINTHE
+STYLE PAGE COMPARATEUR DE LABYRINTHES
 
 *****************************************************/
 
@@ -227,7 +227,7 @@ SECTION LABYRINTHES : LABYRINTHE AFFICHE
 }
 
 .labyrinth-solution {
-    background-image: url("../images/round.png");
+    background-image: url("../../images/round.png");
     background-size: 0;
     background-position: center;
     background-repeat: no-repeat;
@@ -243,7 +243,7 @@ SECTION LABYRINTHES : LABYRINTHE AFFICHE
 }
 
 .labyrinth-access {
-    background-image: url("../images/arrow.png");
+    background-image: url("../../images/arrow.png");
     background-size: 90% 90%;
     background-position: center;
     background-repeat: no-repeat;

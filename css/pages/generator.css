@@ -1,6 +1,6 @@
 /*****************************************************
 
-PAGE GENERATEUR DE LABYRINTHE
+STYLE PAGE GENERATEUR DE LABYRINTHES
 
 *****************************************************/
 
@@ -273,7 +273,7 @@ SECTION LABYRINTHE
 }
 
 .maze-solution {
-    background-image: url("../images/round.png");
+    background-image: url("../../images/round.png");
     background-size: 0;
     background-position: center;
     background-repeat: no-repeat;
@@ -289,7 +289,7 @@ SECTION LABYRINTHE
 }
 
 .maze-access {
-    background-image: url("../images/arrow.png");
+    background-image: url("../../images/arrow.png");
     background-size: 90% 90%;
     background-position: center;
     background-repeat: no-repeat;

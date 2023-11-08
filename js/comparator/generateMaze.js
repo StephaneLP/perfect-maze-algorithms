@@ -30,7 +30,7 @@ const generateMaze = (algo, structure, labyrinth, animationSpeed) => {
     // Création du labyrinthe
     let stackOpenCells = []
 
-    switch(algo) {
+    switch (algo) {
         case "profondeur":
             stackOpenCells = algoProfondeur(nbLines, nbColumns)
             break

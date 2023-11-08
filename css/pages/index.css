@@ -1,10 +1,12 @@
 /*****************************************************
-PAGE D'ACCUEIL
+
+STYLE PAGE D'ACCUEIL
+
 *****************************************************/
 
 body {
     height: 100vh;
-    background: linear-gradient(to bottom, var(--bg-body-color), var(--bg-body-color)), url("../images/Labyrinthe.jpg");
+    background: linear-gradient(to bottom, var(--bg-body-color), var(--bg-body-color)), url("../../images/Labyrinthe.jpg");
     background-position: center; 
     background-repeat: repeat;
     animation: fadein 1s;
@@ -28,18 +30,20 @@ header {
     align-items: center;
 }
 
+header img {
+    margin: 20px 0 0;
+    width: 20px;
+}
+
 h1 {
     margin: 0;
     font-family: "Mulish-Bold", Verdana, sans-serif;
     font-size: 2.2rem;
 }
 
-header img {
-    margin: 20px 0 0;
-    width: 20px;
-}
-
-/************ SECTION PRESENTATION ************/
+/*****************************************************
+SECTION PRESENTATION
+*****************************************************/
 
 .presentation p {
     margin: 20px 0 0;
@@ -47,7 +51,9 @@ header img {
     line-height: 1.6rem;
 }
 
-/************ SECTION CHOIX ALGORITHME ************/
+/*****************************************************
+SECTION CHOIX ALGORITHME
+*****************************************************/
 
 .algorithmes {
     margin: 0;

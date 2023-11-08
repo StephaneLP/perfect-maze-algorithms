@@ -1,17 +1,17 @@
-import { getRandomIntInclusive, shuffleArrayDim, createArray2Dim } from "../utils/tools.js"
+import { getRandomIntInclusive } from "../utils/generalTools.js"
 
 /****************************************************************************************
 
 ****************************************************************************************/
 
-const algoSidewinder = (nbGridLines, nbGridColumns) => {
+const algoSidewinder = (nbLines, nbColumns) => {
     let stackOpenCells = [], currentRoom = [], stackRooms = []
 
-    for (let n = 0; n < nbGridLines; n++) {
-        for (let m = 0; m < nbGridColumns; m++) {
+    for (let n = 0; n < nbLines; n++) {
+        for (let m = 0; m < nbColumns; m++) {
             currentRoom = [n, m]
             stackRooms.push(currentRoom)
-            if((n !== 0 && rightWallClose()) || (m == nbGridColumns - 1)) {
+            if (((n !== 0) && (rightWallClose())) || (m == nbColumns - 1)) {
                 addOpenCells(stackOpenCells, stackRooms)
                 stackRooms = []
             }
@@ -41,7 +41,7 @@ const addOpenCells = (stackOpenCells, stackRooms) => {
         if(index < stackRooms.length - 1) cellRooms.push([2 * room[0] + 1, 2 * room[1] + 2]) 
     })
 
-    crossingRoom = stackRooms[getRandomIntInclusive(0, stackRooms.length -1)]
+    crossingRoom = stackRooms[getRandomIntInclusive(0, stackRooms.length - 1)]
     if(crossingRoom[0] !== 0) cellRooms.push([2 * crossingRoom[0], 2 * crossingRoom[1] + 1])
 
     stackOpenCells.push(cellRooms)

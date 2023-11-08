@@ -4,12 +4,11 @@ import { algoSidewinder }  from "../algorithms/algoSidewinder.js"
 import { algoBinarytree }  from "../algorithms/algoBinarytree.js"
 import { algoPrim }  from "../algorithms/algoPrim.js"
 
-import { addAccessCells } from "../utils/tools.js"
 import { displayMaze } from "./displayMaze.js"
 import { displayMessage } from "./initGenerator.js"
-import { activateBtn } from "../utils/tools.js"
+import { activateBtn, addAccessCells } from "../utils/specificTools.js"
 
-let backUpMaze = {stackOpenCells: [], nbGridLines: 0, nbGridColumns: 0, maxCellLength: 0}
+let backUpMaze = {stackOpenCells: [], structure: {nbLines: 0, nbColumns: 0, maxCellLength: 0, minCellLength: 0}}
 
 /****************************************************************************************
 FONCTION GENERER UN LABYRINTHE
@@ -32,7 +31,7 @@ const generateMaze = (event) => {
     const customNbLines = event.target.customNbLines.value
     const customNbColumns = event.target.customNbColumns.value
 
-    if(customSize && (customNbLines === "" || customNbColumns === "")) {
+    if (customSize && (customNbLines === "" || customNbColumns === "")) {
         displayMessage(true, "Veuillez renseigner les nombres de lignes et de colonnes S.V.P.")
         return
     }
@@ -46,7 +45,8 @@ const generateMaze = (event) => {
 
     // Création du labyrinthe
     let stackOpenCells = []
-    switch(algorithm) {
+
+    switch (algorithm) {
         case "profondeur":
             stackOpenCells = algoProfondeur(structure.nbLines, structure.nbColumns)
             break
@@ -83,13 +83,13 @@ const defineStructure = (thickness, size, customSize, customNbLines, customNbCol
 
     let nbLines, nbColumns, maxCellLength, minCellLength
 
-    if(customSize) {
+    if (customSize) {
         const formatWindow = (heightWindow / widthWindow)
         const formatMaze = (nbLines / nbColumns)
 
         nbLines = Number(customNbLines)
         nbColumns = Number(customNbColumns)
-        if(formatWindow > formatMaze) {
+        if (formatWindow > formatMaze) {
             maxCellLength =  widthWindow / (nbColumns + thicknessFactor * (nbColumns + 1))
         } else {
             maxCellLength =  heightWindow / (nbLines + thicknessFactor * (nbLines + 1))

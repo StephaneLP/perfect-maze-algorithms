@@ -2,7 +2,7 @@ import { generateMaze } from "./generateMaze.js"
 import { generateSolution } from "./generateSolution.js"
 import { stopMazeAnimation } from "./displayMaze.js"
 import { stopSolutionAnimation } from "./displaySolution.js"
-import { activateBtn } from "../utils/tools.js"
+import { activateBtn } from "../utils/specificTools.js"
 
 /****************************************************************************************
 TAILLE PERSONNALISEE : INITIALISATION DES SELECT NOMBRES DE LIGNES ET COLONNES
@@ -16,7 +16,7 @@ const initSelect = (element, step, max) => {
     option.value = ""
     select.appendChild(option)
 
-    for(let n=step; n<=max; n+=step) {
+    for (let n = step; n <= max; n += step) {
         option = document.createElement("option")
         option.text = n
         option.value = n

@@ -18,15 +18,15 @@ const displayMaze = (maze, params, speed) => {
     section.replaceChildren()
     gblMaze.push(maze)
 
-    for(let n = 0; n < nbLines; n++) {
+    for (let n = 0; n < nbLines; n++) {
         line = document.createElement("div")
 
-        for(let m = 0; m < nbColumns; m++) {
+        for (let m = 0; m < nbColumns; m++) {
             id = idMaze + "-" + n + "-" + m
-            if((n % 2 == 1) && (m % 2 == 1)) addMazeCell(line, id, params.maxCellLength, params.maxCellLength, "labyrinthe-room") // Pièce
-            if((n % 2 == 0) && (m % 2 == 0)) addMazeCell(line, id, params.minCellLength, params.minCellLength, "labyrinthe-wall") // Intersection
-            if((n % 2 == 1) && (m % 2 == 0)) addMazeCell(line, id, params.minCellLength, params.maxCellLength, "labyrinthe-wall") // Mur vertical
-            if((n % 2 == 0) && (m % 2 == 1)) addMazeCell(line, id, params.maxCellLength, params.minCellLength, "labyrinthe-wall") // Mur horizontal
+            if ((n % 2 == 1) && (m % 2 == 1)) addMazeCell(line, id, params.maxCellLength, params.maxCellLength, "labyrinthe-room") // Pièce
+            if ((n % 2 == 0) && (m % 2 == 0)) addMazeCell(line, id, params.minCellLength, params.minCellLength, "labyrinthe-wall") // Intersection
+            if ((n % 2 == 1) && (m % 2 == 0)) addMazeCell(line, id, params.minCellLength, params.maxCellLength, "labyrinthe-wall") // Mur vertical
+            if ((n % 2 == 0) && (m % 2 == 1)) addMazeCell(line, id, params.maxCellLength, params.minCellLength, "labyrinthe-wall") // Mur horizontal
         }
 
         section.appendChild(line)
@@ -67,7 +67,7 @@ const addMazeCell = (line, id, width, height, className) => {
 const openCells = (idMaze, arrCells, className) => {
     let id = ""
 
-    for(let i = 0; i < arrCells.length; i++) {
+    for (let i = 0; i < arrCells.length; i++) {
         id = idMaze + "-" + arrCells[i][0] + "-" + arrCells[i][1]
         document.getElementById(id).className = className
     }
@@ -80,7 +80,7 @@ const openCells = (idMaze, arrCells, className) => {
 const openCellsTemp = (idMaze, arrCells, interval, speed) => {
     let intervalTemp = interval
 
-    for(let i = 0; i < arrCells.length; i++) {
+    for (let i = 0; i < arrCells.length; i++) {
         gblTimeOuts.push(setTimeout(openCells, intervalTemp, idMaze, [arrCells[i]], "labyrinth-open-temp"))
         intervalTemp += speed
     }

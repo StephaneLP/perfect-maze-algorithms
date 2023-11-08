@@ -10,22 +10,22 @@ POLICES DE CARACTERE
 
 @font-face {
     font-family: "Mulish-Black";
-    src: url(./fonts/mulish/Mulish-Black.ttf);
+    src: url(../fonts/mulish/Mulish-Black.ttf);
 }
 
 @font-face {
     font-family: "Mulish-Bold";
-    src: url(./fonts/mulish/Mulish-Bold.ttf);
+    src: url(../fonts/mulish/Mulish-Bold.ttf);
 }
 
 @font-face {
     font-family: "Mulish-Regular";
-    src: url(./fonts/mulish/Mulish-Regular.ttf);
+    src: url(../fonts/mulish/Mulish-Regular.ttf);
 }
 
 @font-face {
     font-family: "Mulish-Italic";
-    src: url(./fonts/mulish/Mulish-Italic.ttf);
+    src: url(../fonts/mulish/Mulish-Italic.ttf);
 }
 
 /*****************************************************

@@ -1,4 +1,4 @@
-import { activateBtn } from "../utils/tools.js"
+import { activateBtn } from "../utils/specificTools.js"
 
 let gblTimeOuts = []
 let gblStackCells = []
@@ -8,37 +8,43 @@ let gblStackCells = []
 ****************************************************************************************/
 
 const displayMaze = (stackOpenCells, structure, speed) => {
-    let nbLines = 2 * structure.nbLines + 1
-    let nbColumns = 2 * structure.nbColumns + 1
+    let nbGridLines = 2 * structure.nbLines + 1
+    let nbGridColumns = 2 * structure.nbColumns + 1
 
-    // Affichage de la structure du maze
+    // Affichage de la structure du labyrinthe
     let section = document.querySelector("#maze")
 
     section.replaceChildren()
     gblTimeOuts = []
     gblStackCells = stackOpenCells
 
-    for(let n = 0; n < nbLines; n++) {
+    for (let n = 0; n < nbGridLines; n++) {
         let line = document.createElement("div")
 
         line.appendChild(addBorderCell("left-wall-" + n, "maze-border"))
-        for(let m = 0; m < nbColumns; m++) {
+        for (let m = 0; m < nbGridColumns; m++) {
             const id = n + "-" + m
-            if((n % 2 == 1) && (m % 2 == 1)) line.appendChild(addMazeCell(id, structure.maxCellLength, structure.maxCellLength, "maze-room")) // Pièce
-            if((n % 2 == 0) && (m % 2 == 0)) line.appendChild(addMazeCell(id, structure.minCellLength, structure.minCellLength, "maze-wall")) // Intersection
-            if((n % 2 == 1) && (m % 2 == 0)) line.appendChild(addMazeCell(id, structure.minCellLength, structure.maxCellLength, "maze-wall")) // Mur vertical
-            if((n % 2 == 0) && (m % 2 == 1)) line.appendChild(addMazeCell(id, structure.maxCellLength, structure.minCellLength, "maze-wall")) // Mur horizontal
+            if ((n % 2 == 1) && (m % 2 == 1)) line.appendChild(addMazeCell(id, structure.maxCellLength, structure.maxCellLength, "maze-room")) // Pièce
+            if ((n % 2 == 0) && (m % 2 == 0)) line.appendChild(addMazeCell(id, structure.minCellLength, structure.minCellLength, "maze-wall")) // Intersection
+            if ((n % 2 == 1) && (m % 2 == 0)) line.appendChild(addMazeCell(id, structure.minCellLength, structure.maxCellLength, "maze-wall")) // Mur vertical
+            if ((n % 2 == 0) && (m % 2 == 1)) line.appendChild(addMazeCell(id, structure.maxCellLength, structure.minCellLength, "maze-wall")) // Mur horizontal
         }
         line.appendChild(addBorderCell("right-wall-" + n, "maze-border"))
         section.appendChild(line)
     }
 
-    if(speed > 0) {
-        let interval = 0
+    // Affichage du labyrinthe
+    if (speed > 0) {
+        let interval = 0, intervalTemp = 0
 
         document.querySelector("#stop-maze-animation").style.visibility = "visible"
         stackOpenCells.map(array => {
-            displayCellsProgress(array, interval, speed)
+            intervalTemp = interval
+            array.map(cell => {
+                gblTimeOuts.push(setTimeout(displayCells, intervalTemp, [cell], "maze-open-temp"))
+                intervalTemp += speed        
+            })
+
             interval += array.length * speed
             gblTimeOuts.push(setTimeout(displayCells, interval, array, "labyrinth-open"))
         })
@@ -84,23 +90,10 @@ const addMazeCell = (id, width, height, className) => {
 const displayCells = (arrCells, className) => {
     let id = ""
 
-    for(let i = 0; i < arrCells.length; i++) {
-        id = arrCells[i][0] + "-" + arrCells[i][1]
+    arrCells.map(cell => {
+        id = cell[0] + "-" + cell[1]
         document.getElementById(id).className = className
-    }
-}
-
-/****************************************************************************************
-
-****************************************************************************************/
-
-const displayCellsProgress = (arrCells, interval, speed) => {
-    let intervalTemp = interval
-
-    for(let i = 0; i < arrCells.length; i++) {
-        gblTimeOuts.push(setTimeout(displayCells, intervalTemp, [arrCells[i]], "maze-open-temp"))
-        intervalTemp += speed
-    }
+    })
 }
 
 /****************************************************************************************
@@ -133,12 +126,8 @@ ARRET DE L'ANIMATION
 ****************************************************************************************/
 
 const stopMazeAnimation = () => {
-    for(var i = 0; i < gblTimeOuts.length; i++) {
-        clearTimeout(gblTimeOuts[i]);
-    }
-    for(let i = 0; i < gblStackCells.length; i++) {
-        displayCells(gblStackCells[i], "maze-open")
-    }
+    gblTimeOuts.map(timeOut => clearTimeout(timeOut))
+    gblStackCells.map(stackCells => displayCells(stackCells, "maze-open"))
     displayArrowAccess(gblStackCells.slice(-1))
 }
 
