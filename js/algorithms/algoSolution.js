@@ -14,7 +14,6 @@ const algoSolution = (gridMaze, accessCells) => {
     const entryRoom = [(entryCell[0] - 1) / 2, (entryCell[1]) / 2]
     const exitRoom = [(exitCell[0]- 1 ) / 2, (exitCell[1] - 2 ) / 2]
 
-    gridMazeTrace[entryRoom[0]][entryRoom[1]] = true
 
     stackCells.push({cell: entryCell, display: true, solution: true})
     stackSolution.push(entryCell)
@@ -22,18 +21,19 @@ const algoSolution = (gridMaze, accessCells) => {
     stackCells.push({cell: convertRoomToCell(entryRoom), display: true, solution: true})
     stackSolution.push(convertRoomToCell(entryRoom))
 
+    gridMazeTrace[entryRoom[0]][entryRoom[1]] = true
     currentRoom = [...entryRoom]
-    while (notCurrentRoomExit(currentRoom, exitRoom)) {
+
+    while (currentRoom.toString() !== exitRoom.toString()) {
         adjacentRoom = setAdjacentRoom(currentRoom, gridMazeTrace, gridMaze)
         if (adjacentRoom) {
-            gridMazeTrace[adjacentRoom[0]][adjacentRoom[1]] = true
-
             stackCells.push({cell: [currentRoom[0] + adjacentRoom[0] + 1, currentRoom[1] + adjacentRoom[1] + 1], display: true, solution: true})
             stackSolution.push([currentRoom[0] + adjacentRoom[0] + 1, currentRoom[1] + adjacentRoom[1] + 1])
 
             stackCells.push({cell: [2 * adjacentRoom[0] + 1, 2 * adjacentRoom[1] + 1], display: true, solution: true})
             stackSolution.push([2 * adjacentRoom[0] + 1, 2 * adjacentRoom[1] + 1])
 
+            gridMazeTrace[adjacentRoom[0]][adjacentRoom[1]] = true
             currentRoom = [...adjacentRoom]
         } else {
             cell = stackSolution[stackSolution.length - 1]
@@ -78,15 +78,6 @@ const setAdjacentRoom = (room, gridMazeTrace, gridMaze) => {
 
     const indice = getRandomIntInclusive(0, array.length - 1)
     return array[indice]
-}
-
-
-/****************************************************************************************
-
-****************************************************************************************/
-
-function notCurrentRoomExit(room1, room2) {
-    return (room1[0] !== room2[0])||(room1[1] !== room2[1])
 }
 
 export { algoSolution }
