@@ -5,7 +5,8 @@ import { stopSolutionAnimation } from "./displaySolution.js"
 import { activateBtn } from "../utils/specificTools.js"
 
 /****************************************************************************************
-TAILLE PERSONNALISEE : INITIALISATION DES SELECT NOMBRES DE LIGNES ET COLONNES
+INIT SELECT (procédure)
+- Taille personnalisée : initialisation des champs select (nb lignes / colonnes)
 ****************************************************************************************/
 
 const initSelect = (element, step, max) => {
@@ -25,7 +26,8 @@ const initSelect = (element, step, max) => {
 }
 
 /****************************************************************************************
-TAILLE PERSONNALISEE : AFFICHER / MASQUER LES CHAMPS SELECT
+HANDLE DIMENSION CLICK (procédure)
+- Taille personnalisee : afficher / masquer les champs select (nb lignes / colonnes)
 ****************************************************************************************/
 
 const handleDimensionClick = () => {
@@ -35,7 +37,8 @@ const handleDimensionClick = () => {
 }
 
 /****************************************************************************************
-ANIMATION : AFFICHER / MASQUER LE PARAMETRAGE DE L'ANIMATION
+HANDLE ANIMATION CLICK (procédure)
+- Animation : afficher / masquer le parametrage de l'animation
 ****************************************************************************************/
 
 const handleAnimationClick = () => {
@@ -47,7 +50,8 @@ const handleAnimationClick = () => {
 }
 
 /****************************************************************************************
-AFFICHER / MASQUER LA FENETRE MODALE MESSAGE
+DISPLAY MESSAGE (procédure)
+- Afficher / masquer la fenetre modale message
 ****************************************************************************************/
 
 const displayMessage = (blnDisplay, msg) => {

@@ -1,5 +1,5 @@
 /****************************************************************************************
-GET RANDOM INCLUSIVE
+GET RANDOM INCLUSIVE (fonction)
 - Retourne aléatoirement un nombre entier élément de l'intervalle {min ; ... ; max}
 ****************************************************************************************/
 
@@ -10,7 +10,21 @@ function getRandomIntInclusive(min, max) {
 }
 
 /****************************************************************************************
-CREATE ARRAY 2 DIM
+EQUAL ARRAYS (fonction)
+- Compare deux tableaux : retourne 'true' si identiques, 'false' sinon
+- Uniquement pour des tableaux qui ne contiennent ni tableau ni objet
+****************************************************************************************/
+
+function equalArrays(array1, array2) {
+    if (array1.length !== array2.length) return false
+    for (let i = 0; i < array1.length; i++) {
+        if (array1[i] !== array2[i]) return false
+    }
+    return true
+}
+
+/****************************************************************************************
+CREATE ARRAY 2 DIM (fonction)
 - Création d'un tableau à 2 dimensions
 - Chaque élément du tableau reçoit une valeur passée en paramètre, sinon la valeur null
 - Attention : ne pas passer d'objet (ou tableau) en paramètre
@@ -24,7 +38,7 @@ function createArray2Dim(nbLines, nbColumns, defaultValue) {
 }
 
 /****************************************************************************************
-SHUFFLE ARRAY 2 DIM
+SHUFFLE ARRAY 2 DIM (fonction)
 - Mélange les tableaux du tableau conteneur
 - Attention : les tableaux de 2ème niveau ne doivent pas contenir des objets (ou tableau)
 ****************************************************************************************/
@@ -42,4 +56,4 @@ function shuffleArray2Dim(array) {
     return arrResult
 }
 
-export { getRandomIntInclusive, shuffleArray2Dim, createArray2Dim }
+export { getRandomIntInclusive, equalArrays, createArray2Dim, shuffleArray2Dim }

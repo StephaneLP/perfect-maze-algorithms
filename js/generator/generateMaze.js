@@ -11,17 +11,25 @@ import { activateBtn, addAccessCells } from "../utils/specificTools.js"
 let backUpMaze = {stackOpenCells: [], structure: {nbLines: 0, nbColumns: 0, maxCellLength: 0, minCellLength: 0}}
 
 /****************************************************************************************
-FONCTION GENERER UN LABYRINTHE
+GENERATE MAZE (procédure)
+Fonction appelée en cliquant sur le bouton 'Générer le labyrinthe' :
+- Désactivation des boutons
+- Reccueil des paramètres renseignés par l'utilisateur dans la zone de filtre
+- Calcul de la structure du labyrinthe et de la vitesse d'animation
+- Appel de l'algorithme et constitution la pile 'stackOpenCells' qui contient les cellules à 'ouvrir'
+- Appel de la procédure permettant d'afficher le labyrinthe. Elle necessite 3 paramètres :
+    - structure du labyrinthe
+    - pile des cellules à 'ouvrir'
+    - vitesse d'animation
+- Backup du labyrinthe (utilisé pour l'affichage de la solution)
 ****************************************************************************************/
 
 const generateMaze = (event) => {
     event.preventDefault()
 
-    // Mise à jour du rôle des boutons
     activateBtn("#btn-generate", false)
     activateBtn("#btn-solution", false)
 
-    // Parametres du formulaire
     const algorithm = event.target.algorithm.value
     const size = event.target.size.value
     const thickness = event.target.thickness.value
@@ -36,16 +44,11 @@ const generateMaze = (event) => {
         return
     }
 
-    // Structure du labyrinthe : {nb lignes, nb colonnes, largeurs max cellules, largeurs min cellules}
     const structure = defineStructure(thickness, size, customSize, customNbLines, customNbColumns)
-
-    // Calcul de la vitesse d'animation
     const factor = Math.sqrt(600 / (structure.nbLines * structure.nbColumns))
     const speed = (animationChecked ? (Math.pow(10 - Number(animationSpeed), 2) + 5) * factor : 0)
 
-    // Création du labyrinthe
     let stackOpenCells = []
-
     switch (algorithm) {
         case "profondeur":
             stackOpenCells = algoProfondeur(structure.nbLines, structure.nbColumns)
@@ -65,15 +68,18 @@ const generateMaze = (event) => {
     }
     stackOpenCells.push(addAccessCells(structure.nbLines, structure.nbColumns))
 
-    // Affichage du labyrinthe
     displayMaze(stackOpenCells, structure, speed)
-
-    // BackUp du labyrinthe pour afficher la solution
     backUpMaze = {stackOpenCells: stackOpenCells, structure: structure }
 }
 
 /****************************************************************************************
-
+DEFINE STRUCTURE (fonction)
+- Calcul de la taille de la zone permettant d'afficher le labyrinthe
+- Calcul du pourcentage épaisseur des murs (largeur mur / largeur pièce)
+- En fonction du choix d'une taille personnalisée ou non :
+    - Calcul de la taille du labyrinthe : 'nbLines' et 'nbColumns'
+    - Calcul de la taille des cellules : deux dimensions 'maxCellLength' et 'minCellLength'
+- Retourne un objet contenant ces 4 valeurs {nbLines, nbColumns, maxCellLength, minCellLength}
 ****************************************************************************************/
 
 const defineStructure = (thickness, size, customSize, customNbLines, customNbColumns) => {
@@ -89,11 +95,7 @@ const defineStructure = (thickness, size, customSize, customNbLines, customNbCol
 
         nbLines = Number(customNbLines)
         nbColumns = Number(customNbColumns)
-        if (formatWindow > formatMaze) {
-            maxCellLength =  widthWindow / (nbColumns + thicknessFactor * (nbColumns + 1))
-        } else {
-            maxCellLength =  heightWindow / (nbLines + thicknessFactor * (nbLines + 1))
-        }
+        maxCellLength = (formatWindow > formatMaze ? widthWindow / (nbColumns + thicknessFactor * (nbColumns + 1)) : heightWindow / (nbLines + thicknessFactor * (nbLines + 1)))
         minCellLength = maxCellLength * thicknessFactor
     } else {
         nbLines = Number(size)

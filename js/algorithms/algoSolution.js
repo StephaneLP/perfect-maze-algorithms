@@ -1,4 +1,4 @@
-import { getRandomIntInclusive, createArray2Dim } from "../utils/generalTools.js"
+import { getRandomIntInclusive, equalArrays, createArray2Dim } from "../utils/generalTools.js"
 import { convertCellToRoom, convertRoomToCell } from "../utils/specificTools.js"
 
 /****************************************************************************************
@@ -24,7 +24,7 @@ const algoSolution = (gridMaze, accessCells) => {
     gridMazeTrace[entryRoom[0]][entryRoom[1]] = true
     currentRoom = [...entryRoom]
 
-    while (currentRoom.toString() !== exitRoom.toString()) {
+    while (!equalArrays(currentRoom, exitRoom)) {
         adjacentRoom = setAdjacentRoom(currentRoom, gridMazeTrace, gridMaze)
         if (adjacentRoom) {
             stackCells.push({cell: [currentRoom[0] + adjacentRoom[0] + 1, currentRoom[1] + adjacentRoom[1] + 1], display: true, solution: true})

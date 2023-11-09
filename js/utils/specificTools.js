@@ -1,7 +1,7 @@
 import { getRandomIntInclusive } from "./generalTools.js"
 
 /****************************************************************************************
-ACTIVATE BTN
+ACTIVATE BTN (procédure)
 - Afficher / masquer les boutons et filtres de la section Générateur
 ****************************************************************************************/
 
@@ -22,7 +22,7 @@ function activateBtn(id, blnActive) {
 }
 
 /****************************************************************************************
-ADD ACCESS CELLS
+ADD ACCESS CELLS (fonction)
 - Ajout des murs 'Entrée' et 'Sortie' à la pile contenant les cellules de la grille 
   du labyrinthe, devant être ouvertes
 ****************************************************************************************/
@@ -35,7 +35,7 @@ function addAccessCells(nbLines, nbColumns) {
 }
 
 /****************************************************************************************
-CONVERT CELL TO ROOM
+CONVERT CELL TO ROOM (fonction)
 - Conversion des coordonnées : Cellule de la grille du labyrinthe => Pièce du labyrinthe
 ****************************************************************************************/
 
@@ -44,7 +44,7 @@ function convertCellToRoom(cell) {
 }
 
 /****************************************************************************************
-CONVERT ROOM TO CELL
+CONVERT ROOM TO CELL (fonction)
 - Conversion des coordonnées : Pièce du labyrinthe => Cellule de la grille du labyrinthe
 ****************************************************************************************/
 
