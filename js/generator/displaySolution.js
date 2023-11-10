@@ -3,13 +3,20 @@ let gblStackCells = []
 let gblDiameter = 0
 
 /****************************************************************************************
-
+DISPLAY SOLUTION (procédure)
+- Filtrage de la pile contenant les cellules constituant le chemin solution
+  si l'utilisation de l'algorithme de recherche n'est pas souhaité (i.e. affichage direct)
+- Effacement du chemin représentant la solution
+- Initialisation des variables globales utilisées pour l'arrêt de l'animation
+- Affichage du bouton permettant de stoper l'animation
+- Affichage du chemin solution
+- Si animation, utilisation de la fonction setTimeout
 ****************************************************************************************/
 
 const displaySolution = (stack, diameter, speed, search) => {
     const stackCells = (search ? stack : stack.filter(obj => obj.solution))
 
-    clearImgTags()
+    clearPath()
     gblTimeOuts = []
     gblStackCells = stackCells
     gblDiameter = diameter
@@ -26,7 +33,9 @@ const displaySolution = (stack, diameter, speed, search) => {
 }
 
 /****************************************************************************************
-
+DISPLAY CELL (procédure)
+- Ajout/Retrait dans une cellule de l'image indiquant le chemin solution. en fonction 
+  du paramètre 'display' contenu dans la pile retournée par l'agorithme de recherche de solution
 ****************************************************************************************/
 
 const displayCell = (cell, diameter, blnDisplay) => {
@@ -47,22 +56,27 @@ const displayCell = (cell, diameter, blnDisplay) => {
 }
 
 /****************************************************************************************
-
+CLEAR PATH (procédure)
+- Effacement du chemin représentant la solution
 ****************************************************************************************/
 
-const clearImgTags = () => {
+const clearPath = () => {
     document.querySelectorAll("img").forEach(element => {
         if (element.id.substring(0, 3) === "img") element.remove()
     })
 }
 
 /****************************************************************************************
-ARRET DE L'ANIMATION
+STOP SOLUTION ANIMATION (procédure)
+Fonction appelée en cliquant sur le bouton 'Terminer'
+- Arrêt de l'animation
+- Affichage final du chemin solution
+- Masquage du bouton permettant de stoper l'animation
 ****************************************************************************************/
 
 const stopSolutionAnimation = () => {
     gblTimeOuts.map(timeOut => clearTimeout(timeOut))
-    clearImgTags()
+    clearPath()
     displaySolution(gblStackCells, gblDiameter, 0)
     document.querySelector("#stop-solution-animation").style.visibility = "hidden"
 }

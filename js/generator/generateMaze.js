@@ -13,7 +13,7 @@ let backUpMaze = {stackOpenCells: [], structure: {nbLines: 0, nbColumns: 0, maxC
 /****************************************************************************************
 GENERATE MAZE (procédure)
 Fonction appelée en cliquant sur le bouton 'Générer le labyrinthe' :
-- Désactivation des boutons
+- Désactivation des boutons 'générer'
 - Reccueil des paramètres renseignés par l'utilisateur dans la zone de filtre
 - Calcul de la structure du labyrinthe et de la vitesse d'animation
 - Appel de l'algorithme et constitution la pile 'stackOpenCells' qui contient les cellules à 'ouvrir'
