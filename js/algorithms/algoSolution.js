@@ -2,7 +2,7 @@ import { getRandomIntInclusive, equalArrays, createArray2Dim } from "../utils/ge
 import { convertCellToRoom, convertRoomToCell } from "../utils/specificTools.js"
 
 /****************************************************************************************
-
+ALGO SOLUTION (fonction)
 ****************************************************************************************/
 
 const algoSolution = (gridMaze, accessCells) => {
@@ -57,7 +57,7 @@ const algoSolution = (gridMaze, accessCells) => {
 
 
 /****************************************************************************************
-
+SET ADJACENT ROOM (fonction)
 ****************************************************************************************/
 
 // Retourne aléatoirement une pièce adjacente accessible non visitée

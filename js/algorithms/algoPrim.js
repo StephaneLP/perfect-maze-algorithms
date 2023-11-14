@@ -17,6 +17,7 @@ const algoPrim = (nbLines, nbColumns) => {
         index = getRandomIntInclusive(0, stackWalls.length - 1)
         currentWall = stackWalls[index]
         newRoom = setNewRoom(currentWall, maze)
+        
         if (newRoom !== null) {
             maze[newRoom[0]][newRoom[1]] = true
             addWalls(stackWalls, newRoom, nbLines, nbColumns)
