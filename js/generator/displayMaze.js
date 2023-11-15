@@ -6,14 +6,14 @@ let gblStackCells = []
 /****************************************************************************************
 DISPLAY MAZE (procédure)
 - 1ère partie : Affichage de la structure du labyrinthe
-    - initialisation des variables globales utilisées pour l'arrêt de l'animation
-    - construction de la structure html du labyrinthe (ligne par ligne)
+    - Initialisation des variables globales utilisées pour l'arrêt de l'animation
+    - Construction de la structure html du labyrinthe (ligne par ligne)
 - 2ème partie : Affichage du labyrinthe
-    - affichage du bouton permettant de stoper l'animation
-    - affichage des cellules 'ouvertes' par groupes, en 2 temps à l'aide de 2 couleurs
+    - Affichage du bouton permettant de stoper l'animation
+    - Affichage des cellules 'ouvertes' par groupes, en 2 temps à l'aide de 2 couleurs
       (voir fichier README.md pour une explication détaillée)
-    - si animation, utilisation de la fonction setTimeout
-    - affichage des flèches indiquant l'entrée et la sortie
+    - Si animation, utilisation de la fonction setTimeout
+    - Affichage des flèches indiquant l'entrée et la sortie
 ****************************************************************************************/
 
 const displayMaze = (stackOpenCells, structure, speed) => {
@@ -106,8 +106,10 @@ const displayCells = (arrCells, className) => {
     let id = ""
 
     arrCells.map(cell => {
-        id = cell[0] + "-" + cell[1]
-        document.getElementById(id).className = className
+        if(cell.length > 0) {
+            id = cell[0] + "-" + cell[1]
+            document.getElementById(id).className = className
+        }
     })
 }
 

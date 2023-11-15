@@ -18,9 +18,9 @@ Fonction appelée en cliquant sur le bouton 'Générer le labyrinthe' :
 - Calcul de la structure du labyrinthe et de la vitesse d'animation
 - Appel de l'algorithme et constitution la pile 'stackOpenCells' qui contient les cellules à 'ouvrir'
 - Appel de la procédure permettant d'afficher le labyrinthe. Elle necessite 3 paramètres :
-    - structure du labyrinthe
-    - pile des cellules à 'ouvrir'
-    - vitesse d'animation
+    - Structure du labyrinthe
+    - Pile des cellules à 'ouvrir'
+    - Vitesse d'animation
 - Backup du labyrinthe (utilisé pour l'affichage de la solution)
 ****************************************************************************************/
 
