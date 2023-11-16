@@ -44,10 +44,10 @@ const algoFusion = (nbLines, nbColumns) => {
 
 /****************************************************************************************
 INIT MAZE (fonction)
-- Initialise le tableau représentant le labyrinthe
-- Chaque élément du tableau contient un objet ayant 2 propriétés :
-    - Un numéro unique de branche
-    - Un indicateur booléen de visite initialisé à false
+Initialise le tableau représentant le labyrinthe
+Chaque élément du tableau contient un objet ayant 2 propriétés :
+- Un numéro unique de branche
+- Un indicateur de visite des pièces, de type booléen, initialisé à false
 ****************************************************************************************/
 
 const initMaze = (nbLines, nbColumns) => {
@@ -63,11 +63,11 @@ const initMaze = (nbLines, nbColumns) => {
 
 /****************************************************************************************
 INIT STACK WALLS (fonction)
-- Initialisation de la pile contenant tous les murs du labyrinthe
-- Attention, chaque élément de la pile contient :
-    - Non pas les coordonnées du mur
-    - Mais les coordonnées des 2 pièces attenantes, identifiées par un coefficient
-      (et non par un couple d'abscisses et d'ordonnées)
+Initialisation de la pile contenant tous les murs du labyrinthe
+Attention, chaque élément de la pile correspond à un mur qui :
+- N'est pas identifié par ses coordonnées
+- Mais par les coordonnées des 2 pièces attenantes. Ces coordonnées sont représentées
+  par un coefficient et non par un couple d'abscisses et d'ordonnées
 ****************************************************************************************/
 
 const initStackWalls = (nbLines, nbColumns) => {
@@ -84,8 +84,11 @@ const initStackWalls = (nbLines, nbColumns) => {
   
 /****************************************************************************************
 ADD OPEN CELLS (fonction)
-Construit un tableau contenant les cellules (pièces et murs) correspondantes aux pièces
-de la pile stackRooms :
+Construit un tableau contenant les cellules (pièces et murs) correspondantes au mur 'ouvert'
+et aux 2 pièces attenantes :
+- Le mur courrant est ajouté
+- Seules les pièces non visitées sont ajoutées. La propriété 'visited' dans le tableau maze,
+  passé en paramètre (par référence), est mise à jour
 ****************************************************************************************/
 
 const addOpenCells = (maze, room0, room1) => {

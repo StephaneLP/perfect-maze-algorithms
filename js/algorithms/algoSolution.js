@@ -3,6 +3,7 @@ import { convertCellToRoom, convertRoomToCell } from "../utils/specificTools.js"
 
 /****************************************************************************************
 ALGO SOLUTION (fonction)
+Cet algorithme repose sur l'algorithme de parcourt en profondeur d'un arbre
 ****************************************************************************************/
 
 const algoSolution = (gridMaze, accessCells) => {

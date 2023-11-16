@@ -2,12 +2,11 @@ import { getRandomIntInclusive } from "../utils/generalTools.js"
 
 /****************************************************************************************
 ALGO SIDEWINDER (fonction)
-- Parcourt chaque ligne du labyrinthe du haut vers le bas
-- Parcourt chaque ligne de la gauche vers la droite
-    - Tant que le mur droit est ouvert (test aléatoire à chaque boucle) :
-        - Ouvre les cellules (pièces et murs droits) les unes après les autres en les plaçant
-          dans une pile temporaire
-    - Quand le mur droit est fermé :
+- Parcourt le labyrinthe ligne par ligne (du haut vers le bas, et de la gauche vers la droite)
+- Pour chaque pièce visitée :
+    - Si le mur droit est ouvert (test aléatoire à chaque boucle) :
+        - Ajout des cellules (pièces et murs droits) à une pile temporaire
+    - Si le mur droit est fermé :
         - Ajoute la pile temporaire à la pile stackOpenCells (appel de la fonction addOpenCells)
         - Vide la pile temporaire
 - Retourne la pile stackOpenCells qui permet d'afficher le labyrinthe
@@ -45,6 +44,7 @@ Construit un tableau contenant les cellules (pièces et murs) correspondantes au
 de la pile stackRooms :
 - Ajoute les cellules 'pièce' et les cellules 'murs droits' (sauf pour la dernière pièce)
 - Ajoute aléatoirement un passage vers le haut à partir de l'une des pièces de la pile
+  (sauf pour la première ligne)
 - Retourne l'ensemble des cellules 'ouvertes' de la rangée en cours (pile stackRooms)
 ****************************************************************************************/
 

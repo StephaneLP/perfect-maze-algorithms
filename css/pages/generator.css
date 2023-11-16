@@ -239,7 +239,7 @@ SECTION LABYRINTHE
 }
 
 #maze {
-    background: linear-gradient(to right, var(--bg-maze3-color), var(--bg-maze5-color));
+    background-color: var(--bg-maze3-color);
     overflow: hidden;
 }
 

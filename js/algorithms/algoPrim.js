@@ -44,7 +44,7 @@ UPDATE STACKS (procédure)
 
 const updateStacks = (currentRoom, currentWall, stackWalls, stackOpenCells, maze, nbLines, nbColumns) => {
     maze[currentRoom[0]][currentRoom[1]] = true
-    adjacentWalls(currentRoom, nbLines, nbColumns).map(wall => stackWalls.push(wall))
+    setAdjacentWalls(currentRoom, nbLines, nbColumns).map(wall => stackWalls.push(wall))
     stackOpenCells.push(currentWall ? [currentWall, [2 * currentRoom[0] + 1, 2 * currentRoom[1] + 1]] : [[2 * currentRoom[0] + 1, 2 * currentRoom[1] + 1]])
 }
 
@@ -53,7 +53,7 @@ ADJACENT WALLS (fonction)
 - Retourne les murs 'existants' qui entourent une pièce
 ****************************************************************************************/
 
-const adjacentWalls = (room, nbLines, nbColumns) => {
+const setAdjacentWalls = (room, nbLines, nbColumns) => {
     let line = room[0], column = room[1]
     let array = []
 

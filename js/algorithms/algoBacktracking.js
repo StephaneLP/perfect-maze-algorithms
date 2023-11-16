@@ -1,42 +1,64 @@
 import { getRandomIntInclusive, shuffleArray2Dim, createArray2Dim } from "../utils/generalTools.js"
 
 /****************************************************************************************
-
+ALGO PROFONDEUR (fonction)
+- Choix aléatoire d'une pièce de départ
+- Initialisation des piles stackOpenCells et stackRooms
+  et mise à jour du tableau maze (voir procédure updateStacks)
+- Tant que la pile stackRooms contient des pièces :
+    - Sélection de la dernière pièce de la pile
+    - Si une pièce attenante non visitée a été trouvée (sélection aléatoire) :
+        - Mise à jour des piles stackOpenCells et stackRooms
+          et mise à jour du tableau maze (voir procédure updateStacks)
+    - Sinon : la dernière pièce est retirée de la pile stackRooms
+- Retourne la pile stackOpenCells qui permet d'afficher le labyrinthe
 ****************************************************************************************/
 
 const algoProfondeur = (nbLines, nbColumns) => {
     let maze = createArray2Dim(nbLines, nbColumns, false)
-    let stackOpenCells = [], stackRooms = [], currentRoom = [], adjacentRoom = []
+    let stackOpenCells = [], stackRooms = []
+    let lastRoom = [], newRoom = []
 
-    // Pièce de départ déterminée aléatoirement
-    currentRoom = [getRandomIntInclusive(0, nbLines - 1), getRandomIntInclusive(0, nbColumns - 1)]
-    maze[currentRoom[0]][currentRoom[1]] = true
-    stackRooms.push(currentRoom)
-    stackOpenCells.push([[2 * currentRoom[0] + 1, 2 * currentRoom[1] + 1]])
+    newRoom = [getRandomIntInclusive(0, nbLines - 1), getRandomIntInclusive(0, nbColumns - 1)]
+    updateStacks(null, newRoom, stackRooms, stackOpenCells, maze)
 
-    // Algorithme de création du labyrinthe
     while (stackRooms.length > 0) {
-        currentRoom = stackRooms[stackRooms.length - 1]
-        adjacentRoom = setAdjacentRoom(currentRoom, maze)
+        lastRoom = stackRooms[stackRooms.length - 1]
+        newRoom = searchAdjacentRoom(lastRoom, maze)
 
-        if (adjacentRoom) {
-            maze[adjacentRoom[0]][adjacentRoom[1]] = true
-            stackRooms.push(adjacentRoom)
-            addOpenCells(stackOpenCells, currentRoom, adjacentRoom)
-        } else {
-            stackRooms.pop()
-        }
+        if (newRoom) updateStacks(lastRoom, newRoom, stackRooms, stackOpenCells, maze)
+        else stackRooms.pop()
     }
 
     return stackOpenCells
 }
 
 /****************************************************************************************
-
+UPDATE STACKS (procédure)
+- Marque la pièce newRoom comme visitée (dans le tableau maze)
+- Ajoute la pièce newRoom à la dernière place de la pile des pièces (stackRooms)
+- Met à jour la pile des pièces à 'ouvrir' stackOpenCells pour l'affichage du labyrinthe
+  (remarque : aucune dernière pièce n'est associé à la pièce de départ lors de la 1ère mise à jour)
 ****************************************************************************************/
 
-// Retourne aléatoirement une pièce adjacente non visitée
-const setAdjacentRoom = (room, maze) => {
+const updateStacks = (lastRoom, newRoom, stackRooms, stackOpenCells, maze) => {
+    maze[newRoom[0]][newRoom[1]] = true
+    stackRooms.push(newRoom)
+    if (lastRoom) {
+        stackOpenCells.push(addOpenCells(lastRoom, newRoom))
+    } else {
+        stackOpenCells.push([[2 * newRoom[0] + 1, 2 * newRoom[1] + 1]])
+    }
+}
+
+/****************************************************************************************
+SET ADJACENT ROOM (fonction)
+- Retourne aléatoirement un tableau contenant les coordonnées d'une pièce attenante
+  non visitée
+- Retourne null si toutes les pièces attenantes ont déjà été visitées
+****************************************************************************************/
+
+const searchAdjacentRoom = (room, maze) => {
     let n = room[0]
     let m = room[1]
     let array = []
@@ -52,16 +74,18 @@ const setAdjacentRoom = (room, maze) => {
 }
 
 /****************************************************************************************
-
+ADD OPEN CELLS (fonction)
+Construit un tableau contenant les 2 cellules (mur et pièce) à ouvrir pour visiter
+une nouvelle pièce
 ****************************************************************************************/
 
-const addOpenCells = (stackOpenCells, currentRoom, adjacentRoom) => {
+const addOpenCells = (lastRoom, newRoom) => {
     let cellsToAdd = []
 
-    cellsToAdd.push([currentRoom[0] + adjacentRoom[0] + 1, currentRoom[1] + adjacentRoom[1] + 1])
-    cellsToAdd.push([2 * adjacentRoom[0] + 1, 2 * adjacentRoom[1] + 1])
+    cellsToAdd.push([lastRoom[0] + newRoom[0] + 1, lastRoom[1] + newRoom[1] + 1])
+    cellsToAdd.push([2 * newRoom[0] + 1, 2 * newRoom[1] + 1])
 
-    stackOpenCells.push(cellsToAdd)
+    return cellsToAdd
 }
 
 export { algoProfondeur }
