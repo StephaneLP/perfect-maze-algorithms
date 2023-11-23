@@ -1,5 +1,5 @@
 let gblTimeOuts = new Array()
-let gblMaze = new Object()
+let gblMazes = new Map()
 
 /****************************************************************************************
 
@@ -9,23 +9,20 @@ const displayMaze = (stackOpenCells, params, speed) => {
     const nbLines = 2 * params.nbLines + 1
     const nbColumns = 2 * params.nbColumns + 1
 
+    gblMazes.set(params.idStructure, stackOpenCells)
+
     let mazeSection = document.getElementById("maze" + params.idStructure)
-
-    mazeSection.replaceChildren()
-    gblMaze.push({id: params.idStructure, stackOpenCells: stackOpenCells})
-
-    
-
     let line = "", idElement = ""
+
     for (let n = 0; n < nbLines; n++) {
         line = document.createElement("div")
 
         for (let m = 0; m < nbColumns; m++) {
             idElement = params.idStructure + "-" + n + "-" + m
-            if ((n % 2 == 1) && (m % 2 == 1)) addMazeCell(line, idElement, params.maxCellLength, params.maxCellLength, "maze-room") // Pièce
-            if ((n % 2 == 0) && (m % 2 == 0)) addMazeCell(line, idElement, params.minCellLength, params.minCellLength, "maze-wall") // Intersection
-            if ((n % 2 == 1) && (m % 2 == 0)) addMazeCell(line, idElement, params.minCellLength, params.maxCellLength, "maze-wall") // Mur vertical
-            if ((n % 2 == 0) && (m % 2 == 1)) addMazeCell(line, idElement, params.maxCellLength, params.minCellLength, "maze-wall") // Mur horizontal
+            if ((n % 2 == 1) && (m % 2 == 1)) line.appendChild(addMazeCell(idElement, params.maxCellLength, params.maxCellLength, "maze-room")) // Pièce
+            if ((n % 2 == 0) && (m % 2 == 0)) line.appendChild(addMazeCell(idElement, params.minCellLength, params.minCellLength, "maze-wall")) // Intersection
+            if ((n % 2 == 1) && (m % 2 == 0)) line.appendChild(addMazeCell(idElement, params.minCellLength, params.maxCellLength, "maze-wall")) // Mur vertical
+            if ((n % 2 == 0) && (m % 2 == 1)) line.appendChild(addMazeCell(idElement, params.maxCellLength, params.minCellLength, "maze-wall")) // Mur horizontal
         }
 
         mazeSection.appendChild(line)
@@ -38,21 +35,21 @@ const displayMaze = (stackOpenCells, params, speed) => {
         gblTimeOuts.push(setTimeout(openCells, interval, params.idStructure, stackOpenCells[i], "maze-open"))
     }
 
-    gblTimeOuts.push(setTimeout(endDisplayMaze, interval))
+    gblTimeOuts.push(setTimeout(endDisplayMaze, interval, params.idStructure))
 }
 
 /****************************************************************************************
 
 ****************************************************************************************/
 
-const addMazeCell = (line, idElement, width, height, className) => {
+const addMazeCell = (idElement, width, height, className) => {
     let cell = document.createElement("div")
 
     cell.id = idElement
     cell.style.width = width + "px"
     cell.style.height = height + "px"
     cell.className = className
-    line.appendChild(cell)
+    return cell
 }
 
 /****************************************************************************************
@@ -85,8 +82,9 @@ const openCellsTemp = (idStructure, arrCells, interval, speed) => {
 
 ****************************************************************************************/
 
-const endDisplayMaze = () => {
-    document.querySelector("#stop-maze-animation").style.visibility = "hidden"
+const endDisplayMaze = (id) => {
+    gblMazes.delete(id)
+    if (gblMazes.size === 0) document.querySelector("#stop-maze-animation").style.visibility = "hidden"
 }
 
 /****************************************************************************************
@@ -96,9 +94,9 @@ ARRET DE L'ANIMATION
 const stopMazeAnimation = () => {
     gblTimeOuts.map(element => clearTimeout(element))
 
-    gblMaze.forEach(obj => obj.stackOpenCells.forEach(array => openCells(obj.id, array, "maze-open")))
-    gblMaze = []
-    endDisplayMaze()
+    gblMazes.forEach((stack, id) => stack.forEach(array => openCells(id, array, "maze-open")))
+    gblMazes.clear()
+    document.querySelector("#stop-maze-animation").style.visibility = "hidden"
 }
 
 export { displayMaze, stopMazeAnimation }

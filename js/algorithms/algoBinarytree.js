@@ -14,7 +14,6 @@ const algoBinarytree = (nbLines, nbColumns) => {
     for (let n = 0; n < nbLines; n++) {
         for (let m = 0; m < nbColumns; m++) {
             stackOpenCells.push(addOpenCells(n, m, nbColumns))
-            stackOpenCells.push(addOpenCells(n, m, nbColumns))
         }
     }
 
