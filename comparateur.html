@@ -15,43 +15,22 @@
     ------------------------------------------------------------------------------------>
     <main class="comparator">
         <section class="comparator-filter">
-            <form id="comparator-labyrinth">
+            <form id="comparator-maze">
                 <!-- BOUTON RETOUR VERS LA PAGE D'ACCUEIL -->
                 <a class="comparator-back" href="/">
                     <img src="./images/back.png" alt="Retour vers la page d'accueil" />
                     Page d'accueil
                 </a>
-                <div class="comparator-algorithmes">
+                <div class="comparator-algorithms">
                     <div>Veuillez choisir jusqu'à 3 algorithmes</div>
                     <div>
-                        <select id="algorithm1" name="algorithm1">
-                            <option value=""></option>
-                            <option value="profondeur">Parcours en profondeur</option>
-                            <option value="fusion">Fusion aléatoire</option>
-                            <option value="prim">Prim</option>
-                            <option value="sidewinder">Sidewinder</option>
-                            <option value="binarytree">Arbre binaire</option>
-                        </select>
+                        <select id="algorithm1" name="algorithm1"></select>
                     </div>
                     <div>
-                        <select id="algorithm2" name="algorithm2">
-                            <option value=""></option>
-                            <option value="profondeur">Parcours en profondeur</option>
-                            <option value="fusion">Fusion aléatoire</option>
-                            <option value="prim">Prim</option>
-                            <option value="sidewinder">Sidewinder</option>
-                            <option value="binarytree">Arbre binaire</option>
-                        </select>
+                        <select id="algorithm2" name="algorithm2"></select>
                     </div>
                     <div>
-                        <select id="algorithm3" name="algorithm3">
-                            <option value=""></option>
-                            <option value="profondeur">Parcours en profondeur</option>
-                            <option value="fusion">Fusion aléatoire</option>
-                            <option value="prim">Prim</option>
-                            <option value="sidewinder">Sidewinder</option>
-                            <option value="binarytree">Arbre binaire</option>
-                        </select>
+                        <select id="algorithm3" name="algorithm3"></select>
                     </div>
                 </div>
                 <div class="comparator-generate">
@@ -71,30 +50,30 @@
             </div>
         </section>
         <!-- SECTION AFFICHAGE DES LABYRINTHES -->
-        <section class="comparator-maze">
-            <div class="maze-structure" id="structure1">
+        <section class="comparator-mazes">
+            <div class="mazes-structure" id="structure1">
                 <h2 id="title1"></h2>
-                <div class="maze-structure-labyrinth">
-                    <div class="labyrinth" id="labyrinth1"></div>
+                <div class="mazes-structure-maze">
+                    <div class="maze" id="maze1"></div>
                 </div>
             </div>
-            <div class="maze-structure" id="structure2">
+            <div class="mazes-structure" id="structure2">
                 <h2 id="title2"></h2>
-                <div class="maze-structure-labyrinth">
-                    <div class="labyrinth" id="labyrinth2"></div>
+                <div class="mazes-structure-maze">
+                    <div class="maze" id="maze2"></div>
                 </div>
             </div>
-            <div class="maze-structure" id="structure3">
+            <div class="mazes-structure" id="structure3">
                 <h2 id="title3"></h2>
-                <div class="maze-structure-labyrinth">
-                    <div class="labyrinth" id="labyrinth3"></div>
+                <div class="mazes-structure-maze">
+                    <div class="maze" id="maze3"></div>
                 </div>
             </div>
         </section>
         <!-- FENETRE MODALE MESSAGE -->
-        <section class="message">
-            <div id="message">
-                <div id="libelle-message"></div>
+        <section class="message-container">
+            <div id="message-container">
+                <div id="message"></div>
                 <button class="btn" id="btn-message">Fermer</button>
             </div>
         </section>

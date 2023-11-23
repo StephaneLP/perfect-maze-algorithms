@@ -3,31 +3,35 @@ import { algoFusion }  from "../algorithms/algoFusion.js"
 import { algoSidewinder }  from "../algorithms/algoSidewinder.js"
 import { algoBinarytree }  from "../algorithms/algoBinarytree.js"
 import { algoPrim }  from "../algorithms/algoPrim.js"
-
 import { displayMaze } from "./displayMaze.js"
 
 /****************************************************************************************
-
+GENERATE MAZE (procédure)
+- Initialisation des paramètres du labyrinthe :
+    - Dimensions de la structure
+    - Calcul des nombres de lignes et colonnes
+    - Calcul de la largeur des pièces, murs et intersections
+- Appel de l'algorithme sélectionné et constitution la pile 'stackOpenCells'
+  qui contient les cellules à 'ouvrir'
+- Appel de la procédure permettant d'afficher le labyrinthe. Elle necessite 3 paramètres :
+    - Pile des cellules à 'ouvrir'
+    - Paramètres du labyrinthe
+    - Vitesse d'animation
 ****************************************************************************************/
 
-const generateMaze = (algo, structure, labyrinth, animationSpeed) => {
-    const hauteurStructure = document.getElementById(structure).clientHeight - 56
-    const largeurStructure = document.getElementById(structure).clientWidth - 2
+const generateMaze = (idStructure, algo, animationSpeed) => {
+    const structureHeight = document.getElementById("structure" + idStructure).clientHeight - 56
+    const structureWidth = document.getElementById("structure" + idStructure).clientWidth - 2
     const thicknessFactor = 0.30
 
-    let nbLines, nbColumns, minCellLength, maxCellLength
+    const nbLines = Math.floor(structureHeight / 30)
+    const maxCellLength = structureHeight / (nbLines + thicknessFactor * (nbLines + 1))
+    const minCellLength = maxCellLength * thicknessFactor
+    const nbColumns = Math.floor((structureWidth - minCellLength) / (minCellLength + maxCellLength))
 
-    nbLines = Math.floor(hauteurStructure / 30)
-
-    maxCellLength = hauteurStructure / (nbLines + thicknessFactor * (nbLines + 1))
-    minCellLength = maxCellLength * thicknessFactor
-    nbColumns = Math.floor((largeurStructure - minCellLength) / (minCellLength + maxCellLength))
-
-    // Calcul de la vitesse d'animation
     const factor = Math.sqrt(600 / (nbLines * nbColumns))
     const speed = (Math.pow(10 - Number(animationSpeed), 2) + 5) * factor
 
-    // Création du labyrinthe
     let stackOpenCells = []
 
     switch (algo) {
@@ -48,11 +52,9 @@ const generateMaze = (algo, structure, labyrinth, animationSpeed) => {
             break
     }
 
-    // Affichage du labyrinthe
-    const maze = {id: labyrinth, stackOpenCells: stackOpenCells}
-    const params = {nbLines: nbLines, nbColumns: nbColumns, minCellLength: minCellLength, maxCellLength: maxCellLength}
+    const mazeParams = {idStructure: idStructure, nbLines: nbLines, nbColumns: nbColumns, minCellLength: minCellLength, maxCellLength: maxCellLength}
 
-    displayMaze(maze, params, speed)
+    displayMaze(stackOpenCells, mazeParams, speed)
 }
 
 export { generateMaze }

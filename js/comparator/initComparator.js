@@ -2,51 +2,44 @@ import { generateMaze } from "./generateMaze.js"
 import { stopMazeAnimation } from "./displayMaze.js"
 
 /****************************************************************************************
-AFFICHER / MASQUER LES STRUCTURES DE LABYRINTHES CORRESPONDANT AUX ALGORITHMES SELECTIONNES
+INIT SELECT (procédure)
+- Initialisation des champs select (algorithmes)
 ****************************************************************************************/
 
-const initMazesStructure = () => {
-    let largeurFenetre, largeurLabyrinthe, structure, select, title, maze
-    let nbAlgos = 0
+const initSelect = (element) => {
+    let select = document.querySelector(element)
 
-    for (let i = 1; i < 4; i++) {
-        select = document.getElementById("algorithm" + i)
-        nbAlgos += (select.selectedIndex !== 0 ? 1 : 0)
-    }
-
-    if (nbAlgos !== 0) {
-        largeurFenetre = window.innerWidth
-        largeurLabyrinthe = (nbAlgos > 1 ? Math.floor(largeurFenetre / nbAlgos) - 2 : largeurFenetre)
-    }
-
-    for (let i = 1; i < 4; i++) {
-        select = document.getElementById("algorithm" + i)
-        structure = document.getElementById("structure" + i)
-        title = document.getElementById("title" + i)
-        maze = document.getElementById("labyrinth" + i)
-
-        structure.style.display = (select.selectedIndex !== 0 ? "block" : "none")
-        structure.style.width = largeurLabyrinthe + "px"
-        title.textContent = (select.selectedIndex !== 0 ? select.options[select.selectedIndex].text : "")
-        maze.replaceChildren()
-    }
+    select.appendChild(setOption("", ""))
+    select.appendChild(setOption("profondeur", "Parcours en profondeur"))
+    select.appendChild(setOption("fusion", "Fusion aléatoire"))
+    select.appendChild(setOption("prim", "Prim"))
+    select.appendChild(setOption("sidewinder", "Sidewinder"))
+    select.appendChild(setOption("binarytree", "Arbre binaire"))
 }
 
 /****************************************************************************************
-AFFICHER / MASQUER LA FENETRE MODALE MESSAGE
+SET OPTION (fonction)
+- Création d'un élément 'option' (avec 2 paramètres : value et text)
 ****************************************************************************************/
 
-const displayMessage = (blnDisplay, msg) => {
-    document.querySelector(".message").style.visibility = (blnDisplay ? "visible" : "hidden")
-    document.querySelector("#libelle-message").textContent = msg
-    activateBtn("#btn-generate", true)
+const setOption = (value, text) => {
+    let option = document.createElement("option")
+
+    option.value = value
+    option.text = text
+    return option
 }
 
 /****************************************************************************************
-
+GENERATE ALL MAZES (procédure)
+Remarque : les structures désignent les conteneurs permettant l'affichage des labyrinthes
+- Récuperation des valeurs du formulaire
+- Remise à zéro des structures
+- Calcul de la largeur des structures affichées (en fonction du nombre d'algorithmes)
+- Affichage des labyrinthes (structures correspondantes aux algorithmes sélectionnés)
 ****************************************************************************************/
 
-const prepareGeneratingMazes = (event) => {
+const generateAllMazes = (event) => {
     event.preventDefault()
 
     const algo1 = event.target.algorithm1.value
@@ -54,24 +47,73 @@ const prepareGeneratingMazes = (event) => {
     const algo3 = event.target.algorithm3.value
     const animationSpeed = event.target.animationSpeed.value
 
-    if ((algo1 === "") && (algo2 === "") && (algo3 === "")) {
+    let nbAlgosSelected = 0
+
+    if (algo1 !== "") nbAlgosSelected += 1
+    if (algo2 !== "") nbAlgosSelected += 1
+    if (algo3 !== "") nbAlgosSelected += 1
+
+    if (nbAlgosSelected === 0) {
         displayMessage(true, "Veuillez sélectionner au moins un algorithme S.V.P.")
         return
     }
-    if (algo1 !== "") generateMaze(algo1, "structure1", "labyrinth1", animationSpeed)
-    if (algo2 !== "") generateMaze(algo2, "structure2", "labyrinth2", animationSpeed)
-    if (algo3 !== "") generateMaze(algo3, "structure3", "labyrinth3", animationSpeed)
+
+    resetStructure(1)
+    resetStructure(2)
+    resetStructure(3)
+    
+    const windowWidth = window.innerWidth
+    const structureWidth = (nbAlgosSelected > 1 ? Math.floor(windowWidth / nbAlgosSelected) - 2 : windowWidth)
+    
+    document.querySelector("#stop-maze-animation").style.visibility = "visible"
+    
+    if (algo1 !== "") displayStructure(1, algo1, animationSpeed, structureWidth)
+    if (algo2 !== "") displayStructure(2, algo2, animationSpeed, structureWidth)
+    if (algo3 !== "") displayStructure(3, algo3, animationSpeed, structureWidth)
+}
+
+/****************************************************************************************
+RESET STRUCTURE (procédure)
+- Remet à zéro la structure
+****************************************************************************************/
+
+const resetStructure = (idStructure) => {
+    document.getElementById("structure" + idStructure).style.display = "none"
+    document.getElementById("title" + idStructure).textContent = ""
+    document.getElementById("maze" + idStructure).replaceChildren()
+}
+
+/****************************************************************************************
+DISPLAY STRUCTURE (procédure)
+- Initialise et affiche la structure
+- Appel la procédure d'affichage du labyrinthe 'generateMaze'
+****************************************************************************************/
+
+const displayStructure = (idStructure, algo, speed, structureWidth) => {
+    document.getElementById("structure" + idStructure).style.display = "block"
+    document.getElementById("structure" + idStructure).style.width = structureWidth + "px"
+    document.getElementById("title" + idStructure).textContent = document.getElementById("algorithm" + idStructure).options[document.getElementById("algorithm" + idStructure).selectedIndex].text
+
+    generateMaze(idStructure, algo, speed)
+}
+
+/****************************************************************************************
+DISPLAY MESSAGE (procédure)
+- Afficher / masquer la fenetre modale message
+****************************************************************************************/
+
+const displayMessage = (blnDisplay, msg) => {
+    document.querySelector(".message-container").style.visibility = (blnDisplay ? "visible" : "hidden")
+    document.querySelector("#message").textContent = msg
 }
 
 /****************************************************************************************
 INITIALISATION DES EVENNEMENTS
 ****************************************************************************************/
 
-document.querySelector("#algorithm1").addEventListener("change", initMazesStructure)
-document.querySelector("#algorithm2").addEventListener("change", initMazesStructure)
-document.querySelector("#algorithm3").addEventListener("change", initMazesStructure)
+window.addEventListener('load', initSelect("#algorithm1"), initSelect("#algorithm2"), initSelect("#algorithm3"))
+document.querySelector("#comparator-maze").addEventListener("submit", generateAllMazes)
 document.querySelector("#btn-message").addEventListener("click", () => displayMessage(false, ""))
-document.querySelector("#comparator-labyrinth").addEventListener("submit", prepareGeneratingMazes)
 document.querySelector("#btn-maze-stop").addEventListener("click", stopMazeAnimation)
 
 export { displayMessage }

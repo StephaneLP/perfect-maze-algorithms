@@ -9,18 +9,6 @@ body {
     animation: fadein 0.5s;
 }
 
-h2 {
-    height: 50px;
-    font-family: "Mulish-Regular", Verdana, sans-serif;
-    font-weight: 500;
-    font-size: 1.5rem;
-    color: var(--text-titre-color);
-    background-color: var(--bg-color3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 /*****************************************************
 SECTION FILTRE : GLOBAL
 *****************************************************/
@@ -74,19 +62,19 @@ SECTION FILTRE : BOUTON RETOUR
 SECTION FILTRE : CHOIX ALGORITHMES
 *****************************************************/
 
-.comparator-algorithmes {
+.comparator-algorithms {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.comparator-algorithmes>div {
+.comparator-algorithms>div {
     margin: 0 10px;
     display: flex;
     flex-direction: column;
 }
 
-.comparator-algorithmes>div select {
+.comparator-algorithms>div select {
     padding: 0 5px;
     font-family: "Mulish-Regular", Verdana, sans-serif;
     font-weight: 400;
@@ -162,10 +150,10 @@ SECTION FILTRE : FENETRE MODALE STOP ANIMATION
 }
 
 /*****************************************************
-SECTION LABYRINTHES : STRUCTURE
+SECTION LABYRINTHES : STRUCTURE DES LABYRINTHES (1 - 3)
 *****************************************************/
 
-.comparator-maze {
+.comparator-mazes {
     height: calc(100vh - 80px);
     background-color: var(--bg-maze2-color);
     display: flex;
@@ -173,12 +161,24 @@ SECTION LABYRINTHES : STRUCTURE
     justify-content: space-between;
 }
 
-.comparator-maze .maze-structure {
+.comparator-mazes .mazes-structure {
     height: 100%;
     display: none;
 }
 
-.comparator-maze .maze-structure .maze-structure-labyrinth {
+.comparator-mazes .mazes-structure h2 {
+    height: 50px;
+    font-family: "Mulish-Regular", Verdana, sans-serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: var(--text-titre-color);
+    background-color: var(--bg-color3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.comparator-mazes .mazes-structure .mazes-structure-maze {
     width: 100%;
     height: calc(100% - 50px);
     background-color: var(--bg-maze1-color);
@@ -189,62 +189,39 @@ SECTION LABYRINTHES : STRUCTURE
 }
 
 /*****************************************************
-SECTION LABYRINTHES : LABYRINTHE AFFICHE
+SECTION LABYRINTHES : AFFICHAGE DU LABYRINTHE 
 *****************************************************/
 
-.labyrinth {
+.maze {
     background-color: var(--bg-maze6-color);
-    border: 1px solid var(--border-maze-color);
 }
 
-.labyrinth>div {
+.maze>div {
     display: flex;
     flex-direction: row;
     position: relative;
 }
 
-.labyrinth>div>div {
+.maze>div>div {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-.labyrinth-room {
+.maze-room {
     background-color: var(--bg-maze2-color);
 }
 
-.labyrinth-wall {
+.maze-wall {
     background-color: var(--bg-maze1-color);
 }
 
-.labyrinth-open {
+.maze-open {
     background-color: transparent;
 }
 
-.labyrinth-open-temp {
+.maze-open-temp {
     background-color: var(--bg-maze4-color);
 }
 
-.labyrinth-solution {
-    background-image: url("../../images/round.png");
-    background-size: 0;
-    background-position: center;
-    background-repeat: no-repeat;
-    overflow: visible;
-    position: absolute;
-    
-}
-
-.labyrinth-border {
-    background-color: var(--bg-maze2-color);
-    width: 20px;
-    z-index: 1;
-}
-
-.labyrinth-access {
-    background-image: url("../../images/arrow.png");
-    background-size: 90% 90%;
-    background-position: center;
-    background-repeat: no-repeat;
-}
