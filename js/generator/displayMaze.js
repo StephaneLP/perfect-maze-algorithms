@@ -5,9 +5,8 @@ let gblStackCells = []
 
 /****************************************************************************************
 DISPLAY MAZE (procédure)
-- 1ère partie : Affichage de la structure du labyrinthe
-    - Initialisation des variables globales utilisées pour l'arrêt de l'animation
-    - Construction de la structure html du labyrinthe (ligne par ligne)
+- Initialisation des variables globales utilisées pour l'arrêt de l'animation
+- 1ère partie : Construction de la structure html du labyrinthe (ligne par ligne)
 - 2ème partie : Affichage du labyrinthe
     - Affichage du bouton permettant de stoper l'animation
     - Affichage des cellules 'ouvertes' par groupes, en 2 temps à l'aide de 2 couleurs
@@ -20,23 +19,24 @@ const displayMaze = (stackOpenCells, structure, speed) => {
     let nbGridLines = 2 * structure.nbLines + 1
     let nbGridColumns = 2 * structure.nbColumns + 1
 
-    // Affichage de la structure du labyrinthe
-    let section = document.querySelector("#maze")
-
-    section.replaceChildren()
     gblTimeOuts = []
     gblStackCells = stackOpenCells
 
+    // Affichage de la structure du labyrinthe
+    let section = document.querySelector("#maze")
+    let line = "", idElement = ""
+
+    section.replaceChildren()
     for (let numLine = 0; numLine < nbGridLines; numLine++) {
-        let line = document.createElement("div")
+        line = document.createElement("div")
 
         line.appendChild(addBorderCell("left-wall-" + numLine, "maze-border"))
         for (let numColumn = 0; numColumn < nbGridColumns; numColumn++) {
-            const id = numLine + "-" + numColumn
-            if ((numLine % 2 == 1) && (numColumn % 2 == 1)) line.appendChild(addMazeCell(id, structure.maxCellLength, structure.maxCellLength, "maze-room")) // Pièce
-            if ((numLine % 2 == 0) && (numColumn % 2 == 0)) line.appendChild(addMazeCell(id, structure.minCellLength, structure.minCellLength, "maze-wall")) // Intersection
-            if ((numLine % 2 == 1) && (numColumn % 2 == 0)) line.appendChild(addMazeCell(id, structure.minCellLength, structure.maxCellLength, "maze-wall")) // Mur vertical
-            if ((numLine % 2 == 0) && (numColumn % 2 == 1)) line.appendChild(addMazeCell(id, structure.maxCellLength, structure.minCellLength, "maze-wall")) // Mur horizontal
+            idElement = numLine + "-" + numColumn
+            if ((numLine % 2 == 1) && (numColumn % 2 == 1)) line.appendChild(addMazeCell(idElement, structure.maxCellLength, structure.maxCellLength, "maze-room")) // Pièce
+            if ((numLine % 2 == 0) && (numColumn % 2 == 0)) line.appendChild(addMazeCell(idElement, structure.minCellLength, structure.minCellLength, "maze-wall")) // Intersection
+            if ((numLine % 2 == 1) && (numColumn % 2 == 0)) line.appendChild(addMazeCell(idElement, structure.minCellLength, structure.maxCellLength, "maze-wall")) // Mur vertical
+            if ((numLine % 2 == 0) && (numColumn % 2 == 1)) line.appendChild(addMazeCell(idElement, structure.maxCellLength, structure.minCellLength, "maze-wall")) // Mur horizontal
         }
         line.appendChild(addBorderCell("right-wall-" + numLine, "maze-border"))
         section.appendChild(line)
@@ -44,9 +44,10 @@ const displayMaze = (stackOpenCells, structure, speed) => {
 
     // Affichage du labyrinthe
     if (speed > 0) {
+        document.querySelector("#stop-maze-animation").style.visibility = "visible"
+        
         let interval = 0, intervalTemp = 0
 
-        document.querySelector("#stop-maze-animation").style.visibility = "visible"
         stackOpenCells.map(array => {
             intervalTemp = interval
             array.map(cell => {
@@ -55,11 +56,11 @@ const displayMaze = (stackOpenCells, structure, speed) => {
             })
 
             interval += array.length * speed
-            gblTimeOuts.push(setTimeout(displayCells, interval, array, "labyrinth-open"))
+            gblTimeOuts.push(setTimeout(displayCells, interval, array, "maze-open"))
         })
         gblTimeOuts.push(setTimeout(endDisplayMaze, interval, stackOpenCells.slice(-1)))
     } else {
-        stackOpenCells.map(array => displayCells(array, "labyrinth-open"))
+        stackOpenCells.map(array => displayCells(array, "maze-open"))
         endDisplayMaze(stackOpenCells.slice(-1))
     }
 }
@@ -103,12 +104,12 @@ DISPLAY CELLS (procédure)
 ****************************************************************************************/
 
 const displayCells = (arrCells, className) => {
-    let id = ""
+    let idElement = ""
 
-    arrCells.map(cell => {
+    arrCells.forEach(cell => {
         if(cell.length > 0) {
-            id = cell[0] + "-" + cell[1]
-            document.getElementById(id).className = className
+            idElement = cell[0] + "-" + cell[1]
+            document.getElementById(idElement).className = className
         }
     })
 }
