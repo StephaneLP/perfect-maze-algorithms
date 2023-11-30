@@ -10,19 +10,16 @@
     <title>Labyrinthes Parfaits</title>
 </head>
 <body>
-    <!-----------------------------------------------------------------------------------
-    PAGE GENERATEUR DE LABYRINTHE
-    ------------------------------------------------------------------------------------>
     <main class="generator">
         <section class="generator-filter">
             <!-- BOUTON RETOUR VERS LA PAGE D'ACCUEIL -->
-            <a class="generator-back" href="/">
+            <a class="filter-back" href="/">
                 <img src="./images/back.png" alt="Retour vers la page d'accueil" />
                 Page d'accueil
             </a>
             <!-- FORMULAIRE LABYRINTHE -->
-            <form id="generator-form">
-                <div class="generator-form">
+            <form id="filter">
+                <div class="filter">
                     <h2>Algorithme</h2>
                     <div class="radio">
                         <div>
@@ -47,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="generator-form" >
+                <div class="filter" >
                     <h2>Paramètres</h2>
                     <div class="range">
                         <span>Taille</span>
@@ -82,7 +79,7 @@
                         </div>                               
                     </div>
                 </div>
-                <div class="generator-form">
+                <div class="filter">
                     <h2>Générateur</h2>
                     <div class="animation">
                         <input type="checkbox" id="animation-checkbox" name="animationChecked" checked />
@@ -116,7 +113,7 @@
         <section class="generator-maze">
             <div id="maze"></div>
         </section>
-        <!-- FENETRE MODALE MESSAGE -->
+        <!-- MESSAGE FENETRE MODALE -->
         <section class="message-container">
             <div id="message-container">
                 <div id="message"></div>

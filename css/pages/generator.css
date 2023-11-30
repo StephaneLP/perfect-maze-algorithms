@@ -1,7 +1,5 @@
 /*****************************************************
-
 STYLE PAGE GENERATEUR DE LABYRINTHES
-
 *****************************************************/
 
 body {
@@ -47,7 +45,7 @@ SECTION FILTRE : GLOBAL
 SECTION FILTRE : BOUTON RETOUR
 *****************************************************/
 
-.generator-back {
+.filter-back {
     height: 60px;
     color: var(--text-retour-color);
     font-family: "Mulish-Black", Verdana, sans-serif;
@@ -62,12 +60,12 @@ SECTION FILTRE : BOUTON RETOUR
     transition: all 0.2s ease-out;
 }
 
-.generator-back:hover {
+.filter-back:hover {
     color: var(--bg-color1);
     background-color: var(--text-retour-color);
 }
 
-.generator-back img {
+.filter-back img {
     margin: 0 5px 0;
     width: 18px;
 }
@@ -76,7 +74,7 @@ SECTION FILTRE : BOUTON RETOUR
 SECTION FILTRE : FORMULAIRES
 *****************************************************/
 
-.generator-form {
+.filter {
     margin: 40px 20px 0;
     padding: 20px 15px 15px;
     background-color: var(--bg-color2);
@@ -84,7 +82,7 @@ SECTION FILTRE : FORMULAIRES
     position: relative;
 }
 
-.generator-form h2 {
+.filter h2 {
     font-family: "Mulish-Italic", Verdana, sans-serif;
     font-weight: 500;
     font-size: 1.5rem;
@@ -97,39 +95,39 @@ SECTION FILTRE : FORMULAIRES
     transform: translate(-50%,-60%);
 }
 
-.generator-form>div {
+.filter>div {
     margin: 10px 0 0;
 }
 
 /************ FORMULAIRES : SOLUTION CLASSE RADIO ************/
 
-.generator-form .radio>div {
+.filter .radio>div {
     margin: 5px 0 0 0;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.generator-form .radio label {
+.filter .radio label {
     margin: 0 0 0 10px;
 }
 
 /************ FORMULAIRES : CLASSE RANGE ************/
 
-.generator-form .range {
+.filter .range {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
-.generator-form .range>div {
+.filter .range>div {
     width: 60%;
     display: flex;
     flex-direction: column;
 }
 
-.generator-form .range>div .graduation {
+.filter .range>div .graduation {
     margin: 0;
     padding: 0 6px;
     display: flex;
@@ -137,30 +135,30 @@ SECTION FILTRE : FORMULAIRES
     justify-content: space-between;
 }
 
-.generator-form .range>div .graduation>div {
+.filter .range>div .graduation>div {
     color: var(--text-color2);
     font-size: 0.6rem;
 }
 
 /************ FORMULAIRES : CLASSE & ID CHOIX TAILLE ************/
 
-.generator-form .custom-size {
+.filter .custom-size {
     margin: 20px 0 0;
     font-family: "Mulish-Italic", Verdana, sans-serif;
     font-size: 0.9rem;
 }
 
-.generator-form .custom-size label {
+.filter .custom-size label {
     margin: 0 0 0 5px;
 }
 
-.generator-form #select-custom-size {
+.filter #select-custom-size {
     margin: 15px 0 0;
     font-size: 0.9rem;
     display: none;
 }
 
-.generator-form #select-custom-size>div {
+.filter #select-custom-size>div {
     margin: 5px 0 0;
     display: flex;
     flex-direction: row;
@@ -168,27 +166,27 @@ SECTION FILTRE : FORMULAIRES
     align-items: center;
 }
 
-.generator-form #select-custom-size select {
+.filter #select-custom-size select {
     width: 25%;
     font-size: 0.9rem;
 }
 
 /************ FORMULAIRES : SOLUTION ************/
 
-.generator-form .animation label {
+.filter .animation label {
     margin: 0 0 0 5px;
 }
 
-.generator-form #btn-solution {
+.filter #btn-solution {
     margin: 15px 0 0;
 }
 
-.generator-form .solution-search {
+.filter .solution-search {
     margin: 5px 0 0 5px;
     display: none;
 }
 
-.generator-form .solution-search label {
+.filter .solution-search label {
     font-family: "Mulish-Italic", Verdana, sans-serif;
     font-size: 0.9rem;
 }

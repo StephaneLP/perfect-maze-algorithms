@@ -20,8 +20,8 @@ GENERATE MAZE (procédure)
 ****************************************************************************************/
 
 const generateMaze = (idStructure, algo, animationSpeed) => {
-    const structureHeight = document.getElementById("structure" + idStructure).clientHeight - 56
-    const structureWidth = document.getElementById("structure" + idStructure).clientWidth - 2
+    const structureHeight = document.getElementById("maze-container" + idStructure).clientHeight - 56
+    const structureWidth = document.getElementById("maze-container" + idStructure).clientWidth - 2
     const thicknessFactor = 0.30
 
     const nbLines = Math.floor(structureHeight / 30)

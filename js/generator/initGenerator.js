@@ -68,7 +68,7 @@ window.addEventListener('load', initSelect("#custom-nb-lines", 5, 80), initSelec
 document.querySelector("#custom-size").addEventListener("click", handleDimensionClick)
 document.querySelector("#animation-checkbox").addEventListener("click", handleAnimationClick)
 document.querySelector("#btn-message").addEventListener("click", () => displayMessage(false, ""))
-document.querySelector("#generator-form").addEventListener("submit", generateMaze)
+document.querySelector("#filter").addEventListener("submit", generateMaze)
 document.querySelector("#btn-solution").addEventListener("click", generateSolution)
 document.querySelector("#btn-maze-stop").addEventListener("click", stopMazeAnimation)
 document.querySelector("#btn-solution-stop").addEventListener("click", stopSolutionAnimation)

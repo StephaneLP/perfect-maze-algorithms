@@ -32,11 +32,11 @@ const setOption = (value, text) => {
 
 /****************************************************************************************
 GENERATE ALL MAZES (procédure)
-Remarque : les structures désignent les conteneurs permettant l'affichage des labyrinthes
+Remarque : les conteneurs permettent l'affichage des labyrinthes
 - Récuperation des valeurs du formulaire
-- Remise à zéro des structures
-- Calcul de la largeur des structures affichées (en fonction du nombre d'algorithmes)
-- Affichage des labyrinthes (structures correspondantes aux algorithmes sélectionnés)
+- Remise à zéro des conteneurs
+- Calcul de la largeur des conteneurs affichées (en fonction du nombre d'algorithmes)
+- Affichage des labyrinthes (conteneurs correspondantes aux algorithmes sélectionnés)
 ****************************************************************************************/
 
 const generateAllMazes = (event) => {
@@ -58,18 +58,18 @@ const generateAllMazes = (event) => {
         return
     }
 
-    resetStructure(1)
-    resetStructure(2)
-    resetStructure(3)
+    resetMazeContainer(1)
+    resetMazeContainer(2)
+    resetMazeContainer(3)
     
     const windowWidth = window.innerWidth
-    const structureWidth = (nbAlgosSelected > 1 ? Math.floor(windowWidth / nbAlgosSelected) - 2 : windowWidth)
+    const containerWidth = (nbAlgosSelected > 1 ? Math.floor(windowWidth / nbAlgosSelected) - 2 : windowWidth)
     
     document.querySelector("#stop-maze-animation").style.visibility = "visible"
     
-    if (algo1 !== "") displayStructure(1, algo1, animationSpeed, structureWidth)
-    if (algo2 !== "") displayStructure(2, algo2, animationSpeed, structureWidth)
-    if (algo3 !== "") displayStructure(3, algo3, animationSpeed, structureWidth)
+    if (algo1 !== "") displayMazeContainer(1, algo1, animationSpeed, containerWidth)
+    if (algo2 !== "") displayMazeContainer(2, algo2, animationSpeed, containerWidth)
+    if (algo3 !== "") displayMazeContainer(3, algo3, animationSpeed, containerWidth)
 }
 
 /****************************************************************************************
@@ -77,10 +77,10 @@ RESET STRUCTURE (procédure)
 - Remet à zéro la structure
 ****************************************************************************************/
 
-const resetStructure = (idStructure) => {
-    document.getElementById("structure" + idStructure).style.display = "none"
-    document.getElementById("title" + idStructure).textContent = ""
-    document.getElementById("maze" + idStructure).replaceChildren()
+const resetMazeContainer = (idContainer) => {
+    document.getElementById("maze-container" + idContainer).style.display = "none"
+    document.getElementById("title" + idContainer).textContent = ""
+    document.getElementById("maze" + idContainer).replaceChildren()
 }
 
 /****************************************************************************************
@@ -89,12 +89,12 @@ DISPLAY STRUCTURE (procédure)
 - Appel la procédure d'affichage du labyrinthe 'generateMaze'
 ****************************************************************************************/
 
-const displayStructure = (idStructure, algo, speed, structureWidth) => {
-    document.getElementById("structure" + idStructure).style.display = "block"
-    document.getElementById("structure" + idStructure).style.width = structureWidth + "px"
-    document.getElementById("title" + idStructure).textContent = document.getElementById("algorithm" + idStructure).options[document.getElementById("algorithm" + idStructure).selectedIndex].text
+const displayMazeContainer = (idContainer, algo, speed, containerWidth) => {
+    document.getElementById("maze-container" + idContainer).style.display = "block"
+    document.getElementById("maze-container" + idContainer).style.width = containerWidth + "px"
+    document.getElementById("title" + idContainer).textContent = document.getElementById("algorithm" + idContainer).options[document.getElementById("algorithm" + idContainer).selectedIndex].text
 
-    generateMaze(idStructure, algo, speed)
+    generateMaze(idContainer, algo, speed)
 }
 
 /****************************************************************************************
@@ -112,7 +112,7 @@ INITIALISATION DES EVENNEMENTS
 ****************************************************************************************/
 
 window.addEventListener('load', initSelect("#algorithm1"), initSelect("#algorithm2"), initSelect("#algorithm3"))
-document.querySelector("#comparator-maze").addEventListener("submit", generateAllMazes)
+document.querySelector("#filter").addEventListener("submit", generateAllMazes)
 document.querySelector("#btn-message").addEventListener("click", () => displayMessage(false, ""))
 document.querySelector("#btn-maze-stop").addEventListener("click", stopMazeAnimation)
 

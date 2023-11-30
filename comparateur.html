@@ -10,18 +10,15 @@
     <title>Labyrinthes Parfaits</title>
 </head>
 <body>
-    <!-----------------------------------------------------------------------------------
-    PAGE GENERATEUR DE LABYRINTHE
-    ------------------------------------------------------------------------------------>
-    <main class="comparator">
+    <main>
+        <!-- BOUTON RETOUR VERS LA PAGE D'ACCUEIL & FORMULAIRE LABYRINTHE -->
         <section class="comparator-filter">
-            <form id="comparator-maze">
-                <!-- BOUTON RETOUR VERS LA PAGE D'ACCUEIL -->
-                <a class="comparator-back" href="/">
+            <form id="filter">
+                <a class="filter-back" href="/">
                     <img src="./images/back.png" alt="Retour vers la page d'accueil" />
                     Page d'accueil
                 </a>
-                <div class="comparator-algorithms">
+                <div class="filter-mazes">
                     <div>Veuillez choisir jusqu'à 3 algorithmes</div>
                     <div>
                         <select id="algorithm1" name="algorithm1"></select>
@@ -33,8 +30,8 @@
                         <select id="algorithm3" name="algorithm3"></select>
                     </div>
                 </div>
-                <div class="comparator-generate">
-                    <div class="comparator-speed">
+                <div class="filter-generate">
+                    <div class="filter-speed">
                         <span>Vitesse d'animation</span>
                         <div class="graduation">
                             <div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div><div>&bull;</div>
@@ -51,26 +48,26 @@
         </section>
         <!-- SECTION AFFICHAGE DES LABYRINTHES -->
         <section class="comparator-mazes">
-            <div class="mazes-structure" id="structure1">
+            <div class="maze-container" id="maze-container1">
                 <h2 id="title1"></h2>
-                <div class="mazes-structure-maze">
+                <div>
                     <div class="maze" id="maze1"></div>
                 </div>
             </div>
-            <div class="mazes-structure" id="structure2">
+            <div class="maze-container" id="maze-container2">
                 <h2 id="title2"></h2>
-                <div class="mazes-structure-maze">
+                <div>
                     <div class="maze" id="maze2"></div>
                 </div>
             </div>
-            <div class="mazes-structure" id="structure3">
+            <div class="maze-container" id="maze-container3">
                 <h2 id="title3"></h2>
-                <div class="mazes-structure-maze">
+                <div>
                     <div class="maze" id="maze3"></div>
                 </div>
             </div>
         </section>
-        <!-- FENETRE MODALE MESSAGE -->
+        <!-- MESSAGE FENETRE MODALE -->
         <section class="message-container">
             <div id="message-container">
                 <div id="message"></div>

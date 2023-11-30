@@ -1,7 +1,5 @@
 /*****************************************************
-
 STYLE PAGE COMPARATEUR DE LABYRINTHES
-
 *****************************************************/
 
 body {
@@ -33,7 +31,7 @@ SECTION FILTRE : GLOBAL
 SECTION FILTRE : BOUTON RETOUR
 *****************************************************/
 
-.comparator-back {
+.filter-back {
     height: 100%;
     padding: 0 40px;
     color: var(--text-retour-color);
@@ -48,12 +46,12 @@ SECTION FILTRE : BOUTON RETOUR
     transition: all 0.2s ease-out;
 }
 
-.comparator-back:hover {
+.filter-back:hover {
     color: var(--bg-color1);
     background-color: var(--text-retour-color);
 }
 
-.comparator-back img {
+.filter-back img {
     margin: 0 5px 0;
     width: 18px;
 }
@@ -62,19 +60,19 @@ SECTION FILTRE : BOUTON RETOUR
 SECTION FILTRE : CHOIX ALGORITHMES
 *****************************************************/
 
-.comparator-algorithms {
+.filter-mazes {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.comparator-algorithms>div {
+.filter-mazes>div {
     margin: 0 10px;
     display: flex;
     flex-direction: column;
 }
 
-.comparator-algorithms>div select {
+.filter-mazes>div select {
     padding: 0 5px;
     font-family: "Mulish-Regular", Verdana, sans-serif;
     font-weight: 400;
@@ -89,7 +87,7 @@ SECTION FILTRE : CHOIX ALGORITHMES
 SECTION FILTRE : VITESSE ET BOUTON GENERER
 *****************************************************/
 
-.comparator-generate {
+.filter-generate {
     height: 100%;
     padding: 0 40px;
     border-left: 1px solid var(--bg-color4);
@@ -98,13 +96,13 @@ SECTION FILTRE : VITESSE ET BOUTON GENERER
     align-items: center;
 }
 
-.comparator-generate .comparator-speed {
+.filter-speed {
     margin: 0 40px 0 0;
     display: flex;
     flex-direction: column;
 }
 
-.comparator-generate .comparator-speed .graduation {
+.filter-speed .graduation {
     margin: 0;
     padding: 0 6px;
     display: flex;
@@ -112,7 +110,7 @@ SECTION FILTRE : VITESSE ET BOUTON GENERER
     justify-content: space-between;
 }
 
-.comparator-generate .comparator-speed .graduation>div {
+.filter-speed .graduation>div {
     color: var(--text-color2);
     font-size: 0.6rem;
 }
@@ -161,12 +159,12 @@ SECTION LABYRINTHES : STRUCTURE DES LABYRINTHES (1 - 3)
     justify-content: space-between;
 }
 
-.comparator-mazes .mazes-structure {
+.maze-container {
     height: 100%;
     display: none;
 }
 
-.comparator-mazes .mazes-structure h2 {
+.maze-container h2 {
     height: 50px;
     font-family: "Mulish-Regular", Verdana, sans-serif;
     font-weight: 500;
@@ -178,7 +176,7 @@ SECTION LABYRINTHES : STRUCTURE DES LABYRINTHES (1 - 3)
     align-items: center;
 }
 
-.comparator-mazes .mazes-structure .mazes-structure-maze {
+.maze-container>div {
     width: 100%;
     height: calc(100% - 50px);
     background-color: var(--bg-maze1-color);
