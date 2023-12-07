@@ -12,7 +12,14 @@ DISPLAY SOLUTION (procédure)
 - Affichage du chemin solution
 - Si animation, utilisation de la fonction setTimeout
 ****************************************************************************************/
-
+/**
+ * Affichage de la solution
+ * (description détaillée : README_GENERATOR.md)
+ * @param {array} stack 
+ * @param {*} diameter 
+ * @param {*} speed 
+ * @param {*} search 
+ */
 const displaySolution = (stack, diameter, speed, search) => {
     const stackCells = (search ? stack : stack.filter(obj => obj.solution))
 

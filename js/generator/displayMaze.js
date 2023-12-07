@@ -3,24 +3,19 @@ import { activateBtnSolution } from "../utils/specificTools.js"
 let gblTimeOuts = []
 let gblStackCells = []
 
-/****************************************************************************************
-DISPLAY MAZE (procédure)
-- Initialisation des variables globales utilisées pour l'arrêt de l'animation
-- 1ère partie : Construction de la structure html du labyrinthe (ligne par ligne)
-- 2ème partie : Affichage du labyrinthe
-    - Affichage du bouton permettant de stoper l'animation
-    - Affichage des cellules 'ouvertes' par groupes, en 2 temps à l'aide de 2 couleurs
-      (voir fichier README.md pour une explication détaillée)
-    - Si animation, utilisation de la fonction setTimeout
-    - Affichage des flèches indiquant l'entrée et la sortie
-****************************************************************************************/
-
+/**
+ * Affichage du labyrinthe
+ * (description détaillée : README_GENERATOR.md)
+ * @param {array} stackOpenCells 
+ * @param {object} structure 
+ * @param {integer} speed 
+ */
 const displayMaze = (stackOpenCells, structure, speed) => {
     let nbGridLines = 2 * structure.nbLines + 1
     let nbGridColumns = 2 * structure.nbColumns + 1
 
     gblTimeOuts = []
-    gblStackCells = stackOpenCells
+    gblStackCells = [...stackOpenCells]
 
     // Affichage de la structure du labyrinthe
     let section = document.querySelector("#maze")
@@ -65,12 +60,12 @@ const displayMaze = (stackOpenCells, structure, speed) => {
     }
 }
 
-/****************************************************************************************
-ADD BORDER CELL (fonction)
-- Création des élément de la structure utilisés 
-  pour représenter les bordures gauches et droites des lignes
-****************************************************************************************/
-
+/**
+ * Création des éléments HTML constituant les bordures gauches et droites du labyrinthe
+ * @param {string} id 
+ * @param {string} className 
+ * @returns {object} Élément HTML
+ */
 const addBorderCell = (id, className) => {
     let cell = document.createElement("div")
 
@@ -80,12 +75,14 @@ const addBorderCell = (id, className) => {
     return cell
 }
 
-/****************************************************************************************
-ADD MAZE CELL (fonction)
-- Création des élément de la structure utilisés
-  pour représenter les pièces, murs et intersections des lignes
-****************************************************************************************/
-
+/**
+ * Création des éléments HTML constituant les pièces, murs et intersections
+ * @param {string} id 
+ * @param {integer} width 
+ * @param {integer} height 
+ * @param {string} className 
+ * @returns {object} Élément HTML
+ */
 const addMazeCell = (id, width, height, className) => {
     let cell = document.createElement("div")
 
@@ -97,12 +94,12 @@ const addMazeCell = (id, width, height, className) => {
     return cell
 }
 
-/****************************************************************************************
-DISPLAY CELLS (procédure)
-- Ouverture des cellules (pièces et murs) constituant les chemins du labyrinthe
-- La classe correspond à la phase d'affichage (initiale ou finale) 
-****************************************************************************************/
-
+/**
+ * Ouverture des cellules (pièces et murs) constituant les chemins du labyrinthe
+ * (la classe correspond à la phase d'affichage : initiale ou finale) 
+ * @param {array} arrCells 
+ * @param {string} className 
+ */
 const displayCells = (arrCells, className) => {
     let idElement = ""
 
@@ -114,13 +111,11 @@ const displayCells = (arrCells, className) => {
     })
 }
 
-/****************************************************************************************
-END DISPLAY MAZE (procédure)
-- Affichage des flèches indiquant l'entrée et la sortie (bordures gauche et droite)
-- Réactivation des boutons 'générer'
-- Masquage du bouton permettant de stoper l'animation
-****************************************************************************************/
-
+/**
+ * Affichage des flèches indiquant l'entrée et la sortie (bordures gauche et droite)
+ * Actualisation de la zone de filtre
+ * @param {array} arrAccess 
+ */
 const endDisplayMaze = (arrAccess) => {
     let id = ""
 
@@ -133,14 +128,9 @@ const endDisplayMaze = (arrAccess) => {
     document.querySelector("#stop-maze-animation").style.visibility = "hidden"
 }
 
-/****************************************************************************************
-STOP MAZE ANIMATION (procédure)
-Fonction appelée en cliquant sur le bouton 'Terminer'
-- Arrêt de l'animation
-- Affichage complet du labyrinthe (sans les bordures)
-- Appel de la procédure terminant l'affichage du labyrinthe
-****************************************************************************************/
-
+/**
+ * Arrêt de l'animation et affichage complet du labyrinthe
+ */
 const stopMazeAnimation = () => {
     gblTimeOuts.map(timeOut => clearTimeout(timeOut))
     gblStackCells.map(stackCells => displayCells(stackCells, "maze-open"))

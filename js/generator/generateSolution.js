@@ -3,24 +3,11 @@ import { displaySolution } from "./displaySolution.js"
 import { createArray2Dim } from "../utils/generalTools.js"
 import { backUpMaze } from "./generateMaze.js"
 
-/****************************************************************************************
-GENERATE SOLUTION (procédure)
-Fonction appelée en cliquant sur le bouton 'Générer la solution' :
-- Reccueil des paramètres renseignés par l'utilisateur dans la zone de filtre :
-    - Avec ou sans animation
-    - Vitesse d'animation
-    - Avec/sans algorithme de recherche (recherche de solution ou solution directe)
-- Récupération de la structure du labyrinthe (pièces) et de la pile des cellules à 'ouvrir'
-- Calcul du diamètre de l'image indiquant le chemin et calcul de la vitesse d'animation
-- Création et initialisation de la grille du labyrinthe (pièces + murs + intersections + entrée/sortie)
-- Appel de l'algorithme et constitution la pile 'stackCells' qui contient les cellules du chemin à afficher
-- Appel de la procédure permettant d'afficher la solution du labyrinthe. Elle necessite 4 paramètres :
-    - Pile des cellules constituant le chemin
-    - Diamètre de l'image indiquant le chemin
-    - Vitesse d'animation
-    - Booléen avec/sans recherche du chemin solution
-****************************************************************************************/
-
+/**
+ * Génération de la solution (click sur le bouton 'Générer la solution')
+ * (description détaillée : README_GENERATOR.md)
+ * @param {object} event 
+ */
 const generateSolution = (event) => {
     event.preventDefault()
 

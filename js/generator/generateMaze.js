@@ -11,9 +11,8 @@ import { activateBtnSolution, addAccessCells } from "../utils/specificTools.js"
 let backUpMaze = {stackOpenCells: [], structure: {nbLines: 0, nbColumns: 0, maxCellLength: 0, minCellLength: 0}}
 
 /**
- * Fonction appelée en cliquant sur le bouton 'Générer le labyrinthe'.
- * Description détaillée dans le fichier README_GENERATOR.md
- * 
+ * Génération du labyrinthe (click sur le bouton 'Générer le labyrinthe').
+ * (description détaillée : README_GENERATOR.md)
  * @param {object} event 
  */
 const generateMaze = (event) => {
@@ -63,25 +62,15 @@ const generateMaze = (event) => {
     backUpMaze = {stackOpenCells: stackOpenCells, structure: structure }
 }
 
-/****************************************************************************************
-DEFINE STRUCTURE (fonction)
-- Calcul de la taille de la zone permettant d'afficher le labyrinthe
-- Calcul du pourcentage épaisseur des murs (largeur mur / largeur pièce)
-- En fonction du choix d'une taille personnalisée ou non :
-    - Calcul de la taille du labyrinthe : 'nbLines' et 'nbColumns'
-    - Calcul de la taille des cellules : deux dimensions 'maxCellLength' et 'minCellLength'
-- Retourne un objet contenant ces 4 valeurs {nbLines, nbColumns, maxCellLength, minCellLength}
-****************************************************************************************/
-
 /**
- * 
- * 
- * @param {*} thickness 
- * @param {*} size 
- * @param {*} customSize 
- * @param {*} customNbLines 
- * @param {*} customNbColumns 
- * @returns 
+ * Calcul de la structure du labyrinthe (dimensions du labyrinthe et des cellules)
+ * (description détaillée : README_GENERATOR.md)
+ * @param {string} thickness 
+ * @param {string} size 
+ * @param {boolean} customSize 
+ * @param {string} customNbLines 
+ * @param {string} customNbColumns 
+ * @returns {object} Nombres de lignes et colonnes, taille des pièces, murs et intersections
  */
 const defineStructure = (thickness, size, customSize, customNbLines, customNbColumns) => {
     const heightWindow = window.innerHeight - 40

@@ -5,7 +5,6 @@ import { stopSolutionAnimation } from "./displaySolution.js"
 
 /**
  * Filtre 'Taille personnalisée' : initialisation des champs select (nb lignes & colonnes)
- * 
  * @param {string} selecteurCSS
  * @param {integer} step 
  * @param {integer} max 
@@ -48,7 +47,6 @@ const handleAnimationClick = () => {
 
 /**
  * Afficher / masquer la fenetre modale affichant le message passé en paramètre
- * 
  * @param {boolean} blnDisplay 
  * @param {string} msg 
  */
@@ -57,18 +55,18 @@ const displayMessage = (blnDisplay, msg) => {
     document.querySelector("#message").textContent = msg
 }
 
-// Paramètrage du labyrinthe
+/* Paramètrage du labyrinthe */
 window.addEventListener('load', initSelect("#custom-nb-lines", 5, 80), initSelect("#custom-nb-columns", 5, 80))
 document.querySelector("#custom-size").addEventListener("click", handleDimensionClick)
 document.querySelector("#animation-checkbox").addEventListener("click", handleAnimationClick)
 
-// Génération du labyrinthe
+/* Génération du labyrinthe */
 document.querySelector("#form-generate-maze").addEventListener("submit", generateMaze)
 document.querySelector("#btn-generate-solution").addEventListener("click", generateSolution)
 document.querySelector("#btn-stop-maze-animation").addEventListener("click", stopMazeAnimation)
 document.querySelector("#btn-stop-solution-animation").addEventListener("click", stopSolutionAnimation)
 
-// Fermeture de la fenêtre modale Message
+/* Fermeture de la fenêtre modale Message */
 document.querySelector("#btn-message").addEventListener("click", () => displayMessage(false, ""))
 
 export { displayMessage }
