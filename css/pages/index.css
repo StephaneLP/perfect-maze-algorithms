@@ -4,7 +4,7 @@ STYLE PAGE D'ACCUEIL
 
 body {
     height: 100vh;
-    background: linear-gradient(to bottom, var(--bg-body-color), var(--bg-body-color)), url("../../images/labyrinthe.jpg");
+    background: linear-gradient(to bottom, var(--bg-body-color), var(--bg-body-color)), url("../../images/Labyrinthe.jpg");
     background-position: center; 
     background-repeat: repeat;
     animation: fadein 1s;
@@ -60,7 +60,7 @@ SECTION CHOIX APPLICATION (GENERATEUR OU COMPARATEUR)
     justify-content: space-between;
 }
 
-.application div {
+.application>div {
     margin: 60px 0 0;
     padding: 40px 20px 80px;
     line-height: 1.6rem;

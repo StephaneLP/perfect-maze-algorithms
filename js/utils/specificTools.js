@@ -5,19 +5,19 @@ ACTIVATE BTN (procédure)
 - Afficher / masquer les boutons et filtres de la section Générateur
 ****************************************************************************************/
 
-function activateBtn(id, blnActive) {
-    const element = document.querySelector(id)
+function activateBtnSolution(blnActive) {
+    const btnGenerateSolution = document.querySelector("#btn-generate-solution")
     const animationCheckbox = document.querySelector("#animation-checkbox")
     const solutionSearch = document.querySelector(".solution-search")
     
     if (blnActive) {
-        element.disabled = false
-        element.classList.remove("btn-disabled")
-        if (id === "#btn-solution" && animationCheckbox.checked) solutionSearch.style.display = "block"
+        btnGenerateSolution.disabled = false
+        btnGenerateSolution.classList.remove("btn-disabled")
+        if (animationCheckbox.checked) solutionSearch.style.display = "block"
     } else {
-        element.disabled = true
-        element.classList.add("btn-disabled")
-        if (id === "#btn-solution") solutionSearch.style.display = "none"
+        btnGenerateSolution.disabled = true
+        btnGenerateSolution.classList.add("btn-disabled")
+        solutionSearch.style.display = "none"
     }
 }
 
@@ -52,4 +52,4 @@ function convertRoomToCell(room) {
     return [2 * room[0] + 1, 2 * room[1] + 1]
 }
 
-export { activateBtn, convertCellToRoom, convertRoomToCell, addAccessCells }
+export { activateBtnSolution, convertCellToRoom, convertRoomToCell, addAccessCells }

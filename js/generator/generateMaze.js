@@ -6,30 +6,20 @@ import { algoPrim }  from "../algorithms/algoPrim.js"
 
 import { displayMaze } from "./displayMaze.js"
 import { displayMessage } from "./initGenerator.js"
-import { activateBtn, addAccessCells } from "../utils/specificTools.js"
+import { activateBtnSolution, addAccessCells } from "../utils/specificTools.js"
 
 let backUpMaze = {stackOpenCells: [], structure: {nbLines: 0, nbColumns: 0, maxCellLength: 0, minCellLength: 0}}
 
-/****************************************************************************************
-GENERATE MAZE (procédure)
-Fonction appelée en cliquant sur le bouton 'Générer le labyrinthe' :
-- Désactivation des boutons 'générer'
-- Reccueil des paramètres renseignés par l'utilisateur dans la zone de filtre
-- Calcul de la structure du labyrinthe et de la vitesse d'animation
-- Appel de l'algorithme sélectionné et constitution la pile 'stackOpenCells'
-  qui contient les cellules à 'ouvrir'
-- Appel de la procédure permettant d'afficher le labyrinthe. Elle necessite 3 paramètres :
-    - Pile des cellules à 'ouvrir'
-    - Structure du labyrinthe
-    - Vitesse d'animation
-- Backup du labyrinthe (utilisé pour l'affichage de la solution)
-****************************************************************************************/
-
+/**
+ * Fonction appelée en cliquant sur le bouton 'Générer le labyrinthe'.
+ * Description détaillée dans le fichier README_GENERATOR.md
+ * 
+ * @param {object} event 
+ */
 const generateMaze = (event) => {
     event.preventDefault()
 
-    activateBtn("#btn-generate", false)
-    activateBtn("#btn-solution", false)
+    activateBtnSolution(false)
 
     const algorithm = event.target.algorithm.value
     const size = event.target.size.value
@@ -83,6 +73,16 @@ DEFINE STRUCTURE (fonction)
 - Retourne un objet contenant ces 4 valeurs {nbLines, nbColumns, maxCellLength, minCellLength}
 ****************************************************************************************/
 
+/**
+ * 
+ * 
+ * @param {*} thickness 
+ * @param {*} size 
+ * @param {*} customSize 
+ * @param {*} customNbLines 
+ * @param {*} customNbColumns 
+ * @returns 
+ */
 const defineStructure = (thickness, size, customSize, customNbLines, customNbColumns) => {
     const heightWindow = window.innerHeight - 40
     const widthWindow = window.innerWidth - 380

@@ -1,4 +1,4 @@
-import { activateBtn } from "../utils/specificTools.js"
+import { activateBtnSolution } from "../utils/specificTools.js"
 
 let gblTimeOuts = []
 let gblStackCells = []
@@ -122,15 +122,14 @@ END DISPLAY MAZE (procédure)
 ****************************************************************************************/
 
 const endDisplayMaze = (arrAccess) => {
-    let id
+    let id = ""
 
     id = "left-wall-" + arrAccess[0][0][0]
     document.getElementById(id).classList.add("maze-access") 
     id = "right-wall-" + arrAccess[0][1][0]
     document.getElementById(id).classList.add("maze-access") 
 
-    activateBtn("#btn-generate", true)
-    activateBtn("#btn-solution", true)
+    activateBtnSolution(true)
     document.querySelector("#stop-maze-animation").style.visibility = "hidden"
 }
 

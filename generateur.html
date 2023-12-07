@@ -11,6 +11,7 @@
 </head>
 <body>
     <main class="generator">
+        <!-- SECTION : BOUTONS & ZONE DE FILTRE -->
         <section class="generator-filter">
             <!-- BOUTON RETOUR VERS LA PAGE D'ACCUEIL -->
             <a class="filter-back" href="/">
@@ -18,7 +19,7 @@
                 Page d'accueil
             </a>
             <!-- FORMULAIRE LABYRINTHE -->
-            <form id="filter">
+            <form id="form-generate-maze">
                 <div class="filter">
                     <h2>Algorithme</h2>
                     <div class="radio">
@@ -94,8 +95,8 @@
                             <input type="range" name="animationSpeed" id="animation-speed" min="1" max="9" step="2" />                            
                         </div>
                     </div>
-                    <input type="submit" value="Générer le labyrinthe" class="btn" id="btn-generate" />
-                    <button class="btn btn-disabled" id="btn-solution" disabled>Générer la solution</button>
+                    <input type="submit" value="Générer le labyrinthe" class="btn" id="btn-generate-maze" />
+                    <button class="btn btn-disabled" id="btn-generate-solution" disabled>Générer la solution</button>
                     <div class="solution-search">
                         <input type="checkbox" id="solution-search" name="solutionSearch" checked />
                         <label for="solution-search">Avec algorithme de recherche</label>
@@ -103,17 +104,17 @@
                 </div>
             </form>
             <div class="stop-animation" id="stop-maze-animation">
-                <button class="btn" id="btn-maze-stop">Terminer</button>
+                <button class="btn" id="btn-stop-maze-animation">Terminer</button>
             </div>
             <div class="stop-animation" id="stop-solution-animation">
-                <button class="btn" id="btn-solution-stop">Terminer</button>
+                <button class="btn" id="btn-stop-solution-animation">Terminer</button>
             </div>
         </section>
-        <!-- SECTION AFFICHAGE DU LABYRINTHE -->
+        <!-- SECTION : AFFICHAGE DU LABYRINTHE -->
         <section class="generator-maze">
             <div id="maze"></div>
         </section>
-        <!-- MESSAGE FENETRE MODALE -->
+        <!-- SECTION : MESSAGE FENETRE MODALE -->
         <section class="message-container">
             <div id="message-container">
                 <div id="message"></div>
