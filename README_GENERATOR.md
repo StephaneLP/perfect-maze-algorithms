@@ -1,6 +1,6 @@
-<!-- EXPLICATIONS DÉTAILLÉS DES FONCTIONS DU DOSSIER GENERATOR -->
+**EXPLICATIONS DÉTAILLÉS DES FONCTIONS DU DOSSIER GENERATOR**
 
-** GENERATE MAZE (procédure) **
+*GENERATE MAZE (procédure)*
 
 - Désactivation des boutons 'générer'
 - Reccueil des paramètres renseignés par l'utilisateur dans la zone de filtre
@@ -13,7 +13,8 @@
     - Vitesse d'animation
 - Backup du labyrinthe (utilisé pour l'affichage de la solution)
 
-DEFINE STRUCTURE (fonction)
+
+*DEFINE STRUCTURE (fonction)*
 
 - Calcul de la taille de la zone permettant d'afficher le labyrinthe
 - Calcul du pourcentage épaisseur des murs (largeur mur / largeur pièce)
