@@ -1,19 +1,11 @@
 import { getRandomIntInclusive, shuffleArray2Dim, createArray2Dim } from "../utils/generalTools.js"
 
-/****************************************************************************************
-ALGO PROFONDEUR (fonction)
-- Choix aléatoire d'une pièce de départ
-- Initialisation des piles stackOpenCells et stackRooms
-  et mise à jour du tableau maze (voir procédure updateStacks)
-- Tant que la pile stackRooms contient des pièces :
-    - Sélection de la dernière pièce de la pile
-    - Si une pièce attenante non visitée a été trouvée (sélection aléatoire) :
-        - Mise à jour des piles stackOpenCells et stackRooms
-          et mise à jour du tableau maze (voir procédure updateStacks)
-    - Sinon : la dernière pièce est retirée de la pile stackRooms
-- Retourne la pile stackOpenCells qui permet d'afficher le labyrinthe
-****************************************************************************************/
-
+/**
+ * Description détaillée : README_ALGORITHMS.md
+ * @param {integer} nbLines 
+ * @param {integer} nbColumns 
+ * @returns {array} Tableau de dimension 3
+ */
 const algoProfondeur = (nbLines, nbColumns) => {
     let maze = createArray2Dim(nbLines, nbColumns, false)
     let stackOpenCells = [], stackRooms = []
@@ -33,14 +25,14 @@ const algoProfondeur = (nbLines, nbColumns) => {
     return stackOpenCells
 }
 
-/****************************************************************************************
-UPDATE STACKS (procédure)
-- Marque la pièce newRoom comme visitée (dans le tableau maze)
-- Ajoute la pièce newRoom à la dernière place de la pile des pièces (stackRooms)
-- Met à jour la pile des pièces à 'ouvrir' stackOpenCells pour l'affichage du labyrinthe
-  (remarque : aucune dernière pièce n'est associé à la pièce de départ lors de la 1ère mise à jour)
-****************************************************************************************/
-
+/**
+ * Description détaillée : README_ALGORITHMS.md
+ * @param {array} lastRoom 
+ * @param {array} newRoom 
+ * @param {array[2dim]} stackRooms 
+ * @param {array} stackOpenCells Tableau de dimension 3
+ * @param {array} maze Tableau de dimension 2
+ */
 const updateStacks = (lastRoom, newRoom, stackRooms, stackOpenCells, maze) => {
     maze[newRoom[0]][newRoom[1]] = true
     stackRooms.push(newRoom)
@@ -51,13 +43,12 @@ const updateStacks = (lastRoom, newRoom, stackRooms, stackOpenCells, maze) => {
     }
 }
 
-/****************************************************************************************
-SET ADJACENT ROOM (fonction)
-- Retourne aléatoirement un tableau contenant les coordonnées d'une pièce attenante
-  non visitée
-- Retourne null si toutes les pièces attenantes ont déjà été visitées
-****************************************************************************************/
-
+/**
+ * Retourne aléatoirement les coordonnées d'une pièce adjacente non visitée (null si aucune)
+ * @param {array} room 
+ * @param {array} maze Tableau de dimension 2
+ * @returns {array} Coordonnées d'une pièce adjacente
+ */
 const searchAdjacentRoom = (room, maze) => {
     let n = room[0]
     let m = room[1]
@@ -73,12 +64,12 @@ const searchAdjacentRoom = (room, maze) => {
     return shuffleArray2Dim(array)[0]
 }
 
-/****************************************************************************************
-ADD OPEN CELLS (fonction)
-Construit un tableau contenant les 2 cellules (mur et pièce) à ouvrir pour visiter
-une nouvelle pièce
-****************************************************************************************/
-
+/**
+ * Détermine les coordonnées des 2 cellules (mur et pièce) à ouvrir pour visiter une nouvelle pièce
+ * @param {array} lastRoom 
+ * @param {array} newRoom 
+ * @returns {array} Tableau de dimension 2
+ */
 const addOpenCells = (lastRoom, newRoom) => {
     let cellsToAdd = []
 

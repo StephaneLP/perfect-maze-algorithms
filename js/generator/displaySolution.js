@@ -2,30 +2,20 @@ let gblTimeOuts = []
 let gblStackCells = []
 let gblDiameter = 0
 
-/****************************************************************************************
-DISPLAY SOLUTION (procédure)
-- Filtrage de la pile contenant les cellules constituant le chemin solution
-  si l'utilisation de l'algorithme de recherche n'est pas souhaité (i.e. affichage direct)
-- Effacement du chemin représentant la solution
-- Initialisation des variables globales utilisées pour l'arrêt de l'animation
-- Affichage du bouton permettant de stoper l'animation
-- Affichage du chemin solution
-- Si animation, utilisation de la fonction setTimeout
-****************************************************************************************/
 /**
  * Affichage de la solution
  * (description détaillée : README_GENERATOR.md)
- * @param {array} stack 
- * @param {*} diameter 
- * @param {*} speed 
- * @param {*} search 
+ * @param {object} stack Structure : {cell: array(coordonnées), display: booleen, solution: booleen}
+ * @param {integer} diameter 
+ * @param {integer} speed 
+ * @param {boolean} search 
  */
 const displaySolution = (stack, diameter, speed, search) => {
     const stackCells = (search ? stack : stack.filter(obj => obj.solution))
 
     clearPath()
     gblTimeOuts = []
-    gblStackCells = stackCells
+    gblStackCells = stackCells // Attention : copie par référence
     gblDiameter = diameter
 
     if (speed > 0) {
@@ -39,17 +29,17 @@ const displaySolution = (stack, diameter, speed, search) => {
     }
 }
 
-/****************************************************************************************
-DISPLAY CELL (procédure)
-- Ajout/Retrait dans une cellule de l'image indiquant le chemin solution. en fonction 
-  du paramètre 'display' contenu dans la pile retournée par l'agorithme de recherche de solution
-****************************************************************************************/
-
-const displayCell = (cell, diameter, blnDisplay) => {
+/**
+ * Afficher/Masquer l'image indiquant le chemin solution (en fonction du paramètre 'display')
+ * @param {array} cell 
+ * @param {integer} diameter 
+ * @param {boolean} display 
+ */
+const displayCell = (cell, diameter, display) => {
     let imgElement
     const id = cell[0] + "-" + cell[1]
   
-    if (blnDisplay) {
+    if (display) {
         imgElement = document.createElement("img")
         imgElement.id = "img-" + id
         imgElement.src = "../images/round.png"
@@ -62,25 +52,18 @@ const displayCell = (cell, diameter, blnDisplay) => {
     }        
 }
 
-/****************************************************************************************
-CLEAR PATH (procédure)
-- Effacement du chemin représentant la solution
-****************************************************************************************/
-
+/**
+ * Effacement du chemin représentant la solution
+ */
 const clearPath = () => {
     document.querySelectorAll("img").forEach(element => {
         if (element.id.substring(0, 3) === "img") element.remove()
     })
 }
 
-/****************************************************************************************
-STOP SOLUTION ANIMATION (procédure)
-Fonction appelée en cliquant sur le bouton 'Terminer'
-- Arrêt de l'animation
-- Affichage final du chemin solution
-- Masquage du bouton permettant de stoper l'animation
-****************************************************************************************/
-
+/**
+ * Arrêt de l'animation et affichage complet du chemin solution.
+ */
 const stopSolutionAnimation = () => {
     gblTimeOuts.map(timeOut => clearTimeout(timeOut))
     clearPath()

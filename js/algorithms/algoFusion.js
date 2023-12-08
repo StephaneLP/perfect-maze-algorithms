@@ -1,19 +1,11 @@
 import { shuffleArray2Dim, createArray2Dim } from "../utils/generalTools.js"
 
-/****************************************************************************************
-ALGO FUSION (fonction)
-- Initialisation du tableau maze (qui contient les n° branche et l'indication de visite)
-- Initialisation (et mélange aléatoire) de la pile stackWalls (qui contient tous les murs)
-- Tant que la pile stackWalls contient des murs :
-    - Sélection du dernier mur de la pile
-    - Calcul des coordonnées des pièces attenantes et lecture de leur n° de branche
-    - Si les n° de branche sont différentes :
-        - Fusion des n° de branche
-        - Mise à jour de la pile stackOpenCells
-    - Le mur est retiré de la pile stackWalls
-- Retourne la pile stackOpenCells qui permet d'afficher le labyrinthe
-****************************************************************************************/
-
+/**
+ * Description détaillée : README_ALGORITHMS.md
+ * @param {integer} nbLines 
+ * @param {integer} nbColumns 
+ * @returns {array} Tableau de dimension 3
+ */
 const algoFusion = (nbLines, nbColumns) => {
     let maze = initMaze(nbLines, nbColumns)
     let stackWalls = initStackWalls(nbLines, nbColumns)
@@ -42,14 +34,12 @@ const algoFusion = (nbLines, nbColumns) => {
     return stackOpenCells
 }
 
-/****************************************************************************************
-INIT MAZE (fonction)
-Initialise le tableau représentant le labyrinthe
-Chaque élément du tableau contient un objet ayant 2 propriétés :
-- Un numéro unique de branche
-- Un indicateur de visite des pièces, de type booléen, initialisé à false
-****************************************************************************************/
-
+/**
+ * Description détaillée : README_ALGORITHMS.md
+ * @param {integer} nbLines 
+ * @param {integer} nbColumns 
+ * @returns {array} Tableau de dimension 2 qui contient des objets
+ */
 const initMaze = (nbLines, nbColumns) => {
     let array = createArray2Dim(nbLines, nbColumns)
 
@@ -61,15 +51,12 @@ const initMaze = (nbLines, nbColumns) => {
     return array
 }
 
-/****************************************************************************************
-INIT STACK WALLS (fonction)
-Initialisation de la pile contenant tous les murs du labyrinthe
-Attention, chaque élément de la pile correspond à un mur qui :
-- N'est pas identifié par ses coordonnées
-- Mais par les coordonnées des 2 pièces attenantes. Ces coordonnées sont représentées
-  par un coefficient et non par un couple d'abscisses et d'ordonnées
-****************************************************************************************/
-
+/**
+ * Description détaillée : README_ALGORITHMS.md
+ * @param {integer} nbLines 
+ * @param {integer} nbColumns 
+ * @returns {array} Tableau à 2 dimensions
+ */
 const initStackWalls = (nbLines, nbColumns) => {
     let array = []
 
@@ -81,16 +68,14 @@ const initStackWalls = (nbLines, nbColumns) => {
     }
     return array
 }
-  
-/****************************************************************************************
-ADD OPEN CELLS (fonction)
-Construit un tableau contenant les cellules (pièces et murs) correspondantes au mur 'ouvert'
-et aux 2 pièces attenantes :
-- Le mur courrant est ajouté
-- Seules les pièces non visitées sont ajoutées. La propriété 'visited' dans le tableau maze,
-  passé en paramètre (par référence), est mise à jour
-****************************************************************************************/
 
+/**
+ * Description détaillée : README_ALGORITHMS.md
+ * @param {array} maze Tableau de dimension 2
+ * @param {array} room0 
+ * @param {array} room1 
+ * @returns {array} Tableau de dimension 2
+ */
 const addOpenCells = (maze, room0, room1) => {
     let cells = []
 

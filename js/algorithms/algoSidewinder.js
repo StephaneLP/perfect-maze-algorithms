@@ -1,17 +1,11 @@
 import { getRandomIntInclusive } from "../utils/generalTools.js"
 
-/****************************************************************************************
-ALGO SIDEWINDER (fonction)
-- Parcourt le labyrinthe ligne par ligne (du haut vers le bas, et de la gauche vers la droite)
-- Pour chaque pièce visitée :
-    - Si le mur droit est ouvert (test aléatoire à chaque boucle) :
-        - Ajout des cellules (pièces et murs droits) à une pile temporaire
-    - Si le mur droit est fermé :
-        - Ajoute la pile temporaire à la pile stackOpenCells (appel de la fonction addOpenCells)
-        - Vide la pile temporaire
-- Retourne la pile stackOpenCells qui permet d'afficher le labyrinthe
-****************************************************************************************/
-
+/**
+ * Description détaillée : README_ALGORITHMS.md
+ * @param {integer} nbLines 
+ * @param {integer} nbColumns 
+ * @returns {array} Tableau de dimension 3
+ */
 const algoSidewinder = (nbLines, nbColumns) => {
     let stackOpenCells = [], currentRoom = [], stackRooms = []
 
@@ -29,25 +23,19 @@ const algoSidewinder = (nbLines, nbColumns) => {
     return stackOpenCells
 }
 
-/****************************************************************************************
-RIGHT WALL CLOSE (fonction)
-- Retourne aléatoirement un booléen (true : mur droit fermé / false : mur droit ouvert)
-****************************************************************************************/
-
+/**
+ * Retourne aléatoirement un booléen (true : mur droit fermé / false : mur droit ouvert)
+ * @returns {boolean}
+ */
 const rightWallClose = () => {
     return (getRandomIntInclusive(0,1) == 0)
 }
 
-/****************************************************************************************
-ADD OPEN CELLS (fonction)
-Construit un tableau contenant les cellules (pièces et murs) correspondantes aux pièces
-de la pile stackRooms :
-- Ajoute les cellules 'pièce' et les cellules 'murs droits' (sauf pour la dernière pièce)
-- Ajoute aléatoirement un passage vers le haut à partir de l'une des pièces de la pile
-  (sauf pour la première ligne)
-- Retourne l'ensemble des cellules 'ouvertes' de la rangée en cours (pile stackRooms)
-****************************************************************************************/
-
+/**
+ * Description détaillée : README_ALGORITHMS.md
+ * @param {array} stackRooms Tableau de dimension 2
+ * @returns {array} Tableau de dimension 2
+ */
 const addOpenCells = (stackRooms) => {
     let cells = [], crossingRoom = []
 

@@ -1,19 +1,11 @@
 import { getRandomIntInclusive, createArray2Dim } from "../utils/generalTools.js"
 
-/****************************************************************************************
-ALGO PRIM (fonction)
-- Choix aléatoire d'une pièce de départ
-- Initialisation des piles stackOpenCells et stackWalls
-  et mise à jour du tableau maze (voir procédure updateStacks)
-- Tant que la pile stackWalls contient des murs :
-    - Choix aléatoire d'un mur
-    - Si une des deux pièce attenantes n'a pas encore été visitée :
-        - Mise à jour des piles stackOpenCells et stackWalls
-          et mise à jour du tableau maze (voir procédure updateStacks)
-    - Le mur est retiré de la pile stackWalls
-- Retourne la pile stackOpenCells qui permet d'afficher le labyrinthe
-****************************************************************************************/
-
+/**
+ * Description détaillée : README_ALGORITHMS.md
+ * @param {integer} nbLines 
+ * @param {integer} nbColumns 
+ * @returns {array} Tableau de dimension 3
+ */
 const algoPrim = (nbLines, nbColumns) => {
     let maze = createArray2Dim(nbLines, nbColumns, false)
     let stackOpenCells = [], stackWalls = []
@@ -34,25 +26,29 @@ const algoPrim = (nbLines, nbColumns) => {
     return stackOpenCells
 }
 
-/****************************************************************************************
-UPDATE STACKS (procédure)
-- Marque la pièce currentRoom comme visitée (dans le tableau maze)
-- Ajoute à la pile des murs (stackWalls) les murs attenants à la pièce currentRoom
-- Met à jour la pile des pièces à 'ouvrir' stackOpenCells pour l'affichage du labyrinthe
-  (remarque : aucun mur n'est associé à la pièce de départ lors de la 1ère mise à jour)
-****************************************************************************************/
-
+/**
+ * Description détaillée : README_ALGORITHMS.md
+ * @param {array} currentRoom 
+ * @param {array} currentWall 
+ * @param {array} stackWalls Tableau de dimension 2
+ * @param {array} stackOpenCells Tableau de dimension 3
+ * @param {array} maze Tableau de dimension 2
+ * @param {integer} nbLines 
+ * @param {integer} nbColumns 
+ */
 const updateStacks = (currentRoom, currentWall, stackWalls, stackOpenCells, maze, nbLines, nbColumns) => {
     maze[currentRoom[0]][currentRoom[1]] = true
     setAdjacentWalls(currentRoom, nbLines, nbColumns).map(wall => stackWalls.push(wall))
     stackOpenCells.push(currentWall ? [currentWall, [2 * currentRoom[0] + 1, 2 * currentRoom[1] + 1]] : [[2 * currentRoom[0] + 1, 2 * currentRoom[1] + 1]])
 }
 
-/****************************************************************************************
-ADJACENT WALLS (fonction)
-- Retourne les murs 'existants' qui entourent une pièce
-****************************************************************************************/
-
+/**
+ * Retourne les murs (sauf les murs extérieurs) qui entourent une pièce
+ * @param {array} room 
+ * @param {integer} nbLines 
+ * @param {integer} nbColumns 
+ * @returns {array} Tableau de dimension 2
+ */
 const setAdjacentWalls = (room, nbLines, nbColumns) => {
     let line = room[0], column = room[1]
     let array = []
@@ -65,20 +61,19 @@ const setAdjacentWalls = (room, nbLines, nbColumns) => {
     return array
 }
 
-/****************************************************************************************
-SET CURRENT ROOM (fonction)
-- Détermine les coordonnées des deux pièces attenantes à un mur
-  (2 cas : le mur est horizontal ou vertical)
-- Retourne les coordonnées d'une éventuelle pièce non visitée (null sinon)
-****************************************************************************************/
-
+/**
+ * Retourne les coordonnées d'une pièce non visitée adjacente au mur (null si aucune)
+ * @param {array} wall 
+ * @param {array} maze Tableau de dimension 2
+ * @returns {array|null}
+ */
 const setCurrentRoom = (wall, maze) => {
     let room0 = [], room1 = []
 
-    if (wall[0] % 2 == 0) {
+    if (wall[0] % 2 == 0) { // Mur horizontal
         room0 = [(wall[0] - 2) / 2, (wall[1] - 1) / 2]
         room1 = [(wall[0]) / 2, (wall[1] - 1) / 2]
-    } else {
+    } else { // Mur vertical
         room0 = [(wall[0] - 1) / 2, (wall[1] - 2) / 2]
         room1 = [(wall[0] - 1) / 2, (wall[1]) / 2]
     }

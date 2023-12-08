@@ -1,40 +1,12 @@
 import { getRandomIntInclusive, equalArrays, createArray2Dim } from "../utils/generalTools.js"
 import { convertCellToRoom, convertRoomToCell } from "../utils/specificTools.js"
 
-/****************************************************************************************
-ALGO SOLUTION (fonction)
-Cet algorithme repose sur l'algorithme de parcourt en profondeur d'un arbre.
------------------------------------------------------------------------------------------
-Principe : l'objectif est de retourner une pile qui contient les cellules parcourues
-(une pastille sera affichée aussi bien à l'emplacement des pièces que des des murs indiquant
-le chemin). L'algorithme utilise 2 piles : 
-    - La pile 'stackSearch', qui contient les coordonnées des cellules visitées (ajoutées, 
-      puis retirées si elles appartiennent à un cul de sac)
-    - La pile 'stackCells', qui contient la liste de TOUTES les cellules parcourues, avec :
-        - Les coordonnées de la cellule
-        - Un booléen indiquant s'il faut afficher/masquer la cellule
-        - un booléen indiquant si la cellule est élément du chemin final
------------------------------------------------------------------------------------------
-- Calcul des coordonnées de l'entrée et de la sortie : murs (cells) et pièces (rooms)
-- Initialisation du tableau mazeSearch (servant à identifier les pièces parcourues)
-- Entrée du labyrinthe :
-    - Mise à jour des piles avec le mur d'Entrée
-    - Mise à jour des piles avec la pièce d'Entrée
-    - La pièce 'Entrée' devient la pièce courante
-- Tant que la pièce courante est différente de la Sortie :
-    - Recherche d'une pièce adjacente à la pièce courante, non visitée et accessible
-    - Si cette pièce existe :
-        - Mise à jour des piles avec le mur séparant les pièces
-        - Mise à jour des piles avec la pièce adjacente
-        - La pièce adjacente devient la pièce courante
-    - Sinon :
-        - Mise à jour des piles : les 2 dernières cellules sont supprimées de la pile
-          stackSearch et retirées de l'affichage dans la pile stackCells
-        - La dernière pièce dela pile stackSearch devient la pièce courante
-- Ajout du mur 'Sortie' à la pile stackCells
-- Retourne la pile stackCells qui permet d'afficher la solution du labyrinthe
-****************************************************************************************/
-
+/**
+ * Description détaillée : README_ALGORITHMS.md
+ * @param {array} gridMaze Tableau de dimension 2
+ * @param {array} accessCells Tableau de dimension 2
+ * @returns {array} tableau contenant des objets
+ */
 const algoSolution = (gridMaze, accessCells) => {
     const entryCell = [...accessCells[0]]
     const exitCell = [...accessCells[1]]
@@ -71,25 +43,22 @@ const algoSolution = (gridMaze, accessCells) => {
     return stackCells
 }
 
-/****************************************************************************************
-UPDATE STACKS FORWARD (procédure)
-- Ajout de la cellule cell dans la pile stackSearch
-- Ajout de la cellule cell en tant que solution dans la pile stackCells
-****************************************************************************************/
-
+/**
+ * Ajout de la cellule cell dans les piles stackSearch et stackCells (en tant que solution)
+ * @param {array} stackSearch Tableau de dimension 2
+ * @param {array} stackCells Tableau contenant des objets
+ * @param {array} cell
+ */
 const updateStacksForward = (stackSearch, stackCells, cell) => {
     stackSearch.push(cell)
     stackCells.push({cell: cell, display: true, solution: true})
 }
 
-/****************************************************************************************
-UPDATE STACKS BACKWARD (procédure)
-- Suppression de la dernière cellule de la pile stackSearch
-- Mise à jour de la pile stackCells :
-    - La cellule est retirée de l'affichage et du chemin solution
-    - La précédente occurence de la cellule est retirée du chemin solution
-****************************************************************************************/
-
+/**
+ * Description détaillée : README_ALGORITHMS.md
+ * @param {array} stackSearch Tableau de dimension 2
+ * @param {array} stackCells Tableau contenant des objets
+ */
 const updateStacksBackward = (stackSearch, stackCells) => {
     let cell = stackSearch.pop()
 
@@ -97,13 +66,13 @@ const updateStacksBackward = (stackSearch, stackCells) => {
     stackCells.filter(obj => (obj.cell[0] === cell[0]) && (obj.cell[1] === cell[1]) && (obj.solution === true)).map(arr => arr.solution = false)
 }
 
-/****************************************************************************************
-SET ADJACENT ROOM (fonction)
-- Calcul les variables booléennes indiquant si les pièces adjacentes à la pièces courante
-  existent, sont accessibles (mur intermédiaire ouvert) et sont non visitées
-- Retourne aléatoirement l'une des pièces adjacentes trouvées (null si aucune pièce trouvée)
-****************************************************************************************/
-
+/**
+ * Description détaillée : README_ALGORITHMS.md
+ * @param {array} room 
+ * @param {array} mazeSearch Tableau de dimension 2
+ * @param {array} gridMaze Tableau de dimension 2
+ * @returns {array|null}
+ */
 const setAdjacentRoom = (room, mazeSearch, gridMaze) => {
     const n = room[0], m = room[1]
     let array = []

@@ -1,13 +1,11 @@
 import { getRandomIntInclusive } from "../utils/generalTools.js"
 
-/****************************************************************************************
-ALGO BINARY TREE (fonction)
-- Parcourt le labyrinthe ligne par ligne (du haut vers le bas, et de la gauche vers la droite)
-- Pour chaque pièce visitée :
-    - Ouverture aléatoire du mur droit ou du mur haut
-- Retourne la pile stackOpenCells qui permet d'afficher le labyrinthe
-****************************************************************************************/
-
+/**
+ * Description détaillée : README_ALGORITHMS.md
+ * @param {integer} nbLines 
+ * @param {integer} nbColumns 
+ * @returns {array} Tableau de dimension 3
+ */
 const algoBinarytree = (nbLines, nbColumns) => {
     let stackOpenCells = []
 
@@ -20,17 +18,13 @@ const algoBinarytree = (nbLines, nbColumns) => {
     return stackOpenCells
 }
 
-/****************************************************************************************
-ADD OPEN CELLS (fonction)
-Construit un tableau contenant les cellules 'ouvertes' :
-    - Ajout de la cellule correspondant à la pièce visitée
-    - Ajout du mur adjacent à la pièce :
-        - Si première ligne : mur droit
-        - Si dernière colonne : mur haut
-        - Si dernière pièce de la première ligne : aucun ajout
-        - Sinon : mur droit ou mur haut (aléatoirement)
-****************************************************************************************/
-
+/**
+ * Description détaillée : README_ALGORITHMS.md
+ * @param {integer} n 
+ * @param {integer} m 
+ * @param {integer} nbColumns 
+ * @returns {array} Tableau de dimension 2
+ */
 const addOpenCells = (n, m, nbColumns) => {
     let cellRooms = [], isRightWallOpen = null
 

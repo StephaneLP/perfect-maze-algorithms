@@ -13,7 +13,6 @@
     - Vitesse d'animation
 - Backup du labyrinthe (utilisé pour l'affichage de la solution)
 
-
 *DEFINE STRUCTURE (fonction)*
 
 - Calcul de la taille de la zone permettant d'afficher le labyrinthe
@@ -22,6 +21,7 @@
     - Calcul de la taille du labyrinthe : 'nbLines' et 'nbColumns'
     - Calcul de la taille des cellules : deux dimensions 'maxCellLength' et 'minCellLength'
 - Retourne un objet contenant ces 4 valeurs {nbLines, nbColumns, maxCellLength, minCellLength}
+
 
 **FICHIER displayMaze.js**
 
@@ -36,7 +36,8 @@
     - Si animation, utilisation de la fonction setTimeout
     - Affichage des flèches indiquant l'entrée et la sortie
 
-**Fichier generateSolution**
+
+**Fichier generateSolution.js**
 
 *GENERATE SOLUTION (procédure)*
 
@@ -48,11 +49,14 @@
 - Calcul du diamètre de l'image indiquant le chemin et calcul de la vitesse d'animation
 - Création et initialisation de la grille du labyrinthe (pièces + murs + intersections + entrée/sortie)
 - Appel de l'algorithme et constitution la pile 'stackCells' qui contient les cellules du chemin à afficher
+  Cette pile contient des objets dont la structure est : 
+  {cell: array(coordonnées), display: booleen, solution: booleen}
 - Appel de la procédure permettant d'afficher la solution du labyrinthe. Elle necessite 4 paramètres :
     - Pile des cellules constituant le chemin
     - Diamètre de l'image indiquant le chemin
     - Vitesse d'animation
     - Booléen avec/sans recherche du chemin solution
+
 
 **Fichier displaySolution.js**
 
@@ -65,4 +69,3 @@
 - Affichage du bouton permettant de stoper l'animation
 - Affichage du chemin solution
 - Si animation, utilisation de la fonction setTimeout
-

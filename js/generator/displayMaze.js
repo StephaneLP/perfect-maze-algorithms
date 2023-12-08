@@ -6,7 +6,7 @@ let gblStackCells = []
 /**
  * Affichage du labyrinthe
  * (description détaillée : README_GENERATOR.md)
- * @param {array} stackOpenCells 
+ * @param {array} stackOpenCells Tableau de dimension 3
  * @param {object} structure 
  * @param {integer} speed 
  */
@@ -15,7 +15,7 @@ const displayMaze = (stackOpenCells, structure, speed) => {
     let nbGridColumns = 2 * structure.nbColumns + 1
 
     gblTimeOuts = []
-    gblStackCells = [...stackOpenCells]
+    gblStackCells = stackOpenCells // Attention : copie par référence
 
     // Affichage de la structure du labyrinthe
     let section = document.querySelector("#maze")
@@ -97,7 +97,7 @@ const addMazeCell = (id, width, height, className) => {
 /**
  * Ouverture des cellules (pièces et murs) constituant les chemins du labyrinthe
  * (la classe correspond à la phase d'affichage : initiale ou finale) 
- * @param {array} arrCells 
+ * @param {array} arrCells Tableau de dimension 2
  * @param {string} className 
  */
 const displayCells = (arrCells, className) => {
@@ -114,7 +114,7 @@ const displayCells = (arrCells, className) => {
 /**
  * Affichage des flèches indiquant l'entrée et la sortie (bordures gauche et droite)
  * Actualisation de la zone de filtre
- * @param {array} arrAccess 
+ * @param {array} arrAccess Tableau de dimension 2
  */
 const endDisplayMaze = (arrAccess) => {
     let id = ""
