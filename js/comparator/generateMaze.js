@@ -5,23 +5,17 @@ import { algoBinarytree }  from "../algorithms/algoBinarytree.js"
 import { algoPrim }  from "../algorithms/algoPrim.js"
 import { displayMaze } from "./displayMaze.js"
 
-/****************************************************************************************
-GENERATE MAZE (procédure)
-- Initialisation des paramètres du labyrinthe :
-    - Dimensions de la structure
-    - Calcul des nombres de lignes et colonnes
-    - Calcul de la largeur des pièces, murs et intersections
-- Appel de l'algorithme sélectionné et constitution la pile 'stackOpenCells'
-  qui contient les cellules à 'ouvrir'
-- Appel de la procédure permettant d'afficher le labyrinthe. Elle necessite 3 paramètres :
-    - Pile des cellules à 'ouvrir'
-    - Paramètres du labyrinthe
-    - Vitesse d'animation
-****************************************************************************************/
+/**
+ * Génération du labyrinthe (click sur le bouton 'Générer le labyrinthe').
+ * (description détaillée : README_COMPARATOR.md)
+ * @param {*} idMaze 
+ * @param {*} algo 
+ * @param {*} animationSpeed 
+ */
 
-const generateMaze = (idStructure, algo, animationSpeed) => {
-    const structureHeight = document.getElementById("maze-container" + idStructure).clientHeight - 56
-    const structureWidth = document.getElementById("maze-container" + idStructure).clientWidth - 2
+const generateMaze = (idMaze, algo, animationSpeed) => {
+    const structureHeight = document.getElementById("maze-container" + idMaze).clientHeight - 56
+    const structureWidth = document.getElementById("maze-container" + idMaze).clientWidth - 2
     const thicknessFactor = 0.30
 
     const nbLines = Math.floor(structureHeight / 30)
@@ -52,9 +46,9 @@ const generateMaze = (idStructure, algo, animationSpeed) => {
             break
     }
 
-    const mazeParams = {idStructure: idStructure, nbLines: nbLines, nbColumns: nbColumns, minCellLength: minCellLength, maxCellLength: maxCellLength}
+    const structure = {idMaze: idMaze, nbLines: nbLines, nbColumns: nbColumns, minCellLength: minCellLength, maxCellLength: maxCellLength}
 
-    displayMaze(stackOpenCells, mazeParams, speed)
+    displayMaze(stackOpenCells, structure, speed)
 }
 
 export { generateMaze }

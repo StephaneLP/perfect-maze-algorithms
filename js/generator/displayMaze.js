@@ -105,7 +105,7 @@ const addMazeCell = (id, width, height, className) => {
 
 /**
  * Ouverture des cellules (pièces et murs) constituant les chemins du labyrinthe
- * (la classe correspond à la phase d'affichage : initiale ou finale) 
+ * (la classe correspond à la phase d'affichage : initiale ou finale)
  * @param {array} arrCells Tableau de dimension 2
  * @param {string} className 
  */

@@ -1,34 +1,33 @@
 let gblTimeOuts = new Array()
 let gblMazes = new Map()
 
-/****************************************************************************************
-DISPLAY MAZE (procédure)
-- Ajout du labyrinthe (pile stackOpenCells) dans une variable globale (type Map)
-- 1ère partie : Construction de la structure html du labyrinthe (ligne par ligne)
-- 2ème partie : Affichage du labyrinthe
-    - Affichage des cellules 'ouvertes' par groupes, en 2 temps à l'aide de 2 couleurs
-      (voir fichier README.md pour une explication détaillée)
-****************************************************************************************/
+/**
+ * Affichage du labyrinthe
+ * (description détaillée : README_COMPARATOR.md)
+ * @param {array} stackOpenCells Tableau de dimension 3
+ * @param {object} structure 
+ * @param {integer} speed 
+ */
 
-const displayMaze = (stackOpenCells, params, speed) => {
-    const nbLines = 2 * params.nbLines + 1
-    const nbColumns = 2 * params.nbColumns + 1
+const displayMaze = (stackOpenCells, structure, speed) => {
+    const nbLines = 2 * structure.nbLines + 1
+    const nbColumns = 2 * structure.nbColumns + 1
 
-    gblMazes.set(params.idStructure, stackOpenCells)
+    gblMazes.set(structure.idMaze, stackOpenCells)
 
     // Affichage de la structure du labyrinthe
-    let section = document.getElementById("maze" + params.idStructure)
+    let section = document.getElementById("maze" + structure.idMaze)
     let line = "", idElement = ""
 
     for (let n = 0; n < nbLines; n++) {
         line = document.createElement("div")
 
         for (let m = 0; m < nbColumns; m++) {
-            idElement = params.idStructure + "-" + n + "-" + m
-            if ((n % 2 == 1) && (m % 2 == 1)) line.appendChild(addMazeCell(idElement, params.maxCellLength, params.maxCellLength, "maze-room")) // Pièce
-            if ((n % 2 == 0) && (m % 2 == 0)) line.appendChild(addMazeCell(idElement, params.minCellLength, params.minCellLength, "maze-wall")) // Intersection
-            if ((n % 2 == 1) && (m % 2 == 0)) line.appendChild(addMazeCell(idElement, params.minCellLength, params.maxCellLength, "maze-wall")) // Mur vertical
-            if ((n % 2 == 0) && (m % 2 == 1)) line.appendChild(addMazeCell(idElement, params.maxCellLength, params.minCellLength, "maze-wall")) // Mur horizontal
+            idElement = structure.idMaze + "-" + n + "-" + m
+            if ((n % 2 == 1) && (m % 2 == 1)) line.appendChild(addMazeCell(idElement, structure.maxCellLength, structure.maxCellLength, "maze-room")) // Pièce
+            if ((n % 2 == 0) && (m % 2 == 0)) line.appendChild(addMazeCell(idElement, structure.minCellLength, structure.minCellLength, "maze-wall")) // Intersection
+            if ((n % 2 == 1) && (m % 2 == 0)) line.appendChild(addMazeCell(idElement, structure.minCellLength, structure.maxCellLength, "maze-wall")) // Mur vertical
+            if ((n % 2 == 0) && (m % 2 == 1)) line.appendChild(addMazeCell(idElement, structure.maxCellLength, structure.minCellLength, "maze-wall")) // Mur horizontal
         }
 
         section.appendChild(line)
@@ -40,21 +39,26 @@ const displayMaze = (stackOpenCells, params, speed) => {
     stackOpenCells.map(array => {
         intervalTemp = interval
         array.map(cell => {
-            gblTimeOuts.push(setTimeout(displayCells, intervalTemp,  params.idStructure, [cell], "maze-open-temp"))
+            gblTimeOuts.push(setTimeout(displayCells, intervalTemp,  structure.idMaze, [cell], "maze-open-temp"))
             intervalTemp += speed
         })
 
         interval += array.length * speed
-        gblTimeOuts.push(setTimeout(displayCells, interval, params.idStructure, array, "maze-open"))
+        gblTimeOuts.push(setTimeout(displayCells, interval, structure.idMaze, array, "maze-open"))
     })
-    gblTimeOuts.push(setTimeout(endDisplayMaze, interval, params.idStructure))
+    gblTimeOuts.push(setTimeout(endDisplayMaze, interval, structure.idMaze))
 }
 
-/****************************************************************************************
-ADD MAZE CELL (fonction)
-- Création des élément de la structure utilisés
-  pour représenter les pièces, murs et intersections des lignes
-****************************************************************************************/
+/****************************************************************************************/
+
+/**
+ * Création des éléments HTML constituant les pièces, murs et intersections
+ * @param {string} idElement 
+ * @param {integer} width 
+ * @param {integer} height 
+ * @param {string} className 
+ * @returns  {object} Élément HTML
+ */
 
 const addMazeCell = (idElement, width, height, className) => {
     let cell = document.createElement("div")
@@ -67,41 +71,46 @@ const addMazeCell = (idElement, width, height, className) => {
     return cell
 }
 
-/****************************************************************************************
-DISPLAY CELLS (procédure)
-- Ouverture des cellules (pièces et murs) constituant les chemins du labyrinthe
-- La classe correspond à la phase d'affichage (initiale ou finale) 
-****************************************************************************************/
+/****************************************************************************************/
 
-const displayCells = (idStructure, arrCells, className) => {
+/**
+ * Ouverture des cellules (pièces et murs) constituant les chemins du labyrinthe
+ * (la classe correspond à la phase d'affichage : initiale ou finale) 
+ * @param {string} idMaze 
+ * @param {array} arrCells Tableau de dimension 2
+ * @param {*} className 
+ */
+
+const displayCells = (idMaze, arrCells, className) => {
     let idElement = ""
 
     arrCells.forEach(cell => {
         if(cell.length > 0) {
-            idElement = idStructure + "-" + cell[0] + "-" + cell[1]
+            idElement = idMaze + "-" + cell[0] + "-" + cell[1]
             document.getElementById(idElement).className = className
         }
     })
 }
 
-/****************************************************************************************
-END DISPLAY MAZE (procédure)
-- Suppression du labyrinthe de la variable globale gblMazes
-- Si tous les labyrinthes sont affichés : Masquage du bouton permettant de stoper l'animation
-****************************************************************************************/
+/****************************************************************************************/
+
+/**
+ * Suppression du labyrinthe de la variable globale gblMazes
+ * Si tous les labyrinthes sont affichés : Masquage du bouton permettant de stoper l'animation
+ * @param {*} id 
+ */
 
 const endDisplayMaze = (id) => {
     gblMazes.delete(id)
     if (gblMazes.size === 0) document.querySelector("#stop-maze-animation").style.visibility = "hidden"
 }
 
-/****************************************************************************************
-STOP MAZE ANIMATION (procédure)
-Fonction appelée en cliquant sur le bouton 'Terminer'
-- Arrêt de l'animation
-- Affichage complet des labyrinthes
-- Masquage du bouton permettant de stoper l'animation
-****************************************************************************************/
+/****************************************************************************************/
+
+/**
+ * Arrêt des animations et affichage complet des labyrinthes
+ * Masquage du bouton permettant de stoper l'animation
+ */
 
 const stopMazeAnimation = () => {
     gblTimeOuts.map(element => clearTimeout(element))
