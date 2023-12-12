@@ -35,12 +35,12 @@
 
 ## *Add Open Cells (fonction)*
 Construit un tableau contenant les cellules 'ouvertes' :
-    - Ajout de la cellule correspondant à la pièce visitée
-    - Ajout du mur adjacent à la pièce :
-        - Si première ligne : mur droit
-        - Si dernière colonne : mur haut
-        - Si dernière pièce de la première ligne : aucun ajout
-        - Sinon : mur droit ou mur haut (aléatoirement)
+- Ajout de la cellule correspondant à la pièce visitée
+- Ajout du mur adjacent à la pièce :
+    - Si première ligne : mur droit
+    - Si dernière colonne : mur haut
+    - Si dernière pièce de la première ligne : aucun ajout
+    - Sinon : mur droit ou mur haut (aléatoirement)
 
 ---
 
@@ -62,7 +62,7 @@ Construit un tableau contenant les cellules 'ouvertes' :
 
 ## *Init Maze (fonction)*
 
-Initialise le tableau de dimension 2 représentant le labyrinthe
+- Initialise le tableau de dimension 2 représentant le labyrinthe
 Chaque élément du tableau contient un objet ayant 2 propriétés :
     - Un numéro unique de branche : n°colonne + n°ligne x nbColonnes
     - Un indicateur de visite des pièces, de type booléen, initialisé à false
@@ -142,7 +142,7 @@ de la pile stackRooms :
 
 Cet algorithme repose sur l'algorithme de parcourt en profondeur d'un arbre.
 
-***Principe :***
+**Principe :**
 l'objectif est de retourner une pile qui contient les cellules parcourues
 (une pastille sera affichée aussi bien à l'emplacement des pièces que des des murs indiquant
 le chemin). L'algorithme utilise 2 piles :
