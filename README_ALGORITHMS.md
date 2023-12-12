@@ -1,6 +1,6 @@
 # **algoBacktracking.js**
 
-## *ALGO PROFONDEUR (fonction)*
+## *Algo Profondeur (fonction)*
 
 - Choix aléatoire d'une pièce de départ
 - Initialisation des piles stackOpenCells et stackRooms
@@ -14,7 +14,7 @@
 - Retourne la pile stackOpenCells qui permet d'afficher le labyrinthe
   (pièces et murs 'ouverts' constituant les couloirs du labyrinthe)
 
-## *UPDATE STACKS (procédure)*
+## *Update Stacks (procédure)*
 
 - Marque la pièce newRoom comme visitée (dans le tableau maze)
 - Ajoute la pièce newRoom à la dernière place de la pile des pièces (stackRooms)
@@ -23,7 +23,7 @@
 
 # **algoBinarytree.js**
 
-## *ALGO BINARY TREE (fonction)*
+## *Algo Binary Tree (fonction)*
 
 - Parcourt le labyrinthe ligne par ligne (du haut vers le bas, et de la gauche vers la droite)
 - Pour chaque pièce visitée :
@@ -31,7 +31,7 @@
 - Retourne la pile stackOpenCells qui permet d'afficher le labyrinthe
   (pièces et murs 'ouverts' constituant les couloirs du labyrinthe)
 
-## *ADD OPEN CELLS (fonction)*
+## *Add Open Cells (fonction)*
 Construit un tableau contenant les cellules 'ouvertes' :
     - Ajout de la cellule correspondant à la pièce visitée
     - Ajout du mur adjacent à la pièce :
@@ -42,7 +42,7 @@ Construit un tableau contenant les cellules 'ouvertes' :
 
 # **algoFusion.js**
 
-## *ALGO FUSION (fonction)*
+## *Algo Fusion (fonction)*
 
 - Initialisation du tableau maze (qui contient des objets {n° branche, indication de visite})
 - Initialisation (et mélange aléatoire) de la pile stackWalls (qui contient tous les murs)
@@ -56,7 +56,7 @@ Construit un tableau contenant les cellules 'ouvertes' :
 - Retourne la pile stackOpenCells qui permet d'afficher le labyrinthe
   (pièces et murs 'ouverts' constituant les couloirs du labyrinthe)
 
-## *INIT MAZE (fonction)*
+## *Init Maze (fonction)*
 
 Initialise le tableau de dimension 2 représentant le labyrinthe
 Chaque élément du tableau contient un objet ayant 2 propriétés :
@@ -64,7 +64,7 @@ Chaque élément du tableau contient un objet ayant 2 propriétés :
     - Un indicateur de visite des pièces, de type booléen, initialisé à false
 - Retourne un tableau de dimension 2 qui contient des objets {numBranch, visited}
 
-## *INIT STACK WALLS (fonction)*
+## *Init Stack Walls (fonction)*
 
 Initialisation de la pile contenant tous les murs du labyrinthe
 Attention, chaque élément de la pile correspond à un mur qui :
@@ -72,7 +72,7 @@ Attention, chaque élément de la pile correspond à un mur qui :
 - Mais par les coordonnées des 2 pièces attenantes. Ces coordonnées sont représentées
   par un coefficient et non par un couple d'abscisses et d'ordonnées (voir fonction initMaze)
 
-## *ADD OPEN CELLS (fonction)*
+## *Add Open Cells (fonction)*
 
 Construit un tableau contenant les cellules (pièces et murs) correspondantes au mur 'ouvert'
 et aux 2 pièces attenantes :
@@ -82,7 +82,7 @@ et aux 2 pièces attenantes :
 
 # **algoPrim.js**
 
-## *ALGO PRIM (fonction)*
+## *Algo Prim (fonction)*
 
 - Choix aléatoire d'une pièce de départ
 - Initialisation des piles stackOpenCells et stackWalls
@@ -96,7 +96,7 @@ et aux 2 pièces attenantes :
 - Retourne la pile stackOpenCells qui permet d'afficher le labyrinthe
   (pièces et murs 'ouverts' constituant les couloirs du labyrinthe)
 
-## *UPDATE STACKS (procédure)*
+## *Update Stacks (procédure)*
 
 - Marque la pièce currentRoom comme visitée (dans le tableau maze)
 - Ajoute à la pile des murs (stackWalls) les murs attenants à la pièce currentRoom
@@ -105,7 +105,7 @@ et aux 2 pièces attenantes :
 
 # **algoSidewinder.js**
 
-## *ALGO SIDEWINDER (fonction)*
+## *Algo Sidewinder (fonction)*
 
 - Parcourt le labyrinthe ligne par ligne (du haut vers le bas, et de la gauche vers la droite)
 - Pour chaque pièce visitée :
@@ -117,7 +117,7 @@ et aux 2 pièces attenantes :
 - Retourne la pile stackOpenCells qui permet d'afficher le labyrinthe
   (pièces et murs 'ouverts' constituant les couloirs du labyrinthe)
 
-## *ADD OPEN CELLS (fonction)*
+## *Add Open Cells (fonction)*
 
 Construit un tableau contenant les cellules (pièces et murs) correspondantes aux pièces
 de la pile stackRooms :
@@ -128,7 +128,7 @@ de la pile stackRooms :
 
 # **algoSolution.js**
 
-## *ALGO SOLUTION (fonction)*
+## *Algo Solution (fonction)*
 
 Cet algorithme repose sur l'algorithme de parcourt en profondeur d'un arbre.
 -----------------------------------------------------------------------------------------
@@ -162,14 +162,14 @@ le chemin). L'algorithme utilise 2 piles :
 - Retourne la pile stackCells qui permet d'afficher la solution du labyrinthe
   (tableau qui contient des objets {cell: array(coordonnées), display: booleen, solution: booleen})
 
-## *UPDATE STACKS BACKWARD (procédure)*
+## *Update Stack Backward (procédure)*
 
 - Suppression de la dernière cellule de la pile stackSearch
 - Mise à jour de la pile stackCells :
     - La cellule est retirée de l'affichage et du chemin solution
     - La précédente occurence de la cellule est retirée du chemin solution
 
-## *SET ADJACENT ROOM (fonction)*
+## *Set Adjacent Room (fonction)*
 
 - Calcul les variables booléennes indiquant si les pièces adjacentes à la pièces courante
   existent, sont accessibles (mur intermédiaire ouvert) et sont non visitées
