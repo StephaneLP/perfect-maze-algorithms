@@ -1,4 +1,4 @@
-# **algoBacktracking.js**
+# **FICHIER algoBacktracking.js**
 
 ## *Algo Profondeur (fonction)*
 
@@ -23,7 +23,7 @@
 
 ---
 
-# **algoBinarytree.js**
+# **FICHIER algoBinarytree.js**
 
 ## *Algo Binary Tree (fonction)*
 
@@ -44,7 +44,7 @@ Construit un tableau contenant les cellules 'ouvertes' :
 
 ---
 
-# **algoFusion.js**
+# **FICHIER algoFusion.js**
 
 ## *Algo Fusion (fonction)*
 
@@ -86,7 +86,7 @@ et aux 2 pièces attenantes :
 
 ---
 
-# **algoPrim.js**
+# **FICHIER algoPrim.js**
 
 ## *Algo Prim (fonction)*
 
@@ -111,7 +111,7 @@ et aux 2 pièces attenantes :
 
 ---
 
-# **algoSidewinder.js**
+# **FICHIER algoSidewinder.js**
 
 ## *Algo Sidewinder (fonction)*
 
@@ -136,7 +136,7 @@ de la pile stackRooms :
 
 ---
 
-# **algoSolution.js**
+# **FICHIER algoSolution.js**
 
 ## *Algo Solution (fonction)*
 
