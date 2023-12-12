@@ -152,7 +152,7 @@ le chemin). L'algorithme utilise 2 piles :
     - Un booléen indiquant s'il faut afficher/masquer la cellule
     - Un booléen indiquant si la cellule est élément du chemin final
 
-### **Algorithme**
+### **Algorithme :**
 
 Cet algorithme repose sur l'algorithme de parcourt en profondeur d'un arbre :
 - Calcul des coordonnées de l'entrée et de la sortie : murs (cells) et pièces (rooms)

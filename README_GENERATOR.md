@@ -1,6 +1,6 @@
-**FICHIER generateMaze.js**
+# **FICHIER generateMaze.js**
 
-*GENERATE MAZE (procédure)*
+## *Generate MAZE (procédure)*
 
 - Désactivation des boutons 'générer'
 - Reccueil des paramètres renseignés par l'utilisateur dans la zone de filtre
@@ -13,7 +13,7 @@
     - Vitesse d'animation
 - Backup du labyrinthe (utilisé pour l'affichage de la solution)
 
-*DEFINE STRUCTURE (fonction)*
+## *Define Structure (fonction)*
 
 - Calcul de la taille de la zone permettant d'afficher le labyrinthe
 - Calcul du pourcentage épaisseur des murs (largeur mur / largeur pièce)
@@ -22,10 +22,11 @@
     - Calcul de la taille des cellules : deux dimensions 'maxCellLength' et 'minCellLength'
 - Retourne un objet contenant ces 4 valeurs {nbLines, nbColumns, maxCellLength, minCellLength}
 
+---
 
-**FICHIER displayMaze.js**
+# **FICHIER displayMaze.js**
 
-*DISPLAY MAZE (procédure)*
+## *Display Maze (procédure)*
 
 - Initialisation des variables globales utilisées pour l'arrêt de l'animation
 - 1ère partie : Construction de la structure html du labyrinthe (ligne par ligne) 
@@ -36,10 +37,11 @@
     - Si animation, utilisation de la fonction setTimeout
     - Affichage des flèches indiquant l'entrée et la sortie
 
+---
 
-**Fichier generateSolution.js**
+# **FICHIER generateSolution.js**
 
-*GENERATE SOLUTION (procédure)*
+## *Generate Solution (procédure)*
 
 - Reccueil des paramètres renseignés par l'utilisateur dans la zone de filtre :
     - Avec ou sans animation
@@ -57,10 +59,11 @@
     - Vitesse d'animation
     - Booléen avec/sans recherche du chemin solution
 
+---
 
-**Fichier displaySolution.js**
+# **FICHIER displaySolution.js**
 
-*DISPLAY SOLUTION (procédure)*
+## *Display Solution (procédure)*
 
 - Filtrage de la pile contenant les cellules constituant le chemin solution
   si l'utilisation de l'algorithme de recherche n'est pas souhaité (i.e. affichage direct)
