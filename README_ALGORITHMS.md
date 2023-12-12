@@ -23,6 +23,7 @@
 - Met à jour la pile des pièces à 'ouvrir' stackOpenCells pour l'affichage du labyrinthe
   (remarque : aucune dernière pièce n'est associée à la pièce de départ lors de la 1ère mise à jour)
 
+---
 
 **FICHIER algoBinarytree.js**
 
@@ -43,6 +44,7 @@ Construit un tableau contenant les cellules 'ouvertes' :
         - Si dernière pièce de la première ligne : aucun ajout
         - Sinon : mur droit ou mur haut (aléatoirement)
 
+---
 
 **Fichier algoFusion.js**
 
@@ -84,6 +86,7 @@ et aux 2 pièces attenantes :
 - Seules les pièces non visitées sont ajoutées. La propriété 'visited' dans le tableau maze,
   passé en paramètre (par référence), est mise à jour
 
+---
 
 **Fichier algoPrim.js**
 
@@ -108,6 +111,7 @@ et aux 2 pièces attenantes :
 - Met à jour la pile des pièces à 'ouvrir' stackOpenCells pour l'affichage du labyrinthe
   (remarque : aucun mur n'est associé à la pièce de départ lors de la 1ère mise à jour)
 
+---
 
 **Fichier algoSidewinder.js**
 
@@ -132,6 +136,7 @@ de la pile stackRooms :
   (sauf pour la première ligne)
 - Retourne l'ensemble des cellules 'ouvertes' de la rangée en cours (pile stackRooms)
 
+---
 
 **Fichier algoSolution.js**
 
