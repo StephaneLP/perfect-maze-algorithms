@@ -140,8 +140,9 @@ de la pile stackRooms :
 
 ## *Algo Solution (fonction)*
 
-**Principe :**
-l'objectif est de retourner une pile qui contient les cellules parcourues
+### **Principe :**
+
+L'objectif est de retourner une pile qui contient les cellules parcourues
 (une pastille sera affichée aussi bien à l'emplacement des pièces que des des murs indiquant
 le chemin). L'algorithme utilise 2 piles :
 - La pile 'stackSearch', qui contient les coordonnées des cellules visitées (ajoutées,
@@ -150,6 +151,8 @@ le chemin). L'algorithme utilise 2 piles :
     - Les coordonnées de la cellule
     - Un booléen indiquant s'il faut afficher/masquer la cellule
     - Un booléen indiquant si la cellule est élément du chemin final
+
+### **Algorithme**
 
 Cet algorithme repose sur l'algorithme de parcourt en profondeur d'un arbre :
 - Calcul des coordonnées de l'entrée et de la sortie : murs (cells) et pièces (rooms)
