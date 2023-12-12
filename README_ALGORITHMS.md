@@ -143,9 +143,9 @@ de la pile stackRooms :
 Cet algorithme repose sur l'algorithme de parcourt en profondeur d'un arbre.
 
 ***Principe :***
-*l'objectif est de retourner une pile qui contient les cellules parcourues*
-*(une pastille sera affichée aussi bien à l'emplacement des pièces que des des murs indiquant*
-*le chemin). L'algorithme utilise 2 piles :*
+l'objectif est de retourner une pile qui contient les cellules parcourues
+(une pastille sera affichée aussi bien à l'emplacement des pièces que des des murs indiquant
+le chemin). L'algorithme utilise 2 piles :
     - La pile 'stackSearch', qui contient les coordonnées des cellules visitées (ajoutées,
       puis retirées si elles appartiennent à un cul de sac)
     - *La pile 'stackCells', qui contient la liste de TOUTES les cellules parcourues, avec :*
