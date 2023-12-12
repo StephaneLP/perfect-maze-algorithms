@@ -148,10 +148,10 @@ l'objectif est de retourner une pile qui contient les cellules parcourues
 le chemin). L'algorithme utilise 2 piles :
     - La pile 'stackSearch', qui contient les coordonnées des cellules visitées (ajoutées,
       puis retirées si elles appartiennent à un cul de sac)
-    - *La pile 'stackCells', qui contient la liste de TOUTES les cellules parcourues, avec :*
-        - *Les coordonnées de la cellule*
-        - *Un booléen indiquant s'il faut afficher/masquer la cellule*
-        - *Un booléen indiquant si la cellule est élément du chemin final*
+    - La pile 'stackCells', qui contient la liste de TOUTES les cellules parcourues, avec :
+        - Les coordonnées de la cellule
+        - Un booléen indiquant s'il faut afficher/masquer la cellule
+        - Un booléen indiquant si la cellule est élément du chemin final
         
 - Calcul des coordonnées de l'entrée et de la sortie : murs (cells) et pièces (rooms)
 - Initialisation du tableau mazeSearch (servant à identifier les pièces parcourues)
