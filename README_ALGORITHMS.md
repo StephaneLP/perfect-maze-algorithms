@@ -140,8 +140,6 @@ de la pile stackRooms :
 
 ## *Algo Solution (fonction)*
 
-Cet algorithme repose sur l'algorithme de parcourt en profondeur d'un arbre.
-
 **Principe :**
 l'objectif est de retourner une pile qui contient les cellules parcourues
 (une pastille sera affichée aussi bien à l'emplacement des pièces que des des murs indiquant
@@ -153,7 +151,7 @@ le chemin). L'algorithme utilise 2 piles :
     - Un booléen indiquant s'il faut afficher/masquer la cellule
     - Un booléen indiquant si la cellule est élément du chemin final
 
-
+Cet algorithme repose sur l'algorithme de parcourt en profondeur d'un arbre :
 - Calcul des coordonnées de l'entrée et de la sortie : murs (cells) et pièces (rooms)
 - Initialisation du tableau mazeSearch (servant à identifier les pièces parcourues)
 - Entrée du labyrinthe :
