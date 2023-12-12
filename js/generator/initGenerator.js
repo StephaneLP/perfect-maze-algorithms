@@ -9,6 +9,7 @@ import { stopSolutionAnimation } from "./displaySolution.js"
  * @param {integer} step 
  * @param {integer} max 
  */
+
 const initSelect = (selecteurCSS, step, max) => {
     let select = document.querySelector(selecteurCSS)
     let option = document.createElement("option")
@@ -25,18 +26,24 @@ const initSelect = (selecteurCSS, step, max) => {
     }
 }
 
+/****************************************************************************************/
+
 /**
  * Filtre 'Taille personnalisée' : afficher/masquer les champs select (nb lignes / colonnes)
  */
+
 const handleDimensionClick = () => {
     const dimensionPerso = document.querySelector("#custom-size")
 
     document.querySelector("#select-custom-size").style.display = (dimensionPerso.checked ? "block" : "none")
 }
 
+/****************************************************************************************/
+
 /**
  * Filtre 'Activer l'animation' : afficher / masquer le parametrage de l'animation
  */
+
 const handleAnimationClick = () => {
     const animationChecked = document.querySelector("#animation-checkbox").checked
     const solutionAvailable = (document.querySelector("#btn-generate-solution").disabled == false)
@@ -45,15 +52,20 @@ const handleAnimationClick = () => {
     document.querySelector(".solution-search").style.display = (animationChecked && solutionAvailable ? "block" : "none")
 }
 
+/****************************************************************************************/
+
 /**
  * Afficher / masquer la fenetre modale affichant le message passé en paramètre
  * @param {boolean} blnDisplay 
  * @param {string} msg 
  */
+
 const displayMessage = (blnDisplay, msg) => {
     document.querySelector(".message-container").style.visibility = (blnDisplay ? "visible" : "hidden")
     document.querySelector("#message").textContent = msg
 }
+
+/****************************************************************************************/
 
 /* Paramètrage du labyrinthe */
 window.addEventListener('load', initSelect("#custom-nb-lines", 5, 80), initSelect("#custom-nb-columns", 5, 80))

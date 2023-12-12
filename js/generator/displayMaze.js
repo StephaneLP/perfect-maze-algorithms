@@ -10,6 +10,7 @@ let gblStackCells = []
  * @param {object} structure 
  * @param {integer} speed 
  */
+
 const displayMaze = (stackOpenCells, structure, speed) => {
     let nbGridLines = 2 * structure.nbLines + 1
     let nbGridColumns = 2 * structure.nbColumns + 1
@@ -60,12 +61,15 @@ const displayMaze = (stackOpenCells, structure, speed) => {
     }
 }
 
+/****************************************************************************************/
+
 /**
  * Création des éléments HTML constituant les bordures gauches et droites du labyrinthe
  * @param {string} id 
  * @param {string} className 
  * @returns {object} Élément HTML
  */
+
 const addBorderCell = (id, className) => {
     let cell = document.createElement("div")
 
@@ -75,6 +79,8 @@ const addBorderCell = (id, className) => {
     return cell
 }
 
+/****************************************************************************************/
+
 /**
  * Création des éléments HTML constituant les pièces, murs et intersections
  * @param {string} id 
@@ -83,6 +89,7 @@ const addBorderCell = (id, className) => {
  * @param {string} className 
  * @returns {object} Élément HTML
  */
+
 const addMazeCell = (id, width, height, className) => {
     let cell = document.createElement("div")
 
@@ -94,12 +101,15 @@ const addMazeCell = (id, width, height, className) => {
     return cell
 }
 
+/****************************************************************************************/
+
 /**
  * Ouverture des cellules (pièces et murs) constituant les chemins du labyrinthe
  * (la classe correspond à la phase d'affichage : initiale ou finale) 
  * @param {array} arrCells Tableau de dimension 2
  * @param {string} className 
  */
+
 const displayCells = (arrCells, className) => {
     let idElement = ""
 
@@ -111,11 +121,14 @@ const displayCells = (arrCells, className) => {
     })
 }
 
+/****************************************************************************************/
+
 /**
  * Affichage des flèches indiquant l'entrée et la sortie (bordures gauche et droite)
  * Actualisation de la zone de filtre
  * @param {array} arrAccess Tableau de dimension 2
  */
+
 const endDisplayMaze = (arrAccess) => {
     let id = ""
 
@@ -128,9 +141,12 @@ const endDisplayMaze = (arrAccess) => {
     document.querySelector("#stop-maze-animation").style.visibility = "hidden"
 }
 
+/****************************************************************************************/
+
 /**
  * Arrêt de l'animation et affichage complet du labyrinthe
  */
+
 const stopMazeAnimation = () => {
     gblTimeOuts.map(timeOut => clearTimeout(timeOut))
     gblStackCells.map(stackCells => displayCells(stackCells, "maze-open"))

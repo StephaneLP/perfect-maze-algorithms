@@ -6,6 +6,7 @@ import { getRandomIntInclusive, shuffleArray2Dim, createArray2Dim } from "../uti
  * @param {integer} nbColumns 
  * @returns {array} Tableau de dimension 3
  */
+
 const algoProfondeur = (nbLines, nbColumns) => {
     let maze = createArray2Dim(nbLines, nbColumns, false)
     let stackOpenCells = [], stackRooms = []
@@ -25,6 +26,8 @@ const algoProfondeur = (nbLines, nbColumns) => {
     return stackOpenCells
 }
 
+/****************************************************************************************/
+
 /**
  * Description détaillée : README_ALGORITHMS.md
  * @param {array} lastRoom 
@@ -33,6 +36,7 @@ const algoProfondeur = (nbLines, nbColumns) => {
  * @param {array} stackOpenCells Tableau de dimension 3
  * @param {array} maze Tableau de dimension 2
  */
+
 const updateStacks = (lastRoom, newRoom, stackRooms, stackOpenCells, maze) => {
     maze[newRoom[0]][newRoom[1]] = true
     stackRooms.push(newRoom)
@@ -43,12 +47,15 @@ const updateStacks = (lastRoom, newRoom, stackRooms, stackOpenCells, maze) => {
     }
 }
 
+/****************************************************************************************/
+
 /**
  * Retourne aléatoirement les coordonnées d'une pièce adjacente non visitée (null si aucune)
  * @param {array} room 
  * @param {array} maze Tableau de dimension 2
  * @returns {array} Coordonnées d'une pièce adjacente
  */
+
 const searchAdjacentRoom = (room, maze) => {
     let n = room[0]
     let m = room[1]
@@ -64,12 +71,15 @@ const searchAdjacentRoom = (room, maze) => {
     return shuffleArray2Dim(array)[0]
 }
 
+/****************************************************************************************/
+
 /**
  * Détermine les coordonnées des 2 cellules (mur et pièce) à ouvrir pour visiter une nouvelle pièce
  * @param {array} lastRoom 
  * @param {array} newRoom 
  * @returns {array} Tableau de dimension 2
  */
+
 const addOpenCells = (lastRoom, newRoom) => {
     let cellsToAdd = []
 

@@ -15,6 +15,7 @@ let backUpMaze = {stackOpenCells: [], structure: {nbLines: 0, nbColumns: 0, maxC
  * (description détaillée : README_GENERATOR.md)
  * @param {object} event 
  */
+
 const generateMaze = (event) => {
     event.preventDefault()
 
@@ -62,6 +63,8 @@ const generateMaze = (event) => {
     backUpMaze = {stackOpenCells: stackOpenCells, structure: structure }
 }
 
+/****************************************************************************************/
+
 /**
  * Calcul de la structure du labyrinthe (dimensions du labyrinthe et des cellules)
  * (description détaillée : README_GENERATOR.md)
@@ -72,6 +75,7 @@ const generateMaze = (event) => {
  * @param {string} customNbColumns 
  * @returns {object} Nombres de lignes et colonnes, taille des pièces, murs et intersections
  */
+
 const defineStructure = (thickness, size, customSize, customNbLines, customNbColumns) => {
     const heightWindow = window.innerHeight - 40
     const widthWindow = window.innerWidth - 380

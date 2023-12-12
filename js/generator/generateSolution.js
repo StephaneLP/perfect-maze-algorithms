@@ -8,6 +8,7 @@ import { backUpMaze } from "./generateMaze.js"
  * (description détaillée : README_GENERATOR.md)
  * @param {object} event 
  */
+
 const generateSolution = (event) => {
     event.preventDefault()
 

@@ -6,6 +6,7 @@ import { getRandomIntInclusive } from "../utils/generalTools.js"
  * @param {integer} nbColumns 
  * @returns {array} Tableau de dimension 3
  */
+
 const algoBinarytree = (nbLines, nbColumns) => {
     let stackOpenCells = []
 
@@ -18,6 +19,8 @@ const algoBinarytree = (nbLines, nbColumns) => {
     return stackOpenCells
 }
 
+/****************************************************************************************/
+
 /**
  * Description détaillée : README_ALGORITHMS.md
  * @param {integer} n 
@@ -25,6 +28,7 @@ const algoBinarytree = (nbLines, nbColumns) => {
  * @param {integer} nbColumns 
  * @returns {array} Tableau de dimension 2
  */
+
 const addOpenCells = (n, m, nbColumns) => {
     let cellRooms = [], isRightWallOpen = null
 

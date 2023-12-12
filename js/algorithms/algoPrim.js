@@ -6,6 +6,7 @@ import { getRandomIntInclusive, createArray2Dim } from "../utils/generalTools.js
  * @param {integer} nbColumns 
  * @returns {array} Tableau de dimension 3
  */
+
 const algoPrim = (nbLines, nbColumns) => {
     let maze = createArray2Dim(nbLines, nbColumns, false)
     let stackOpenCells = [], stackWalls = []
@@ -26,6 +27,8 @@ const algoPrim = (nbLines, nbColumns) => {
     return stackOpenCells
 }
 
+/****************************************************************************************/
+
 /**
  * Description détaillée : README_ALGORITHMS.md
  * @param {array} currentRoom 
@@ -36,11 +39,14 @@ const algoPrim = (nbLines, nbColumns) => {
  * @param {integer} nbLines 
  * @param {integer} nbColumns 
  */
+
 const updateStacks = (currentRoom, currentWall, stackWalls, stackOpenCells, maze, nbLines, nbColumns) => {
     maze[currentRoom[0]][currentRoom[1]] = true
     setAdjacentWalls(currentRoom, nbLines, nbColumns).map(wall => stackWalls.push(wall))
     stackOpenCells.push(currentWall ? [currentWall, [2 * currentRoom[0] + 1, 2 * currentRoom[1] + 1]] : [[2 * currentRoom[0] + 1, 2 * currentRoom[1] + 1]])
 }
+
+/****************************************************************************************/
 
 /**
  * Retourne les murs (sauf les murs extérieurs) qui entourent une pièce
@@ -49,6 +55,7 @@ const updateStacks = (currentRoom, currentWall, stackWalls, stackOpenCells, maze
  * @param {integer} nbColumns 
  * @returns {array} Tableau de dimension 2
  */
+
 const setAdjacentWalls = (room, nbLines, nbColumns) => {
     let line = room[0], column = room[1]
     let array = []
@@ -61,12 +68,15 @@ const setAdjacentWalls = (room, nbLines, nbColumns) => {
     return array
 }
 
+/****************************************************************************************/
+
 /**
  * Retourne les coordonnées d'une pièce non visitée adjacente au mur (null si aucune)
  * @param {array} wall 
  * @param {array} maze Tableau de dimension 2
  * @returns {array|null}
  */
+
 const setCurrentRoom = (wall, maze) => {
     let room0 = [], room1 = []
 

@@ -7,6 +7,7 @@ import { convertCellToRoom, convertRoomToCell } from "../utils/specificTools.js"
  * @param {array} accessCells Tableau de dimension 2
  * @returns {array} tableau contenant des objets
  */
+
 const algoSolution = (gridMaze, accessCells) => {
     const entryCell = [...accessCells[0]]
     const exitCell = [...accessCells[1]]
@@ -43,28 +44,36 @@ const algoSolution = (gridMaze, accessCells) => {
     return stackCells
 }
 
+/****************************************************************************************/
+
 /**
  * Ajout de la cellule cell dans les piles stackSearch et stackCells (en tant que solution)
  * @param {array} stackSearch Tableau de dimension 2
  * @param {array} stackCells Tableau contenant des objets
  * @param {array} cell
  */
+
 const updateStacksForward = (stackSearch, stackCells, cell) => {
     stackSearch.push(cell)
     stackCells.push({cell: cell, display: true, solution: true})
 }
+
+/****************************************************************************************/
 
 /**
  * Description détaillée : README_ALGORITHMS.md
  * @param {array} stackSearch Tableau de dimension 2
  * @param {array} stackCells Tableau contenant des objets
  */
+
 const updateStacksBackward = (stackSearch, stackCells) => {
     let cell = stackSearch.pop()
 
     stackCells.push({cell: cell, display: false, solution: false})
     stackCells.filter(obj => (obj.cell[0] === cell[0]) && (obj.cell[1] === cell[1]) && (obj.solution === true)).map(arr => arr.solution = false)
 }
+
+/****************************************************************************************/
 
 /**
  * Description détaillée : README_ALGORITHMS.md
@@ -73,6 +82,7 @@ const updateStacksBackward = (stackSearch, stackCells) => {
  * @param {array} gridMaze Tableau de dimension 2
  * @returns {array|null}
  */
+
 const setAdjacentRoom = (room, mazeSearch, gridMaze) => {
     const n = room[0], m = room[1]
     let array = []

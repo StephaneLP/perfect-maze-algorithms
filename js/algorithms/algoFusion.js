@@ -6,6 +6,7 @@ import { shuffleArray2Dim, createArray2Dim } from "../utils/generalTools.js"
  * @param {integer} nbColumns 
  * @returns {array} Tableau de dimension 3
  */
+
 const algoFusion = (nbLines, nbColumns) => {
     let maze = initMaze(nbLines, nbColumns)
     let stackWalls = initStackWalls(nbLines, nbColumns)
@@ -34,12 +35,15 @@ const algoFusion = (nbLines, nbColumns) => {
     return stackOpenCells
 }
 
+/****************************************************************************************/
+
 /**
  * Description détaillée : README_ALGORITHMS.md
  * @param {integer} nbLines 
  * @param {integer} nbColumns 
  * @returns {array} Tableau de dimension 2 qui contient des objets
  */
+
 const initMaze = (nbLines, nbColumns) => {
     let array = createArray2Dim(nbLines, nbColumns)
 
@@ -51,12 +55,15 @@ const initMaze = (nbLines, nbColumns) => {
     return array
 }
 
+/****************************************************************************************/
+
 /**
  * Description détaillée : README_ALGORITHMS.md
  * @param {integer} nbLines 
  * @param {integer} nbColumns 
  * @returns {array} Tableau à 2 dimensions
  */
+
 const initStackWalls = (nbLines, nbColumns) => {
     let array = []
 
@@ -69,6 +76,8 @@ const initStackWalls = (nbLines, nbColumns) => {
     return array
 }
 
+/****************************************************************************************/
+
 /**
  * Description détaillée : README_ALGORITHMS.md
  * @param {array} maze Tableau de dimension 2
@@ -76,6 +85,7 @@ const initStackWalls = (nbLines, nbColumns) => {
  * @param {array} room1 
  * @returns {array} Tableau de dimension 2
  */
+
 const addOpenCells = (maze, room0, room1) => {
     let cells = []
 

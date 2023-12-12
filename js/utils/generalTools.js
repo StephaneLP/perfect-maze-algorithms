@@ -1,7 +1,9 @@
-/****************************************************************************************
-GET RANDOM INCLUSIVE (fonction)
-- Retourne aléatoirement un nombre entier élément de l'intervalle {min ; ... ; max}
-****************************************************************************************/
+/**
+ * Retourne aléatoirement un nombre entier élément de l'intervalle {min ; ... ; max}
+ * @param {integer} min 
+ * @param {integer} max 
+ * @returns {integer}
+ */
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min)
@@ -9,11 +11,15 @@ function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-/****************************************************************************************
-EQUAL ARRAYS (fonction)
-- Compare deux tableaux : retourne 'true' si identiques, 'false' sinon
-- Uniquement pour des tableaux qui ne contiennent ni tableau ni objet
-****************************************************************************************/
+/****************************************************************************************/
+
+/**
+ * Compare deux tableaux : retourne 'true' si identiques, 'false' sinon
+ * Attention : uniquement pour des tableaux qui ne contiennent ni tableau ni objet
+ * @param {array} array1 
+ * @param {array} array2 
+ * @returns {boolean}
+ */
 
 function equalArrays(array1, array2) {
     if (array1.length !== array2.length) return false
@@ -23,12 +29,15 @@ function equalArrays(array1, array2) {
     return true
 }
 
-/****************************************************************************************
-CREATE ARRAY 2 DIM (fonction)
-- Création d'un tableau à 2 dimensions
-- Chaque élément du tableau reçoit une valeur passée en paramètre, sinon la valeur null
-- Attention : ne pas passer d'objet (ou tableau) en paramètre
-****************************************************************************************/
+/****************************************************************************************/
+
+/**
+ * Création d'un tableau à 2 dimensions, initialisé avec une valeur parc défaut (null sinon)
+ * @param {integer} nbLines 
+ * @param {integer} nbColumns 
+ * @param {*} defaultValue ATTENTION : donnée de type primitif
+ * @returns {array} Tableau de dimension 2
+ */
 
 function createArray2Dim(nbLines, nbColumns, defaultValue) {
     let value = (defaultValue !== undefined ? defaultValue : null)
@@ -37,11 +46,13 @@ function createArray2Dim(nbLines, nbColumns, defaultValue) {
     return array
 }
 
-/****************************************************************************************
-SHUFFLE ARRAY 2 DIM (fonction)
-- Mélange les tableaux du tableau conteneur
-- Attention : les tableaux de 2ème niveau ne doivent pas contenir des objets (ou tableau)
-****************************************************************************************/
+/****************************************************************************************/
+
+/**
+ * Mélange les éléments d'un tableau à 2 dimensions
+ * @param {array} array ATTENTION : données doivent être de type primitif
+ * @returns {array} Tableau de dimension 2
+ */
 
 function shuffleArray2Dim(array) {
     let arrCopy = array.map(arr => [...arr])

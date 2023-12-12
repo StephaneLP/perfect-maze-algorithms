@@ -1,9 +1,9 @@
 import { getRandomIntInclusive } from "./generalTools.js"
 
-/****************************************************************************************
-ACTIVATE BTN (procédure)
-- Afficher / masquer les boutons et filtres de la section Générateur
-****************************************************************************************/
+/**
+ * Afficher / masquer le bouton et filtres 'Solution' de la section Générateur
+ * @param {boolean} blnActive 
+ */
 
 function activateBtnSolution(blnActive) {
     const btnGenerateSolution = document.querySelector("#btn-generate-solution")
@@ -21,11 +21,14 @@ function activateBtnSolution(blnActive) {
     }
 }
 
-/****************************************************************************************
-ADD ACCESS CELLS (fonction)
-- Ajout des murs 'Entrée' et 'Sortie' à la pile contenant les cellules de la grille 
-  du labyrinthe, devant être ouvertes
-****************************************************************************************/
+/****************************************************************************************/
+
+/**
+ * Calcul aléatoire des coordonnées des murs 'Entrée' et 'Sortie' du labyrinthe
+ * @param {integer} nbLines 
+ * @param {integer} nbColumns 
+ * @returns {array} Tableau de dimension 2
+ */
 
 function addAccessCells(nbLines, nbColumns) {
     const indexEntry = 2 * getRandomIntInclusive(0, nbLines -1 ) + 1
@@ -34,19 +37,25 @@ function addAccessCells(nbLines, nbColumns) {
     return [[indexEntry, 0], [indexExit, 2 * nbColumns]]
 }
 
-/****************************************************************************************
-CONVERT CELL TO ROOM (fonction)
-- Conversion des coordonnées : Cellule de la grille du labyrinthe => Pièce du labyrinthe
-****************************************************************************************/
+/****************************************************************************************/
+
+/**
+ * Conversion des coordonnées : Cellule de la grille du labyrinthe => Pièce du labyrinthe
+ * @param {array} cell 
+ * @returns {array}
+ */
 
 function convertCellToRoom(cell) {
     return [(cell[0] - 1) / 2, (cell[1] - 1) / 2]
 }
 
-/****************************************************************************************
-CONVERT ROOM TO CELL (fonction)
-- Conversion des coordonnées : Pièce du labyrinthe => Cellule de la grille du labyrinthe
-****************************************************************************************/
+/****************************************************************************************/
+
+/**
+ * Conversion des coordonnées : Pièce du labyrinthe => Cellule de la grille du labyrinthe
+ * @param {array} room 
+ * @returns {array}
+ */
 
 function convertRoomToCell(room) {
     return [2 * room[0] + 1, 2 * room[1] + 1]

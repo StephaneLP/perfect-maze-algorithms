@@ -6,6 +6,7 @@ import { getRandomIntInclusive } from "../utils/generalTools.js"
  * @param {integer} nbColumns 
  * @returns {array} Tableau de dimension 3
  */
+
 const algoSidewinder = (nbLines, nbColumns) => {
     let stackOpenCells = [], currentRoom = [], stackRooms = []
 
@@ -23,19 +24,25 @@ const algoSidewinder = (nbLines, nbColumns) => {
     return stackOpenCells
 }
 
+/****************************************************************************************/
+
 /**
  * Retourne aléatoirement un booléen (true : mur droit fermé / false : mur droit ouvert)
  * @returns {boolean}
  */
+
 const rightWallClose = () => {
     return (getRandomIntInclusive(0,1) == 0)
 }
+
+/****************************************************************************************/
 
 /**
  * Description détaillée : README_ALGORITHMS.md
  * @param {array} stackRooms Tableau de dimension 2
  * @returns {array} Tableau de dimension 2
  */
+
 const addOpenCells = (stackRooms) => {
     let cells = [], crossingRoom = []
 
