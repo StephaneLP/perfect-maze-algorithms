@@ -4,7 +4,7 @@ STYLE PAGE D'ACCUEIL
 
 body {
     height: 100vh;
-    background: linear-gradient(to bottom, var(--bg-body-color), var(--bg-body-color)), url("../../images/Labyrinthe.jpg");
+    background: linear-gradient(to bottom, var(--bg-body-color), var(--bg-body-color)), url("../../images/labyrinthe.jpg");
     background-position: center; 
     background-repeat: repeat;
     animation: fadein 1s;
